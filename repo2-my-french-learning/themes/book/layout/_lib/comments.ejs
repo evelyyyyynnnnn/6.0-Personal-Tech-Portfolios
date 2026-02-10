@@ -1,0 +1,40 @@
+<% if(theme.comments.utterances.enable) { %>
+<script src="https://utteranc.es/client.js"
+        repo="<%= theme.comments.utterances.user %>/<%= theme.comments.utterances.repo %>"
+        issue-term="pathname"
+        theme="<%= theme.comments.utterances.theme %>"
+        crossorigin="anonymous"
+        async>
+</script>
+<% } %>
+
+<% if(theme.comments.disqus.enable) { %>
+    <div id="disqus_thread"></div>
+    <script>
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://<%= theme.comments.disqus.shortname %>.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<% } %>
+
+<% if(theme.comments.gitalk.enable) { %>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <div id="gitalk-container"></div>
+    <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '<%= theme.comments.gitalk.ClientID %>',
+          clientSecret: '<%= theme.comments.gitalk.ClientSecret %>',
+          repo: '<%= theme.comments.gitalk.repo %>',
+          owner: '<%= theme.comments.gitalk.githubID %>',
+          admin: ['<%= theme.comments.gitalk.adminUser %>'],
+          id: location.pathname,
+          distractionFreeMode: '<%= theme.comments.gitalk.distractionFreeMode %>'
+        })
+        gitalk.render('gitalk-container')
+    </script>
+<% } %>
