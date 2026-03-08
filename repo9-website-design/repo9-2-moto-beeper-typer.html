@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motorola Fix Beeper Typewriter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #2c3e50;
+            --motorola-grey: #95a5a6;
+            --screen-green: #90be6d;
+            --paper-white: #fdfbf7;
+            --ink-black: #2c2c2c;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            background-image: radial-gradient(#34495e 1px, transparent 1px);
+            background-size: 20px 20px;
+            font-family: 'Special Elite', monospace;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden; /* 防止拖拽出界导致滚动条 */
+            user-select: none;
+        }
+
+        /* --- 控制台区域 --- */
+        .console-wrapper {
+            margin-top: 50px;
+            width: 350px;
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 
+                0 10px 20px rgba(0,0,0,0.5),
+                inset 0 2px 5px rgba(255,255,255,0.1);
+            border-bottom: 5px solid #000;
+            z-index: 100; /* 保证控制台在卡片之上 */
+            position: relative;
+        }
+
+        .brand {
+            color: var(--motorola-grey);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-align: center;
+            border-bottom: 2px solid var(--motorola-grey);
+            padding-bottom: 5px;
+        }
+
+        .input-area {
+            width: 100%;
+            display: flex;
+            gap: 10px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            background: #333;
+            border: 2px solid #555;
+            color: var(--screen-green);
+            font-family: 'Courier New', monospace;
+            padding: 10px;
+            border-radius: 4px;
+            outline: none;
+            font-size: 16px;
+        }
+
+        input[type="text"]::placeholder {
+            color: rgba(144, 190, 109, 0.5);
+        }
+
+        button {
+            background: var(--motorola-grey);
+            border: none;
+            padding: 10px 20px;
+            font-family: 'Special Elite', cursive;
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: bold;
+            box-shadow: 0 4px 0 #555;
+            transition: all 0.1s;
+        }
+
+        button:active {
+            transform: translateY(4px);
+            box-shadow: 0 0 0 #555;
+        }
+
+        /* --- 打印出的卡片 --- */
+        #paper-card {
+            position: absolute;
+            top: 250px; /* 初始位置 */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            min-height: 180px;
+            background-color: var(--paper-white);
+            color: var(--ink-black);
+            padding: 25px;
+            box-shadow: 10px 10px 30px rgba(0,0,0,0.3);
+            font-size: 18px;
+            line-height: 1.6;
+            cursor: move; /* 鼠标变成移动图标 */
+            transition: transform 0.1s;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmRmYmY3Ii8+CjxwYXRoIGQ9Ik0wIDBoNHY0SDB6IiBmaWxsPSIjZjBmMGZjIiBmaWxsLW9wYWNpdHk9IjAuNSIvPgo8L3N2Zz4='); /* 简单的纸质纹理 */
+            border-radius: 2px;
+            /* 初始隐藏，打印时显示 */
+            opacity: 0; 
+            visibility: hidden;
+        }
+
+        /* 旋转一点点增加真实感 */
+        .card-tilted {
+            transform: rotate(-1deg);
+        }
+
+        /* 模拟打字机的光标 */
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background-color: var(--ink-black);
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* 装饰用的 Motorola Logo 风格条纹 */
+        .stripes {
+            display: flex;
+            justify-content: flex-end;
+            gap: 2px;
+            margin-top: 5px;
+        }
+        .stripe {
+            width: 20px;
+            height: 4px;
+            background: #555;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="console-wrapper">
+        <div class="brand">Motorola Fix Beeper</div>
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="输入文字..." maxlength="80">
+            <button onclick="startTyping()">PRINT</button>
+        </div>
+        <div class="stripes">
+            <div class="stripe"></div>
+            <div class="stripe"></div>
+            <div class="stripe"></div>
+        </div>
+    </div>
+
+    <div id="paper-card">
+        <span id="typewriter-text"></span><span class="cursor" id="cursor"></span>
+    </div>
+
+    <script>
+        const card = document.getElementById('paper-card');
+        const textSpan = document.getElementById('typewriter-text');
+        const inputField = document.getElementById('user-input');
+        const cursor = document.getElementById('cursor');
+
+        let isDragging = false;
+        let currentX;
+        let currentY;
+        let initialX;
+        let initialY;
+        let xOffset = 0;
+        let yOffset = 0;
+
+        // --- 1. 打字机逻辑 ---
+        function startTyping() {
+            const text = inputField.value;
+            if (!text) return;
+
+            // 重置卡片状态
+            textSpan.innerHTML = '';
+            // 如果卡片还没显示，显示它并重置位置到中间
+            if (getComputedStyle(card).visibility === 'hidden') {
+                 card.style.visibility = 'visible';
+                 card.style.opacity = '1';
+                 // 重置位置（如果之前被拖走了）
+                 xOffset = 0;
+                 yOffset = 0;
+                 setTranslate(0, 0, card);
+            }
+            
+            // 播放打字动画
+            let i = 0;
+            inputField.value = ''; // 清空输入框
+            cursor.style.display = 'inline-block';
+
+            function typeLoop() {
+                if (i < text.length) {
+                    textSpan.innerHTML += text.charAt(i);
+                    i++;
+                    // 随机打字速度，模拟真实感 (50ms - 150ms)
+                    const speed = Math.floor(Math.random() * 100) + 50;
+                    setTimeout(typeLoop, speed);
+                } else {
+                    // 打字结束，光标闪烁几次后消失
+                    setTimeout(() => {
+                        cursor.style.display = 'none';
+                    }, 2000);
+                }
+            }
+            typeLoop();
+        }
+
+        // --- 2. 拖拽逻辑 (Drag and Drop) ---
+
+        // 绑定事件
+        card.addEventListener("mousedown", dragStart);
+        document.addEventListener("mouseup", dragEnd);
+        document.addEventListener("mousemove", drag);
+
+        function dragStart(e) {
+            initialX = e.clientX - xOffset;
+            initialY = e.clientY - yOffset;
+
+            if (e.target === card || card.contains(e.target)) {
+                isDragging = true;
+                // 提起卡片的效果：稍微放大或改变阴影
+                card.style.boxShadow = "20px 20px 40px rgba(0,0,0,0.4)";
+                card.style.zIndex = 1000;
+            }
+        }
+
+        function dragEnd(e) {
+            initialX = currentX;
+            initialY = currentY;
+            isDragging = false;
+            // 放下卡片的效果
+            card.style.boxShadow = "10px 10px 30px rgba(0,0,0,0.3)";
+            card.style.zIndex = "";
+        }
+
+        function drag(e) {
+            if (isDragging) {
+                e.preventDefault();
+                
+                currentX = e.clientX - initialX;
+                currentY = e.clientY - initialY;
+
+                xOffset = currentX;
+                yOffset = currentY;
+
+                setTranslate(currentX, currentY, card);
+            }
+        }
+
+        function setTranslate(xPos, yPos, el) {
+            // 保持原本的居中逻辑 (left: 50%) 并叠加拖拽位移
+            // 注意：由于初始 CSS用了 transform: translateX(-50%)，我们需要在 JS 里处理这个复合变换
+            // 这里为了简化，我们直接覆盖 transform，但需要手动加上居中修正的逻辑比较麻烦
+            // 所以更简单的做法是：不用 CSS 的 translate(-50%) 居中，或者在 JS 里始终带上它。
+            
+            // 修正方案：CSS 中移除 transform，用 JS 初始化位置，或者简单地叠加：
+            el.style.transform = `translate3d(calc(-50% + ${xPos}px), ${yPos}px, 0)`;
+        }
+    </script>
+</body>
+</html>
