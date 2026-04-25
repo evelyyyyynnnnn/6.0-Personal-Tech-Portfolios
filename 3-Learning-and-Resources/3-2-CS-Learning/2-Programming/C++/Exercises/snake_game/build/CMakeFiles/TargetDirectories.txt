@@ -1,0 +1,3 @@
+/Users/evelyndu/Documents/CLionProjects/Exercise/snake_game/build/CMakeFiles/snake_game.dir
+/Users/evelyndu/Documents/CLionProjects/Exercise/snake_game/build/CMakeFiles/edit_cache.dir
+/Users/evelyndu/Documents/CLionProjects/Exercise/snake_game/build/CMakeFiles/rebuild_cache.dir

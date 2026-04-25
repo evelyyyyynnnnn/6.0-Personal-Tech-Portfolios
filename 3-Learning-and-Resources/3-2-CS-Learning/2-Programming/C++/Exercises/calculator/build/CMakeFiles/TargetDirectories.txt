@@ -1,0 +1,3 @@
+/Users/evelyndu/Documents/CLionProjects/Exercise/calculator/build/CMakeFiles/calculator.dir
+/Users/evelyndu/Documents/CLionProjects/Exercise/calculator/build/CMakeFiles/edit_cache.dir
+/Users/evelyndu/Documents/CLionProjects/Exercise/calculator/build/CMakeFiles/rebuild_cache.dir
