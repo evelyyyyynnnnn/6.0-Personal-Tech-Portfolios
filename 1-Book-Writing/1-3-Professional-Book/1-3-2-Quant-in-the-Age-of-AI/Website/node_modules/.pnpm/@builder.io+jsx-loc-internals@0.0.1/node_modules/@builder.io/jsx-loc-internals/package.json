@@ -1,0 +1,27 @@
+{
+  "name": "@builder.io/jsx-loc-internals",
+  "version": "0.0.1",
+  "description": "Shared utilities for JSX location data injection",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "jsx",
+    "debug",
+    "development"
+  ],
+  "dependencies": {
+    "@babel/parser": "^7.24.0",
+    "estree-walker": "2.0.2",
+    "magic-string": "^0.30.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.2",
+    "typescript": "^5.0.0",
+    "vitest": "^1.2.0"
+  }
+}
