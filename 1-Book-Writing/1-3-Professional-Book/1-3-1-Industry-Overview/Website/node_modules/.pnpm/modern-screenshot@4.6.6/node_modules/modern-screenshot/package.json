@@ -1,0 +1,97 @@
+{
+  "name": "modern-screenshot",
+  "type": "module",
+  "version": "4.6.6",
+  "packageManager": "pnpm@9.15.1",
+  "description": "Quickly generate image from DOM node using HTML5 canvas and SVG",
+  "author": "wxm",
+  "license": "MIT",
+  "homepage": "https://github.com/qq15725/modern-screenshot",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qq15725/modern-screenshot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/qq15725/modern-screenshot/issues"
+  },
+  "keywords": [
+    "dom",
+    "image",
+    "raster",
+    "render",
+    "html",
+    "canvas",
+    "svg",
+    "screenshot",
+    "modern"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./worker": {
+      "types": "./worker.d.ts",
+      "import": "./dist/worker.js",
+      "require": "./dist/worker.js"
+    },
+    "./*": "./*"
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "browser": "./dist/index.js",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./dist/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist",
+    "worker.d.ts"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "test": "vitest --no-isolate",
+    "coverage": "vitest run --coverage",
+    "build:lib": "vite build && unbuild",
+    "build:worker": "vite build --config vite.worker.config.ts",
+    "build": "pnpm build:lib && pnpm build:worker",
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
+    "release": "bumpp package.json --commit \"release: v%s\" --push --all --tag",
+    "typecheck": "tsc --noEmit",
+    "prepare": "simple-git-hooks"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^3.8.0",
+    "@types/glob": "^8.1.0",
+    "@types/jest-image-snapshot": "^6.4.0",
+    "@vitest/ui": "^2.1.4",
+    "bumpp": "^9.8.1",
+    "conventional-changelog-cli": "^5.0.0",
+    "eslint": "^9.14.0",
+    "glob": "^11.0.0",
+    "happy-dom": "^15.10.1",
+    "jest-image-snapshot": "^6.4.0",
+    "lint-staged": "^15.2.10",
+    "puppeteer": "^23.7.0",
+    "simple-git-hooks": "^2.11.1",
+    "typescript": "^5.7.2",
+    "unbuild": "^3.0.1",
+    "vite": "^5.4.10",
+    "vitest": "^2.1.4"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint src --fix"
+  }
+}
