@@ -1,0 +1,20 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1777236287481,
+      "tag": "0000_nice_avengers",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1777236405788,
+      "tag": "0001_brainy_squadron_supreme",
+      "breakpoints": true
+    }
+  ]
+}
