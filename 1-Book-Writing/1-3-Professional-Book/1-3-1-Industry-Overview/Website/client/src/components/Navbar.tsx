@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Sun, Moon, Globe, Menu, X } from 'lucide-react';
+import { useLocation } from 'wouter';
 
 const NAV_ITEMS = [
   { key: 'contents', href: '#contents' },
@@ -19,6 +20,8 @@ export default function Navbar() {
   const { t, toggleLanguage, language } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [location, navigate] = useLocation();
+  const isQAPage = location === '/qa';
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -28,8 +31,21 @@ export default function Navbar() {
 
   const handleNavClick = (href: string) => {
     setMobileOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (isQAPage) {
+      navigate('/');
+      setTimeout(() => {
+        const el = document.querySelector(href);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    } else {
+      const el = document.querySelector(href);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const handleQAClick = () => {
+    setMobileOpen(false);
+    navigate(isQAPage ? '/' : '/qa');
   };
 
   return (
@@ -45,7 +61,7 @@ export default function Navbar() {
         {/* Logo */}
         <a
           href="#"
-          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+          onClick={(e) => { e.preventDefault(); if (isQAPage) navigate('/'); else window.scrollTo({ top: 0, behavior: 'smooth' }); }}
           className="flex flex-col leading-tight"
         >
           <span
@@ -70,6 +86,18 @@ export default function Navbar() {
               {t.nav[item.key]}
             </button>
           ))}
+          {/* Q&A Button */}
+          <button
+            onClick={handleQAClick}
+            className="text-sm font-semibold tracking-wide px-3 py-1 rounded transition-all duration-150"
+            style={{
+              background: isQAPage ? 'var(--amber-accent)' : 'transparent',
+              color: isQAPage ? '#1a1200' : 'var(--amber-accent)',
+              border: '1px solid var(--amber-accent)',
+            }}
+          >
+            {t.nav.qa}
+          </button>
         </nav>
 
         {/* Controls */}
@@ -121,6 +149,14 @@ export default function Navbar() {
                 {t.nav[item.key]}
               </button>
             ))}
+            {/* Q&A mobile item */}
+            <button
+              onClick={handleQAClick}
+              className="text-left py-2.5 px-2 text-sm font-semibold rounded transition-colors"
+              style={{ color: 'var(--amber-accent)' }}
+            >
+              {t.nav.qa}
+            </button>
           </nav>
         </div>
       )}

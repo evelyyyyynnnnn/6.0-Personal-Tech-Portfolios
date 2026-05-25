@@ -16,6 +16,7 @@ export interface Translation {
     regions: string;
     trends: string;
     about: string;
+    qa: string;
     langToggle: string;
     themeLight: string;
     themeDark: string;
@@ -201,6 +202,7 @@ const en: Translation = {
     regions: 'Regions',
     trends: 'Trends',
     about: 'About',
+    qa: 'Q&A',
     langToggle: '中文',
     themeLight: 'Light',
     themeDark: 'Dark',
@@ -378,6 +380,7 @@ const zh: Translation = {
     regions: '区域分析',
     trends: '未来趋势',
     about: '关于本书',
+    qa: '问答',
     langToggle: 'English',
     themeLight: '浅色',
     themeDark: '深色',
