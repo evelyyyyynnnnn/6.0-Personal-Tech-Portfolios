@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "mac-shell": {
+      "url": "https://exp-preparation-centres-forms.trycloudflare.com/sse",
+      "headers": {
+        "x-mcp-secret": "mysecrettoken"
+      }
+    }
+  }
+}
