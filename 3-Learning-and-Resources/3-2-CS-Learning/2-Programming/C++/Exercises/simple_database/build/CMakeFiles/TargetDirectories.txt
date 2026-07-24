@@ -1,3 +1,0 @@
-/Users/evelyndu/Documents/CLionProjects/Exercise/simple_database/build/CMakeFiles/simple_database.dir
-/Users/evelyndu/Documents/CLionProjects/Exercise/simple_database/build/CMakeFiles/edit_cache.dir
-/Users/evelyndu/Documents/CLionProjects/Exercise/simple_database/build/CMakeFiles/rebuild_cache.dir
