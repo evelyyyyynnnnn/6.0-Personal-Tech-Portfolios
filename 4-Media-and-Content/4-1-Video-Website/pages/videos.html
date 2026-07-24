@@ -1,0 +1,17 @@
+---
+layout: default
+permalink: /videos/
+---
+
+<ul class='videos'>
+  {% for video in site.videos reversed %}
+  <li>
+    <a href='{{ site.baseurl }}{{ video.url }}'>
+      <h3>{{ video.title }}</h3>
+      <time>{{ video.date | date: '%d %B %Y'}}</time>
+      <img src='http://img.youtube.com/vi/{{ video.youtube_id }}/hqdefault.jpg' />
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+

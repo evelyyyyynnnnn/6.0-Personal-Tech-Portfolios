@@ -1,0 +1,79 @@
+# 基础数据处理
+numpy>=1.21.0              # 数值计算基础库
+pandas>=1.3.0              # 数据分析与处理
+pandas-datareader>=0.10.0  # 从网络获取金融数据
+openpyxl>=3.0.0            # 读写Excel文件
+xlrd>=2.0.0                # 读取Excel文件（旧格式）
+xlwt>=1.3.0                # 写入Excel文件（旧格式）
+pyarrow>=6.0.0             # Apache Arrow Python绑定，用于高效数据交换
+fastparquet>=0.7.0         # 读写Parquet文件
+
+
+# 基础可视化
+matplotlib>=3.4.0          # 基础绘图库
+seaborn>=0.11.0            # 基于matplotlib的高级统计图表
+plotly>=5.0.0              # 交互式图表
+plotly-express>=0.4.0      # Plotly的高级接口
+bokeh>=2.4.0               # 交互式Web可视化
+altair>=4.1.0              # 声明式统计可视化
+pygal>=3.0.0               # SVG图表生成
+
+# 统计与科学计算
+#scipy>=1.7.0               # 科学计算和统计分析
+#statsmodels>=0.13.0        # 统计模型和计量经济学
+#scikit-learn>=1.0.0        # 机器学习库
+#scikit-optimize>=0.9.0     # 超参数优化
+#imbalanced-learn>=0.9.0    # 不平衡数据处理
+
+# 深度学习
+#tensorflow>=2.8.0          # 深度学习框架
+#torch>=1.10.0              # PyTorch深度学习框架
+#torchvision>=0.11.0        # 计算机视觉数据集和模型
+#keras>=2.8.0               # 高级神经网络API
+
+# 时间序列
+#prophet>=1.1.0             # Facebook时间序列预测
+#pmdarima>=2.0.0            # ARIMA模型
+#tsfresh>=0.19.0            # 时间序列特征提取
+
+#自然语言处理
+#nltk>=3.6.0                # 自然语言处理工具包
+#spacy>=3.2.0               # 工业级NLP
+#textblob>=0.17.0           # 文本处理简单接口
+#gensim>=4.2.0              # 主题建模和词向量
+#transformers>=4.18.0       # Hugging Face预训练模型
+
+#图像处理
+#Pillow>=9.0.0              # 图像处理库
+#opencv-python>=4.5.0       # 计算机视觉库
+#scikit-image>=0.19.0       # 图像处理算法
+#imageio>=2.15.0            # 读写图像数据
+
+#地理空间数据处理
+#geopandas>=0.10.0          # 地理空间数据分析
+#folium>=0.12.0             # 交互式地图
+#contextily>=1.2.0          # 地图瓦片
+#rasterio>=1.2.0            # 栅格数据处理
+#shapely>=1.8.0             # 几何对象操作
+#fiona>=1.8.0               # 矢量数据读写
+#pyproj>=3.2.0              # 地图投影转换
+
+#网络数据与API
+#requests>=2.27.0           # HTTP请求库
+#beautifulsoup4>=4.10.0     # HTML解析
+#lxml>=4.7.0                # XML/HTML处理
+#scrapy>=2.6.0              # 网络爬虫框架
+#selenium>=4.1.0            # 浏览器自动化
+#tweepy>=4.10.0             # Twitter API
+#yfinance>=0.1.70           # Yahoo财经数据
+#alpha-vantage>=2.3.0       # Alpha Vantage金融API
+
+#数据库与数据存储
+#sqlalchemy>=1.4.0          # SQL工具包和ORM
+#psycopg2-binary>=2.9.0     # PostgreSQL适配器
+#pymysql>=1.0.0             # MySQL连接
+#sqlite3                    # SQLite数据库（Python内置）
+#redis>=4.2.0               # Redis客户端
+#pymongo>=4.0.0             # MongoDB驱动程序
+#elasticsearch>=8.0.0       # Elasticsearch客户端
+

@@ -1,0 +1,15 @@
+header { text-align: center; }
+header img { max-width: 100%; }
+
+nav {
+  font-size: 2em;
+  margin: 25px 0;
+}
+
+nav li {
+  display: inline-block;
+  padding: 5px 0;
+}
+
+nav, nav a { color: #EABABA; }
+nav a:hover { color: #FF4C4C; }

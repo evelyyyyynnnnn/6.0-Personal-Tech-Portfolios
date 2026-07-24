@@ -1,0 +1,17 @@
+.posts {
+  padding: 0 10%;
+}
+
+.posts a {
+  display: block;
+  padding: 5%;
+  margin: 5%;
+  color: #333;
+	transition: all 0.3s ease;
+}
+
+.posts a:hover {
+  background: #FFC1C1;
+  border-radius: 10px;
+  box-shadow: 0 0 5px 2px #333;
+}

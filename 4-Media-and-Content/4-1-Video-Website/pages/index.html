@@ -1,0 +1,55 @@
+---
+layout: base
+permalink: /
+---
+
+<header>
+  <img src='{{ site.baseurl }}/assets/img/logo.svg' />
+  <nav role='navigation'>
+    <ul>
+      <li><a href='{{ site.baseurl }}/videos'>Videos</a></li>
+      &bull;
+      <li><a href='{{ site.baseurl }}/words'>Words</a></li>
+      &bull;
+      <li><a href='{{ site.baseurl }}/about'>About</a></li>
+    </ul>
+  </nav>
+</header>
+
+<ul class='videos'>
+  {% assign videos = site.videos | reverse %}
+  {% for video in videos | limit: 3 %}
+  <li>
+    <a href='{{ site.baseurl }}{{ video.url }}'>
+      <h3>{{ video.title }}</h3>
+      <time>{{ video.date | date: '%d %B %Y'}}</time>
+      <img src='http://img.youtube.com/vi/{{ video.youtube_id }}/hqdefault.jpg' />
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+
+<nav>
+  <ul>
+    <li>
+      <a href='{{ site.facebook }}' target='_blank'>
+      <img src='{{ site.baseurl }}/assets/img/fb.png' />
+      </a>
+    </li>
+    <li>
+      <a href='{{ site.twitter }}' target='_blank'>
+      <img src='{{ site.baseurl }}/assets/img/twitter.png' />
+      </a>
+    </li>
+    <li>
+      <a href='{{ site.youtube }}' target='_blank'>
+      <img src='{{ site.baseurl }}/assets/img/youtube.png' />
+      </a>
+    </li>
+    <li>
+      <a href='{{ site.baseurl }}/feed.xml' target='_blank'>
+      <img src='{{ site.baseurl }}/assets/img/rss.png' />
+      </a>
+    </li>
+  </ul>
+</nav>

@@ -1,0 +1,239 @@
+vCard - Personal Portfolio
+
+# sidebar
+
+alt = Evelyn Du
+Evelyn Du
+Designer and Developer
+
+Show Contacts
+
+Email
+wd275@cornell.edu
+
+Phone
++1 (607) 262-4282
+
+Birthday
+July 7, 2001
+
+Location
+New York, United States 
+
+# navbar
+
+About
+Resume
+Portfolio
+Blog
+Contact
+
+# about
+
+About me
+
+I'm a Creative Designer and Developer from New York,the United States, working for business,media and computer science. I enjoy turning complex problems into simple, beautiful and intuitive designs.
+
+My job is to come up the idea of your project so that it is functional and user-friendly but at the same time attractive. Moreover, I add personal touch to your product and make sure that is eye-catching and easy to use. My aim is to bring across your message and identity in the most creative way. I created design job for many famous brand companies.
+
+
+## service
+
+What i'm doing
+
+alt = design icon
+Interface design
+The most modern and high-quality design made at a professional level.
+
+alt = Web development icon
+Project development
+High-quality development of Business Project at the professional level.
+
+alt = mobile app icon
+Personal Interaction
+I make high-quality photos of any category at a professional level.
+
+alt = camera icon
+Modeling and Phtotography
+I make high-quality photos of any category at a professional level.
+
+
+## testimonials
+
+Testimonials
+
+alt = Daniel lewis
+Daniel lewis
+Vicky was hired to create a corporate identity. We were very pleased with the work done. She has a lot of experience and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt consectetur adipiscing elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
+
+alt = Jessica miller
+Jessica miller
+Vicky's modeling and photography skills are truly exceptional. We were incredibly impressed with the quality of her work. She brings a wealth of experience to her craft and is deeply committed to meeting the unique needs of her clients. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+alt = Emily evans
+Emily evans
+Vicky was hired to work on complex projects, and we were extremely pleased with her professionalism and dedication. Vicky demonstrates a wealth of experience and a genuine concern for understanding and addressing the specific needs of her clients. Her ability to engage with clients and build strong relationships is commendable. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+alt = Henry william
+Henry william
+Vicky's web development performance in real business cases has exceeded our expectations. When we hired her to work on our web projects, we were highly impressed with the results. Her dedication to delivering top-notch web solutions and her commitment to understanding and meeting our specific requirements have been outstanding. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+
+## clients
+
+Clients
+
+alt = client logo
+
+
+
+# resume
+
+Resume
+
+Education
+
+University school of the arts
+2007 — 2008
+Nemo enims ipsam voluptatem, blanditiis praesentium voluptum delenit atque corrupti, quos dolores et quas molestias exceptur.
+
+New york academy of art
+2006 — 2007
+Ratione voluptatem sequi nesciunt, facere quisquams facere menda ossimus, omnis voluptas assumenda est omnis..
+
+High school of art and design
+2002 — 2004
+Duis aute irure dolor in reprehenderit in voluptate, quila voluptas mag odit aut fugit, sed consequuntur magni dolores eos.
+
+Experience
+
+Creative director
+2015 — Present
+Nemo enim ipsam voluptatem blanditiis praesentium voluptum delenit atque corrupti, quos dolores et qvuas molestias exceptur.
+
+Art director
+2013 — 2015
+Nemo enims ipsam voluptatem, blanditiis praesentium voluptum delenit atque corrupti, quos dolores et quas molestias exceptur.
+
+Web designer
+2010 — 2013
+Nemo enims ipsam voluptatem, blanditiis praesentium voluptum delenit atque corrupti, quos dolores et quas molestias exceptur.
+
+My skills
+
+Web design
+80%
+Graphic design
+70%
+Branding
+90%
+WordPress
+50%
+
+
+
+# portfolio
+
+Portfolio
+
+All
+Web design
+Applications
+Web development
+
+Select category
+All
+Web design
+Applications
+Web development
+
+alt = finance
+Finance
+Web development
+
+alt = orizon
+Orizon
+Web development
+
+alt = fundo
+Fundo
+Web design
+
+alt = brawlhalla
+Brawlhalla
+Applications
+
+alt = dsm.
+DSM.
+Web design
+
+alt = metaspark
+MetaSpark
+Web design
+
+alt = summary
+Summary
+Web development
+
+alt = task manager
+Task Manager
+Applications
+
+alt = arrival
+Arrival
+Web development
+
+
+
+# blog
+
+Blog
+
+alt = Design conferences in 2022
+Design
+Fab 23, 2022
+Design conferences in 2022
+Veritatis et quasi architecto beatae vitae dicta sunt, explicabo.
+
+alt = Best fonts every designer
+Design
+Fab 23, 2022
+Best fonts every designer
+Sed ut perspiciatis, nam libero tempore, cum soluta nobis est eligendi.
+
+alt = Design digest #80
+Design
+Fab 23, 2022
+Design digest #80
+Excepteur sint occaecat cupidatat no proident, quis nostrum exercitationem ullam corporis suscipit.
+
+alt = UI interactions of the week
+Design
+Fab 23, 2022
+UI interactions of the week
+Enim ad minim veniam, consectetur adipiscing elit, quis nostrud exercitation ullamco laboris nisi.
+
+alt = The forgotten art of spacing
+Design
+Fab 23, 2022
+The Forgotten Art Of Spacing
+Maxime placeat, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+alt = Design digest #79
+Design
+Fab 23, 2022
+Design Digest #79
+Optio cumque nihil impedit uo minus quod maxime placeat, velit esse cillum.
+
+
+
+# contact
+
+Contact
+
+Contact Form
+
+Full name
+Email address
+Your Message
+
+Send Message

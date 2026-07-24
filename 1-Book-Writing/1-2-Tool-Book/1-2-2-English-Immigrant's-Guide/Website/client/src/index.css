@@ -1,0 +1,243 @@
+/* ============================================================
+   Design: "Warm Notebook" — Scrapbook stationery aesthetic
+   Colors: Cream bg, terracotta accent, sage green highlight
+   Fonts: Playfair Display (headings) + Nunito (body)
+   Chinese: Noto Serif SC / Noto Sans SC
+   ============================================================ */
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/* ── LIGHT MODE ── Warm cream + terracotta + sage */
+:root {
+  --radius: 0.75rem;
+
+  /* Warm cream background */
+  --background: oklch(0.985 0.008 75);
+  --foreground: oklch(0.22 0.025 50);
+
+  /* Card: slightly warmer white */
+  --card: oklch(0.995 0.005 75);
+  --card-foreground: oklch(0.22 0.025 50);
+
+  --popover: oklch(0.995 0.005 75);
+  --popover-foreground: oklch(0.22 0.025 50);
+
+  /* Primary: terracotta */
+  --primary: oklch(0.58 0.12 38);
+  --primary-foreground: oklch(0.98 0.005 75);
+
+  /* Secondary: sage green */
+  --secondary: oklch(0.88 0.04 150);
+  --secondary-foreground: oklch(0.28 0.06 150);
+
+  --muted: oklch(0.94 0.01 75);
+  --muted-foreground: oklch(0.52 0.02 60);
+
+  /* Accent: warm amber */
+  --accent: oklch(0.92 0.06 80);
+  --accent-foreground: oklch(0.28 0.06 60);
+
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+
+  --border: oklch(0.88 0.015 70);
+  --input: oklch(0.88 0.015 70);
+  --ring: oklch(0.58 0.12 38);
+
+  --sidebar: oklch(0.97 0.01 75);
+  --sidebar-foreground: oklch(0.22 0.025 50);
+  --sidebar-primary: oklch(0.58 0.12 38);
+  --sidebar-primary-foreground: oklch(0.98 0.005 75);
+  --sidebar-accent: oklch(0.92 0.06 80);
+  --sidebar-accent-foreground: oklch(0.28 0.06 60);
+  --sidebar-border: oklch(0.88 0.015 70);
+  --sidebar-ring: oklch(0.58 0.12 38);
+}
+
+/* ── DARK MODE ── Warm dark brown, not cold black */
+.dark {
+  --background: oklch(0.17 0.018 45);
+  --foreground: oklch(0.92 0.01 75);
+
+  --card: oklch(0.22 0.02 45);
+  --card-foreground: oklch(0.92 0.01 75);
+
+  --popover: oklch(0.22 0.02 45);
+  --popover-foreground: oklch(0.92 0.01 75);
+
+  /* Primary: lighter terracotta for dark bg */
+  --primary: oklch(0.68 0.13 38);
+  --primary-foreground: oklch(0.15 0.02 45);
+
+  /* Secondary: muted sage */
+  --secondary: oklch(0.30 0.04 150);
+  --secondary-foreground: oklch(0.82 0.05 150);
+
+  --muted: oklch(0.26 0.02 45);
+  --muted-foreground: oklch(0.65 0.02 60);
+
+  --accent: oklch(0.32 0.05 70);
+  --accent-foreground: oklch(0.92 0.01 75);
+
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.985 0 0);
+
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.68 0.13 38);
+
+  --sidebar: oklch(0.20 0.02 45);
+  --sidebar-foreground: oklch(0.92 0.01 75);
+  --sidebar-primary: oklch(0.68 0.13 38);
+  --sidebar-primary-foreground: oklch(0.15 0.02 45);
+  --sidebar-accent: oklch(0.28 0.03 70);
+  --sidebar-accent-foreground: oklch(0.92 0.01 75);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.68 0.13 38);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Nunito', 'Noto Sans SC', sans-serif;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', 'Noto Serif SC', serif;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  a[href],
+  select:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      max-width: 1280px;
+    }
+  }
+
+  /* Warm paper texture card */
+  .paper-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 2px 8px oklch(0.22 0.025 50 / 0.06), 0 1px 2px oklch(0.22 0.025 50 / 0.04);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .paper-card:hover {
+    box-shadow: 0 8px 24px oklch(0.22 0.025 50 / 0.1), 0 2px 6px oklch(0.22 0.025 50 / 0.06);
+    transform: translateY(-2px);
+  }
+  .dark .paper-card {
+    box-shadow: 0 2px 8px oklch(0 0 0 / 0.3);
+  }
+  .dark .paper-card:hover {
+    box-shadow: 0 8px 24px oklch(0 0 0 / 0.4);
+  }
+
+  /* Dashed vocab underline */
+  .vocab-term {
+    border-bottom: 2px dashed var(--primary);
+    padding-bottom: 1px;
+    font-weight: 600;
+  }
+
+  /* Chapter color badges */
+  .badge-terracotta { background: oklch(0.58 0.12 38 / 0.15); color: oklch(0.48 0.12 38); border: 1px solid oklch(0.58 0.12 38 / 0.3); }
+  .badge-sage       { background: oklch(0.55 0.1 150 / 0.15); color: oklch(0.40 0.1 150); border: 1px solid oklch(0.55 0.1 150 / 0.3); }
+  .badge-amber      { background: oklch(0.75 0.12 80 / 0.2);  color: oklch(0.50 0.1 70);  border: 1px solid oklch(0.75 0.12 80 / 0.4); }
+  .badge-navy       { background: oklch(0.35 0.08 260 / 0.15); color: oklch(0.35 0.08 260); border: 1px solid oklch(0.35 0.08 260 / 0.3); }
+  .badge-green      { background: oklch(0.55 0.1 145 / 0.15); color: oklch(0.40 0.1 145); border: 1px solid oklch(0.55 0.1 145 / 0.3); }
+  .badge-rose       { background: oklch(0.65 0.1 10 / 0.15);  color: oklch(0.50 0.1 10);  border: 1px solid oklch(0.65 0.1 10 / 0.3); }
+  .badge-purple     { background: oklch(0.55 0.1 300 / 0.15); color: oklch(0.45 0.1 300); border: 1px solid oklch(0.55 0.1 300 / 0.3); }
+  .badge-slate      { background: oklch(0.50 0.03 260 / 0.15); color: oklch(0.40 0.03 260); border: 1px solid oklch(0.50 0.03 260 / 0.3); }
+  .badge-sky        { background: oklch(0.65 0.1 220 / 0.15); color: oklch(0.45 0.1 220); border: 1px solid oklch(0.65 0.1 220 / 0.3); }
+
+  .dark .badge-terracotta { background: oklch(0.68 0.13 38 / 0.2);  color: oklch(0.80 0.1 38); }
+  .dark .badge-sage       { background: oklch(0.55 0.1 150 / 0.2);  color: oklch(0.75 0.1 150); }
+  .dark .badge-amber      { background: oklch(0.75 0.12 80 / 0.2);  color: oklch(0.85 0.1 80); }
+  .dark .badge-navy       { background: oklch(0.45 0.08 260 / 0.2); color: oklch(0.75 0.08 260); }
+  .dark .badge-green      { background: oklch(0.55 0.1 145 / 0.2);  color: oklch(0.75 0.1 145); }
+  .dark .badge-rose       { background: oklch(0.65 0.1 10 / 0.2);   color: oklch(0.80 0.1 10); }
+  .dark .badge-purple     { background: oklch(0.55 0.1 300 / 0.2);  color: oklch(0.78 0.1 300); }
+  .dark .badge-slate      { background: oklch(0.50 0.03 260 / 0.2); color: oklch(0.75 0.03 260); }
+  .dark .badge-sky        { background: oklch(0.65 0.1 220 / 0.2);  color: oklch(0.80 0.1 220); }
+
+  /* Chapter accent left border */
+  .accent-terracotta { border-left: 4px solid oklch(0.58 0.12 38); }
+  .accent-sage       { border-left: 4px solid oklch(0.55 0.1 150); }
+  .accent-amber      { border-left: 4px solid oklch(0.75 0.12 80); }
+  .accent-navy       { border-left: 4px solid oklch(0.35 0.08 260); }
+  .accent-green      { border-left: 4px solid oklch(0.55 0.1 145); }
+  .accent-rose       { border-left: 4px solid oklch(0.65 0.1 10); }
+  .accent-purple     { border-left: 4px solid oklch(0.55 0.1 300); }
+  .accent-slate      { border-left: 4px solid oklch(0.50 0.03 260); }
+  .accent-sky        { border-left: 4px solid oklch(0.65 0.1 220); }
+}

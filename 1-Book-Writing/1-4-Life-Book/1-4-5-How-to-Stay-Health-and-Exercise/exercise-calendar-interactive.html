@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exercise Calendar 2026–2030</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+:root {
+  --bg:      #F5F3EF;
+  --surface: #FFFFFF;
+  --border:  #E8E4DC;
+  --ink:     #2C2C2C;
+  --ink2:    #5A5A5A;
+  --ink3:    #A0A0A0;
+  --today:   #D4667A;
+
+  /* light pastel pills */
+  --c-face:  #F7C5D0;  /* soft pink */
+  --c-run:   #C5D9F7;  /* soft blue */
+  --c-hit:   #F7DEC5;  /* soft peach */
+  --c-dance: #DFC5F7;  /* soft lavender */
+  --c-swim:  #C5EFF7;  /* soft sky */
+  --c-leg:   #C5F7DC;  /* soft mint */
+  --c-arm:   #F7F0C5;  /* soft butter */
+  --c-cycle: #C5F7F0;  /* soft teal */
+}
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+/* NAV */
+.nav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 18px 10px;
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-left { display: flex; align-items: center; gap: 8px; }
+.nav-arrow {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 1px solid var(--border); background: var(--bg);
+  color: var(--ink2); font-size: 15px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.nav-arrow:hover { background: var(--border); }
+.nav-month { font-size: 20px; font-weight: 700; color: var(--ink); letter-spacing: -0.3px; }
+.nav-today {
+  font-size: 11px; font-weight: 500; color: var(--today);
+  cursor: pointer; padding: 4px 10px; border-radius: 12px;
+  border: 1px solid var(--today);
+}
+
+/* YEAR ROW */
+.year-row {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 6px 14px; display: flex; gap: 5px; overflow-x: auto;
+}
+.ybtn {
+  padding: 3px 11px; border-radius: 12px;
+  border: 1px solid var(--border); background: var(--bg);
+  font-size: 11px; font-weight: 500; color: var(--ink2);
+  cursor: pointer; white-space: nowrap; flex-shrink: 0;
+}
+.ybtn.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+.ybtn.month-btn { opacity: 0.6; font-size: 10px; padding: 2px 7px; }
+
+/* LEGEND */
+.legend {
+  display: flex; flex-wrap: wrap; gap: 4px 10px;
+  padding: 7px 14px; background: var(--surface);
+  border-bottom: 1px solid var(--border); font-size: 10.5px; color: var(--ink2);
+}
+.li { display: flex; align-items: center; gap: 4px; }
+.ld { width: 9px; height: 9px; border-radius: 2px; flex-shrink: 0; border: 1px solid rgba(0,0,0,0.08); }
+
+/* DOW */
+.dow-row {
+  display: grid; grid-template-columns: repeat(7,1fr);
+  background: var(--surface); border-bottom: 1px solid var(--border); padding: 4px 0 5px;
+}
+.dow-cell {
+  text-align: center; font-size: 10px; font-weight: 600;
+  color: var(--ink3); letter-spacing: 0.5px; text-transform: uppercase;
+}
+
+/* GRID */
+.cal-grid {
+  display: grid; grid-template-columns: repeat(7,1fr);
+  background: var(--border); gap: 1px;
+}
+.day-cell {
+  background: var(--surface); min-height: 92px;
+  padding: 5px 4px 4px; display: flex; flex-direction: column; gap: 2px;
+}
+.day-cell.empty  { background: #F9F8F5; }
+.day-cell.is-past { background: #FAFAF8; }
+.day-cell.is-weekend { background: #FDFBF8; }
+
+.date-num {
+  font-size: 15px; font-weight: 600; color: var(--ink);
+  width: 26px; height: 26px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 2px; flex-shrink: 0; line-height: 1;
+}
+.is-today .date-num { background: var(--today); color: #fff; }
+.is-past  .date-num { color: var(--ink3); }
+
+/* PILLS */
+.pill {
+  border-radius: 4px; padding: 2px 5px;
+  font-size: 10px; font-weight: 500; color: var(--ink);
+  cursor: pointer; user-select: none;
+  transition: opacity 0.12s, transform 0.08s;
+  display: flex; align-items: center; gap: 3px;
+  border: 1px solid rgba(0,0,0,0.06);
+  line-height: 1.3;
+}
+.pill:active { transform: scale(0.94); }
+.pill.done { opacity: 0.28; text-decoration: line-through; }
+.cdot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: rgba(0,0,0,0.18); flex-shrink: 0;
+}
+.pill.done .cdot { background: rgba(0,0,0,0.4); }
+
+.p-face  { background: var(--c-face); }
+.p-run   { background: var(--c-run); }
+.p-hit   { background: var(--c-hit); }
+.p-dance { background: var(--c-dance); }
+.p-swim  { background: var(--c-swim); }
+.p-leg   { background: var(--c-leg); }
+.p-arm   { background: var(--c-arm); }
+.p-cycle { background: var(--c-cycle); }
+
+/* SUMMARY */
+.summary {
+  background: var(--surface); border-top: 1px solid var(--border);
+  padding: 9px 16px; font-size: 11px; color: var(--ink3); text-align: center;
+}
+.summary strong { color: var(--ink2); font-weight: 600; }
+.prog-wrap { height: 3px; background: var(--border); margin: 5px 16px 0; border-radius: 2px; overflow: hidden; }
+.prog-fill { height: 100%; background: var(--today); border-radius: 2px; transition: width 0.3s; }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav-left">
+    <button class="nav-arrow" onclick="changeMonth(-1)">‹</button>
+    <button class="nav-arrow" onclick="changeMonth(1)">›</button>
+    <div class="nav-month" id="nav-label"></div>
+  </div>
+  <div class="nav-today" onclick="goToday()">Today</div>
+</div>
+
+<div class="year-row" id="year-row"></div>
+
+<div class="legend">
+  <div class="li"><div class="ld" style="background:var(--c-face)"></div>Slim (Face / Leg / Arm)</div>
+  <div class="li"><div class="ld" style="background:var(--c-run)"></div>Run</div>
+  <div class="li"><div class="ld" style="background:var(--c-hit)"></div>HIT</div>
+  <div class="li"><div class="ld" style="background:var(--c-dance)"></div>Dance</div>
+  <div class="li"><div class="ld" style="background:var(--c-swim)"></div>Swim</div>
+  <div class="li"><div class="ld" style="background:var(--c-cycle)"></div>Cycle</div>
+  <div style="margin-left:auto;color:var(--ink3);font-size:10px;">tap to check off</div>
+</div>
+
+<div class="dow-row">
+  <div class="dow-cell">Sun</div>
+  <div class="dow-cell">Mon</div>
+  <div class="dow-cell">Tue</div>
+  <div class="dow-cell">Wed</div>
+  <div class="dow-cell">Thu</div>
+  <div class="dow-cell">Fri</div>
+  <div class="dow-cell">Sat</div>
+</div>
+
+<div class="cal-grid" id="cal-grid"></div>
+<div class="prog-wrap"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+<div class="summary" id="summary"></div>
+
+<script>
+// ─────────────────────────────────────────────
+//  SCHEDULE RULES
+//
+//  BASE DATE: Mon May 25 2026 = weekday-index 0
+//
+//  WEEKDAYS (Mon–Fri):
+//    Always: Face-slim AM + Face-slim PM
+//    Toning cycle (daily):  Leg-slim → Arm-slim → Leg-slim …
+//    Main cycle   (daily):  Gym-run → Dance → HIT → Gym-run …
+//      Dance sub-cycle:     Ballet/Yoga → Zumba → Kpop (every Dance slot)
+//
+//  WEEKENDS (Sat + Sun):
+//    Every weekend has a pair: (Outdoor-run weekend) or (Cycle weekend)
+//    Sat: Swim  +  the weekend special (Outdoor-run OR Cycle)
+//    Sun: just  the weekend special (Outdoor-run OR Cycle)
+//    Weekend pairs alternate starting from Weekend 0 (May 30–31 2026):
+//      Even weekend# → Outdoor-run
+//      Odd  weekend# → Cycle
+//
+//  No Face-slim / toning on weekends.
+// ─────────────────────────────────────────────
+
+const BASE     = new Date(2026, 4, 25); // Mon May 25 2026
+const FIRST_SAT = new Date(2026, 4, 30); // Sat May 30 2026
+
+const MONTHS = ['January','February','March','April','May','June',
+                'July','August','September','October','November','December'];
+
+// ── helpers ──────────────────────────────────
+function dayOffset(y, m, d) {
+  return Math.round((new Date(y, m-1, d) - BASE) / 86400000);
+}
+
+// Count Mon–Fri days from BASE (inclusive) up to date (inclusive)
+function weekdayCount(y, m, d) {
+  const off = dayOffset(y, m, d);
+  if (off < 0) return -1;
+  // BASE is Monday (dow=1)
+  const fullWeeks = Math.floor(off / 7);
+  const rem       = off % 7; // 0=Mon,1=Tue,2=Wed,3=Thu,4=Fri,5=Sat,6=Sun
+  const extraWD   = Math.min(rem, 4); // Sat(5)/Sun(6) don't count
+  return fullWeeks * 5 + extraWD; // 0-indexed
+}
+
+// Weekend number: which Sat–Sun pair is this date in? (0 = May 30–31)
+function weekendNum(y, m, d) {
+  const dt  = new Date(y, m-1, d);
+  const dow = dt.getDay(); // 0=Sun,6=Sat
+  const sat = new Date(dt);
+  if (dow === 0) sat.setDate(sat.getDate() - 1); // Sun → its Saturday
+  const diff = Math.round((sat - FIRST_SAT) / 86400000);
+  if (diff < 0) return -1;
+  return Math.floor(diff / 7);
+}
+
+// ── cycles ───────────────────────────────────
+const DANCE_NAMES = ['Ballet/Yoga/Tradition', 'Zumba', 'Kpop'];
+
+// Main weekday 3-cycle: 0=Gym-run, 1=Dance, 2=HIT
+// Toning 2-cycle:       0=Leg-slim, 1=Arm-slim
+
+// WEEKEND LOGIC:
+// Each weekend (Sat+Sun pair) has:
+//   - Swim on exactly ONE day (Sat on even weekend#, Sun on odd weekend#)
+//   - The other day gets the active: Outdoor-run (even wn) or Cycle (odd wn)
+// So:
+//   Even weekend# → Sat=Swim, Sun=Outdoor-run
+//   Odd  weekend# → Sat=Cycle, Sun=Swim
+
+function getSchedule(y, m, d) {
+  const off = dayOffset(y, m, d);
+  if (off < 0) return null;
+
+  const dow       = new Date(y, m-1, d).getDay();
+  const isWeekend = dow === 0 || dow === 6;
+  const isSat     = dow === 6;
+  const isSun     = dow === 0;
+
+  if (isWeekend) {
+    const wn = weekendNum(y, m, d);
+    if (wn < 0) return null;
+
+    const isEven = (wn % 2 === 0);
+    // Even wn: Sat=Swim, Sun=Outdoor-run
+    // Odd  wn: Sat=Cycle, Sun=Swim
+    let swim = false, special = null;
+
+    if (isEven) {
+      if (isSat) {
+        swim = true;
+        special = null; // swim only day
+      } else {
+        // Sun
+        special = { name: 'Outdoor-run', cls: 'p-run' };
+      }
+    } else {
+      if (isSat) {
+        special = { name: 'Cycle', cls: 'p-cycle' };
+      } else {
+        // Sun
+        swim = true;
+        special = null; // swim only day
+      }
+    }
+
+    return { weekend: true, swim, special };
+  }
+
+  // Weekday
+  const wdi     = weekdayCount(y, m, d);
+  const mainPos = ((wdi % 3) + 3) % 3;
+  const tonPos  = ((wdi % 2) + 2) % 2;
+
+  let mainName, mainCls;
+  if (mainPos === 0) {
+    mainName = 'Gym-run'; mainCls = 'p-run';
+  } else if (mainPos === 1) {
+    const dIdx = Math.floor(wdi / 3);
+    mainName   = DANCE_NAMES[dIdx % 3];
+    mainCls    = 'p-dance';
+  } else {
+    mainName = 'HIT'; mainCls = 'p-hit';
+  }
+
+  const toningName = tonPos === 0 ? 'Leg-slim' : 'Arm-slim';
+  const toningCls  = tonPos === 0 ? 'p-leg'    : 'p-arm';
+
+  return { weekend: false, mainName, mainCls, toningName, toningCls };
+}
+
+// ── done state ───────────────────────────────
+const done = {};
+function pid(y, m, d, t) { return `${y}|${m}|${d}|${t}`; }
+
+function toggle(id) {
+  done[id] = !done[id];
+  const el = document.getElementById('p' + id);
+  if (el) el.classList.toggle('done', !!done[id]);
+  updateSummary();
+}
+
+function pill(label, cls, id) {
+  const d = done[id] ? ' done' : '';
+  return `<div class="pill ${cls}${d}" id="p${id}" onclick="toggle('${id}')">` +
+         `<div class="cdot"></div>${label}</div>`;
+}
+
+// ── render ───────────────────────────────────
+let vY = 2026, vM = 5;
+
+function daysIn(y, m)   { return new Date(y, m, 0).getDate(); }
+function startDow(y, m) { return new Date(y, m-1, 1).getDay(); }
+
+function renderMonth() {
+  const y = vY, m = vM;
+  document.getElementById('nav-label').textContent = MONTHS[m-1] + ' ' + y;
+  document.querySelectorAll('.ybtn[data-y]').forEach(b =>
+    b.classList.toggle('active', +b.dataset.y === y)
+  );
+
+  const days  = daysIn(y, m);
+  const start = startDow(y, m);
+  const today = new Date();
+  const [ty, tm, td] = [today.getFullYear(), today.getMonth()+1, today.getDate()];
+
+  let html = '';
+  for (let e = 0; e < start; e++) html += `<div class="day-cell empty"></div>`;
+
+  for (let d = 1; d <= days; d++) {
+    const off     = dayOffset(y, m, d);
+    const sched   = getSchedule(y, m, d);
+    const isToday = y===ty && m===tm && d===td;
+    const isPast  = off < 0 || (y===ty && m===tm && d < td);
+    const dow     = new Date(y, m-1, d).getDay();
+    const isWE    = dow===0 || dow===6;
+
+    let cls = 'day-cell';
+    if (isToday)    cls += ' is-today';
+    else if (isPast) cls += ' is-past';
+    if (isWE)       cls += ' is-weekend';
+
+    html += `<div class="${cls}"><div class="date-num">${d}</div>`;
+
+    if (sched) {
+      if (sched.weekend) {
+        if (sched.swim)
+          html += pill('Swim', 'p-swim', pid(y,m,d,'sw'));
+        if (sched.special)
+          html += pill(sched.special.name, sched.special.cls, pid(y,m,d,'sp'));
+      } else {
+        html += pill('Face-slim AM', 'p-face', pid(y,m,d,'fam'));
+        html += pill('Face-slim PM', 'p-face', pid(y,m,d,'fpm'));
+        html += pill(sched.toningName, sched.toningCls, pid(y,m,d,'ton'));
+        html += pill(sched.mainName,   sched.mainCls,   pid(y,m,d,'main'));
+      }
+    }
+
+    html += `</div>`;
+  }
+
+  const total = start + days;
+  const trail = (7 - (total % 7)) % 7;
+  for (let e = 0; e < trail; e++) html += `<div class="day-cell empty"></div>`;
+
+  document.getElementById('cal-grid').innerHTML = html;
+  updateSummary();
+}
+
+function updateSummary() {
+  const y = vY, m = vM;
+  let total = 0, comp = 0;
+  for (let d = 1; d <= daysIn(y, m); d++) {
+    const s = getSchedule(y, m, d);
+    if (!s) continue;
+    const types = s.weekend
+      ? [...(s.swim ? ['sw'] : []), ...(s.special ? ['sp'] : [])]
+      : ['fam','fpm','ton','main'];
+    total += types.length;
+    for (const t of types) if (done[pid(y,m,d,t)]) comp++;
+  }
+  const pct = total ? Math.round(comp/total*100) : 0;
+  document.getElementById('summary').innerHTML =
+    `<strong>${comp}</strong> / ${total} done this month &nbsp;·&nbsp; <strong>${pct}%</strong>`;
+  document.getElementById('prog-fill').style.width = pct + '%';
+}
+
+function changeMonth(delta) {
+  vM += delta;
+  if (vM > 12) { vM = 1; vY++; }
+  if (vM < 1)  { vM = 12; vY--; }
+  if (vY < 2026 || (vY===2026 && vM < 5)) { vY=2026; vM=5; }
+  if (vY > 2030) { vY=2030; vM=12; }
+  renderMonth();
+}
+
+function goToday() {
+  const t = new Date(); vY = t.getFullYear(); vM = t.getMonth()+1; renderMonth();
+}
+function jumpTo(y, m) { vY=y; vM=m; renderMonth(); }
+
+function buildYearRow() {
+  let html = '';
+  for (let y = 2026; y <= 2030; y++) {
+    html += `<button class="ybtn" data-y="${y}" onclick="jumpTo(${y},${y===2026?5:1})">${y}</button>`;
+    const s = y===2026 ? 5 : 1;
+    for (let mm = s; mm <= 12; mm++)
+      html += `<button class="ybtn month-btn" data-y="${y}" onclick="jumpTo(${y},${mm})">${MONTHS[mm-1].slice(0,3)}</button>`;
+  }
+  document.getElementById('year-row').innerHTML = html;
+}
+
+buildYearRow();
+goToday();
+</script>
+</body>
+</html>

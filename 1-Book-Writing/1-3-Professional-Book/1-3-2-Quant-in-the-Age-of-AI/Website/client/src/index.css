@@ -1,0 +1,264 @@
+/* 
+ * DESIGN PHILOSOPHY: Editorial Finance — Bloomberg/FT meets academic publishing
+ * Typography: Playfair Display (titles) + Source Sans 3 (body) + JetBrains Mono (labels/code)
+ * Colors: White/charcoal with deep teal (#0F7173) accent (light); dark navy (#111827) with teal (dark)
+ * Layout: Full-width sections, left-aligned hero, alternating content emphasis
+ * Motion: Intersection Observer fade-up (60px translateY, 500ms, staggered 100ms)
+ */
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-teal: var(--teal);
+  --color-teal-light: var(--teal-light);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Source Sans 3', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+:root {
+  --radius: 0.5rem;
+  --teal: oklch(0.48 0.12 185);
+  --teal-light: oklch(0.62 0.10 185);
+  --primary: oklch(0.48 0.12 185);
+  --primary-foreground: oklch(0.98 0 0);
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.13 0.01 260);
+  --card: oklch(0.98 0.002 260);
+  --card-foreground: oklch(0.13 0.01 260);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.13 0.01 260);
+  --secondary: oklch(0.96 0.003 260);
+  --secondary-foreground: oklch(0.25 0.01 260);
+  --muted: oklch(0.96 0.003 260);
+  --muted-foreground: oklch(0.50 0.01 260);
+  --accent: oklch(0.94 0.015 185);
+  --accent-foreground: oklch(0.35 0.10 185);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.90 0.005 260);
+  --input: oklch(0.90 0.005 260);
+  --ring: oklch(0.48 0.12 185);
+  --chart-1: oklch(0.48 0.12 185);
+  --chart-2: oklch(0.62 0.10 185);
+  --chart-3: oklch(0.35 0.08 185);
+  --chart-4: oklch(0.75 0.07 185);
+  --chart-5: oklch(0.25 0.05 260);
+  --sidebar: oklch(0.98 0.002 260);
+  --sidebar-foreground: oklch(0.13 0.01 260);
+  --sidebar-primary: oklch(0.48 0.12 185);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.94 0.015 185);
+  --sidebar-accent-foreground: oklch(0.35 0.10 185);
+  --sidebar-border: oklch(0.90 0.005 260);
+  --sidebar-ring: oklch(0.48 0.12 185);
+}
+
+.dark {
+  --teal: oklch(0.62 0.10 185);
+  --teal-light: oklch(0.75 0.08 185);
+  --primary: oklch(0.62 0.10 185);
+  --primary-foreground: oklch(0.10 0.01 260);
+  --background: oklch(0.13 0.01 260);
+  --foreground: oklch(0.93 0.005 260);
+  --card: oklch(0.17 0.01 260);
+  --card-foreground: oklch(0.93 0.005 260);
+  --popover: oklch(0.17 0.01 260);
+  --popover-foreground: oklch(0.93 0.005 260);
+  --secondary: oklch(0.22 0.01 260);
+  --secondary-foreground: oklch(0.80 0.005 260);
+  --muted: oklch(0.22 0.01 260);
+  --muted-foreground: oklch(0.60 0.01 260);
+  --accent: oklch(0.22 0.03 185);
+  --accent-foreground: oklch(0.75 0.08 185);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.62 0.10 185);
+  --chart-1: oklch(0.62 0.10 185);
+  --chart-2: oklch(0.75 0.08 185);
+  --chart-3: oklch(0.48 0.12 185);
+  --chart-4: oklch(0.85 0.06 185);
+  --chart-5: oklch(0.35 0.05 260);
+  --sidebar: oklch(0.17 0.01 260);
+  --sidebar-foreground: oklch(0.93 0.005 260);
+  --sidebar-primary: oklch(0.62 0.10 185);
+  --sidebar-primary-foreground: oklch(0.10 0.01 260);
+  --sidebar-accent: oklch(0.22 0.03 185);
+  --sidebar-accent-foreground: oklch(0.75 0.08 185);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.62 0.10 185);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', Georgia, serif;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  a[href] {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+      max-width: 1320px;
+    }
+  }
+
+  /* Teal accent border for callouts */
+  .teal-border-left {
+    border-left: 3px solid var(--teal);
+    padding-left: 1rem;
+  }
+
+  /* Chapter pill badge */
+  .chapter-badge {
+    display: inline-flex;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--accent-foreground);
+  }
+
+  /* Fade-up animation class */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Section divider */
+  .section-rule {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0;
+  }
+
+  /* Teal text utility */
+  .text-teal {
+    color: var(--teal);
+  }
+
+  /* Card hover lift */
+  .card-lift {
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .card-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px oklch(0 0 0 / 0.10);
+  }
+  .dark .card-lift:hover {
+    box-shadow: 0 8px 30px oklch(0 0 0 / 0.35);
+  }
+
+  /* Smooth theme color transitions */
+  *, *::before, *::after {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.15s ease;
+  }
+
+  /* Marquee ticker */
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .marquee-track {
+    animation: marquee 30s linear infinite;
+    display: flex;
+    width: max-content;
+  }
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  /* Prose-style list items */
+  .prose-list li::marker {
+    color: var(--teal);
+  }
+}

@@ -1,0 +1,67 @@
+home_page: home.md        # filepath under /source/
+menu_page: menu.md        # filepath under /source/
+author_img: /picture/author.jpg    # filepath of author image
+favicon_url: /picture/favicon.png  # filepath of favicon
+
+zoom_image: true
+codeblock:
+  # Code Highlight theme
+  # Available values: normal | night | night eighties | night blue | night bright | solarized | solarized dark | galactic
+  highlight_theme: normal
+
+comments:
+  utterances:
+    enable: true
+    user: Viiiikedy
+    repo: text-comment
+    theme: github-light # github-light | github-dark | github-dark-orange | icy-dark | dark-blue | photon-dark
+  disqus:
+    enable: false
+    shortname: # your disqus shortname
+  gitalk:
+    enable: false
+    githubID: # your github id
+    repo: # GitHub repository e.g. kaiiiz.github.io
+    ClientID: # GitHub Application Client ID
+    ClientSecret: # GitHub Application Client Secret
+    adminUser: # GitHub repository owner and collaborators
+    labels: 'gitalk' # GitHub issue labels
+    distractionFreeMode: true
+
+google_analytics: # UA-XXXXX-Y
+
+
+# 尝试的字体设置
+font:
+  enable: true
+  host: 
+  global:
+    external: false
+    #family: EB Garamond,Noto Serif SC
+    family: 
+    size:
+    
+  headings:
+    external: false
+    #family: Roboto Slab
+    family: 
+    size: 
+
+  # Font settings for posts.
+  # Fallback to `global` font settings.
+  posts:
+    external: false
+    family:  
+
+  # Font settings for Logo.
+  # Fallback to `global` font settings.
+  logo:
+    external: false
+    family: 
+    size: 24
+
+  # Font settings for <code> and code blocks.
+  codes:
+    external: true
+    family: Roboto Mono
+    size:

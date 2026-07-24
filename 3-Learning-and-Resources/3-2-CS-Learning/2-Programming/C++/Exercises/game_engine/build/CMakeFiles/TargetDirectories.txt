@@ -1,0 +1,7 @@
+/Users/evelyndu/Documents/CLionProjects/Exercise/game_engine/build/CMakeFiles/game_engine.dir
+/Users/evelyndu/Documents/CLionProjects/Exercise/game_engine/build/CMakeFiles/edit_cache.dir
+/Users/evelyndu/Documents/CLionProjects/Exercise/game_engine/build/CMakeFiles/rebuild_cache.dir
+/Users/evelyndu/Documents/CLionProjects/Exercise/game_engine/build/CMakeFiles/list_install_components.dir
+/Users/evelyndu/Documents/CLionProjects/Exercise/game_engine/build/CMakeFiles/install.dir
+/Users/evelyndu/Documents/CLionProjects/Exercise/game_engine/build/CMakeFiles/install/local.dir
+/Users/evelyndu/Documents/CLionProjects/Exercise/game_engine/build/CMakeFiles/install/strip.dir

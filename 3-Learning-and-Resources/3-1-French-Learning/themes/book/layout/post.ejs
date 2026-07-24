@@ -1,0 +1,11 @@
+<div class="book-post">
+  <%- page.content %>
+</div>
+
+<% if(page.comments === undefined || page.comments) { %>
+  <div class="book-comments">
+    <%- partial('_lib/comments') %>
+  </div>
+<% } %>
+
+<%- js('js/book-post') %>

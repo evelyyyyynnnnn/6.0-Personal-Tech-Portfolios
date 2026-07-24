@@ -1,0 +1,7 @@
+{
+    "build": {
+      "env": {
+        "RUBY_VERSION": "2.6.10"
+      }
+    }
+  }

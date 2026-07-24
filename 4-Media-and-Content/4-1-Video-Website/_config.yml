@@ -1,0 +1,39 @@
+name: Vicky Video
+description: Let's Enjoy the Wisdom of Life.
+url: 'https://viiickkkkkky.github.io/'
+# sbaseurl: '/jekyll-video'
+email: vickydu1213@gmail.com
+twitter: https://twitter.com/DuVicky233691
+youtube: https://www.youtube.com/@Cynthiiiiia
+facebook: https://www.instagram.com/viii.iiicky/
+google_analytics: 'UA-00000000-1'
+
+################################################################
+################################################################
+plugins:
+  - jekyll-sitemap
+sass:
+  sass_dir: /assets/_sass
+  style: :compressed
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - CNAME
+  - .gitignore
+collections:
+  videos:
+    output: true
+    permalink: /:path/
+defaults:
+  -
+    scope:
+      path: ''
+      type: posts
+    values:
+      layout: post
+  -
+    scope:
+      path: ''
+      type: videos
+    values:
+      layout: video

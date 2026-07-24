@@ -1,0 +1,23 @@
+{
+  "name": "@builder.io/vite-plugin-jsx-loc",
+  "version": "0.1.1",
+  "description": "A Vite plugin that adds location data attributes to JSX elements",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "vite-plugin",
+    "jsx",
+    "debug",
+    "development"
+  ],
+  "dependencies": {
+    "@builder.io/jsx-loc-internals": "0.0.1"
+  },
+  "peerDependencies": {
+    "vite": "^4.0.0 || ^5.0.0"
+  }
+}
