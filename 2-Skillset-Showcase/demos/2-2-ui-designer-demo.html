@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UI Designer Portfolio — Demo</title>
+<meta name="description" content="Static demo of the vCard-style personal portfolio in 2-2-My-UI-Designer-Site.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gold:hsl(45,100%,72%); --gold-2:hsl(45,54%,58%);
+    --eerie-1:hsl(240,2%,13%); --eerie-2:hsl(240,2%,12%);
+    --smoky:hsl(0,0%,7%); --jet:hsl(0,0%,22%);
+    --onyx:hsl(240,1%,17%); --white-1:hsl(0,0%,100%); --white-2:hsl(0,0%,98%);
+    --light-gray:hsl(0,0%,84%); --light-gray-70:hsla(0,0%,84%,.7);
+    --bg-gradient:linear-gradient(to bottom right,hsl(240,1%,25%) 3%,hsl(0,0%,19%) 97%);
+    --border-gradient:linear-gradient(to bottom right,hsl(0,0%,25%) 0%,hsla(0,0%,25%,0) 50%);
+    --gold-gradient:linear-gradient(to bottom right,hsl(45,100%,71%) 0%,hsla(36,100%,69%,0) 50%);
+    --shadow:0 16px 30px hsla(0,0%,0%,.25);
+    --sans:'Poppins',-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    --radius:20px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--smoky);color:var(--white-2);font-family:var(--sans);font-size:15px;
+       line-height:1.6;padding:15px;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+  ul{list-style:none}
+
+  .banner{max-width:1200px;margin:0 auto 15px;background:var(--eerie-1);border:1px solid var(--jet);
+    border-radius:14px;padding:10px 18px;font-size:12.5px;color:var(--light-gray-70);text-align:center}
+  .banner b{color:var(--gold)}
+
+  main{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:300px 1fr;gap:25px;align-items:start}
+
+  /* ---------- sidebar ---------- */
+  .sidebar{background:var(--eerie-1);border:1px solid var(--jet);border-radius:var(--radius);
+    padding:15px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .sidebar-info{display:flex;align-items:center;gap:15px;padding-right:96px}
+  .avatar{width:80px;height:80px;border-radius:22px;background:var(--bg-gradient);
+    display:grid;place-items:center;font-size:26px;font-weight:600;color:var(--gold);flex-shrink:0}
+  .name{color:var(--white-2);font-size:17px;font-weight:500;letter-spacing:-.25px;margin-bottom:8px}
+  .role{color:var(--white-1);background:var(--onyx);font-size:11px;font-weight:300;
+    width:max-content;padding:3px 12px;border-radius:8px}
+  .toggle-contacts{position:absolute;top:0;right:0;background:var(--border-gradient);
+    color:var(--gold);font-size:11px;padding:11px 16px;border:0;
+    border-radius:0 var(--radius) 0 var(--radius);
+    cursor:pointer;font-family:inherit;letter-spacing:.02em}
+  .toggle-contacts:hover{color:#fff}
+  .sidebar-more{opacity:0;max-height:0;overflow:hidden;transition:.25s ease}
+  .sidebar.active .sidebar-more{opacity:1;max-height:420px;margin-top:18px}
+  .sep{width:100%;height:1px;background:var(--jet);margin:16px 0}
+  .contacts li{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+  .icon-box{width:30px;height:30px;border-radius:8px;background:var(--border-gradient);
+    display:grid;place-items:center;font-size:14px;color:var(--gold);flex-shrink:0}
+  .c-title{color:var(--light-gray-70);font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+  .c-val{color:var(--white-2);font-size:13px;word-break:break-all}
+  .socials{display:flex;gap:15px;padding-left:7px}
+  .socials a{color:var(--light-gray-70);font-size:16px}
+  .socials a:hover{color:var(--gold)}
+
+  /* ---------- main box ---------- */
+  .box{position:relative;background:var(--eerie-1);border:1px solid var(--jet);
+    border-radius:var(--radius);box-shadow:var(--shadow);min-height:100%}
+  .navbar{position:sticky;top:0;background:hsla(240,1%,17%,.75);backdrop-filter:blur(10px);
+    border:1px solid var(--jet);border-radius:14px;margin:14px;z-index:5;
+    display:flex;justify-content:center;flex-wrap:wrap}
+  .navbar button{background:none;border:0;color:var(--light-gray);font-family:inherit;
+    font-size:13px;padding:16px 12px;cursor:pointer}
+  .navbar button:hover{color:var(--light-gray-70)}
+  .navbar button.active{color:var(--gold)}
+
+  article{display:none;padding:0 30px 30px;animation:fade .4s ease backwards}
+  article.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+  .h2{position:relative;color:var(--white-2);font-size:26px;font-weight:600;margin-bottom:22px;padding-bottom:12px}
+  .h2::after{content:'';position:absolute;bottom:0;left:0;width:44px;height:3px;border-radius:3px;background:var(--gold-2)}
+  .h3{color:var(--white-2);font-size:19px;font-weight:500;margin-bottom:16px}
+  p{color:var(--light-gray-70);font-size:14px;line-height:1.8}
+
+  .services{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:30px}
+  .service{background:var(--border-gradient);border:1px solid var(--jet);border-radius:14px;
+    padding:20px;display:flex;gap:16px;align-items:flex-start}
+  .service .ic{font-size:24px}
+  .service h4{color:var(--white-2);font-size:16px;font-weight:500;margin-bottom:6px}
+  .service p{font-size:13px;line-height:1.7}
+
+  .timeline{margin-bottom:34px}
+  .tl-head{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+  .tl-head .ic{width:34px;height:34px;border-radius:10px;background:var(--border-gradient);
+    display:grid;place-items:center;color:var(--gold);font-size:15px}
+  .tl-list{margin-left:48px}
+  .tl-item{position:relative;margin-bottom:22px}
+  .tl-item::before{content:'';position:absolute;top:-26px;left:-31px;width:1px;height:calc(100% + 26px);background:var(--jet)}
+  .tl-item:first-child::before{display:none}
+  .tl-item::after{content:'';position:absolute;top:6px;left:-34px;width:7px;height:7px;
+    border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px var(--jet)}
+  .tl-item h4{color:var(--white-2);font-size:15px;font-weight:500;line-height:1.4}
+  .tl-item .yr{color:var(--gold);font-size:13px;font-weight:400;margin:2px 0 6px}
+  .tl-item p{font-size:13.5px}
+  .tl-item p strong{color:var(--light-gray);font-weight:500}
+
+  .skills li{margin-bottom:16px}
+  .sk-title{display:flex;justify-content:space-between;font-size:13.5px;color:var(--white-2);margin-bottom:7px}
+  .sk-title span:last-child{color:var(--light-gray-70)}
+  .bar{height:8px;background:var(--jet);border-radius:10px}
+  .bar div{height:100%;border-radius:10px;background:var(--gold-2);width:0;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+
+  .filters{display:flex;gap:22px;flex-wrap:wrap;margin-bottom:26px}
+  .filters button{background:none;border:0;color:var(--light-gray-70);font-family:inherit;
+    font-size:14px;cursor:pointer;padding:0}
+  .filters button.active{color:var(--gold)}
+  .projects{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .proj{cursor:pointer}
+  .proj .thumb{position:relative;height:145px;border-radius:14px;overflow:hidden;
+    display:grid;place-items:center;font-size:30px;font-weight:600;color:hsla(0,0%,100%,.85)}
+  .proj .thumb::after{content:'↗';position:absolute;inset:0;display:grid;place-items:center;
+    background:hsla(0,0%,0%,.6);color:var(--gold);font-size:22px;opacity:0;transition:.25s}
+  .proj:hover .thumb::after{opacity:1}
+  .proj h4{color:var(--white-2);font-size:15px;font-weight:400;margin-top:14px}
+  .proj .cat{color:var(--light-gray-70);font-size:13px}
+
+  .form{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:8px}
+  .form input,.form textarea{grid-column:span 1;background:var(--eerie-2);color:var(--white-2);
+    font-family:inherit;font-size:14px;padding:13px 18px;border:1px solid var(--jet);border-radius:12px;outline:none}
+  .form textarea{grid-column:span 2;min-height:110px;resize:vertical}
+  .form input:focus,.form textarea:focus{border-color:var(--gold)}
+  .send{grid-column:span 2;justify-self:end;display:flex;align-items:center;gap:10px;
+    background:var(--border-gradient);color:var(--gold);border:1px solid var(--jet);
+    border-radius:12px;padding:13px 22px;font-family:inherit;font-size:14px;cursor:pointer}
+  .send:hover{background:var(--gold-gradient);color:var(--smoky)}
+  .note{grid-column:span 2;font-size:12.5px;color:var(--light-gray-70)}
+
+  @media(max-width:900px){
+    main{grid-template-columns:1fr}
+    .services,.projects,.form{grid-template-columns:1fr}
+    .form textarea,.send,.note{grid-column:span 1}
+    article{padding:0 18px 24px}
+  }
+</style>
+</head>
+<body>
+
+<div class="banner">
+  Static demo page for <b>2-Skillset-Showcase / 2-2-My-UI-Designer-Site</b> — a single-file recreation of the vCard portfolio (sidebar, tab routing, filters, form) with no external assets.
+</div>
+
+<main>
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar" id="sidebar">
+    <button class="toggle-contacts" id="toggleContacts">Show Contacts</button>
+
+    <div class="sidebar-info">
+      <div class="avatar">ED</div>
+      <div>
+        <h1 class="name">Evelyn Du</h1>
+        <p class="role">Creator &amp; Developer</p>
+      </div>
+    </div>
+
+    <div class="sidebar-more">
+      <div class="sep"></div>
+      <ul class="contacts">
+        <li>
+          <div class="icon-box">✉</div>
+          <div><p class="c-title">Email</p><a class="c-val" href="mailto:wd275@cornell.edu">wd275@cornell.edu</a></div>
+        </li>
+        <li>
+          <div class="icon-box">◎</div>
+          <div><p class="c-title">Location</p><address class="c-val" style="font-style:normal">Ithaca, New York, USA</address></div>
+        </li>
+        <li>
+          <div class="icon-box">✎</div>
+          <div><p class="c-title">Focus</p><p class="c-val">HCI · UX Design · Front-end</p></div>
+        </li>
+      </ul>
+      <div class="sep"></div>
+      <ul class="socials">
+        <li><a href="#" title="GitHub">GitHub</a></li>
+        <li><a href="#" title="Dribbble">Dribbble</a></li>
+        <li><a href="#" title="LinkedIn">LinkedIn</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- ============ CONTENT ============ -->
+  <div class="box">
+    <nav class="navbar">
+      <button class="active" data-page="about">About</button>
+      <button data-page="resume">Resume</button>
+      <button data-page="portfolio">Portfolio</button>
+      <button data-page="contact">Contact</button>
+    </nav>
+
+    <!-- ---- ABOUT ---- -->
+    <article class="active" data-article="about">
+      <h2 class="h2">About me</h2>
+      <p>
+        I design and build interfaces at the seam between research and engineering — studying
+        Operations Research &amp; Information Engineering at Cornell with a minor in UX Design,
+        and shipping the front-ends that come out of it.
+      </p>
+      <p style="margin-top:14px">
+        My work runs from human–AI interaction studies and usability testing through to
+        production React and design systems. I like turning a messy problem into an interface
+        that feels obvious in hindsight.
+      </p>
+
+      <h3 class="h3" style="margin-top:34px">What I'm doing</h3>
+      <div class="services">
+        <div class="service"><span class="ic">🖥️</span><div><h4>Web design &amp; development</h4><p>Responsive, accessible interfaces built from a design system, not a screenshot.</p></div></div>
+        <div class="service"><span class="ic">📱</span><div><h4>Mobile app</h4><p>iOS product design and prototyping, from flows and wireframes to shipped features.</p></div></div>
+        <div class="service"><span class="ic">🎨</span><div><h4>Poster &amp; logo design</h4><p>Brand marks, print pieces and campaign visuals with a consistent visual language.</p></div></div>
+        <div class="service"><span class="ic">📷</span><div><h4>Photography</h4><p>Editorial and product photography used across the sites and decks I design.</p></div></div>
+      </div>
+    </article>
+
+    <!-- ---- RESUME ---- -->
+    <article data-article="resume">
+      <h2 class="h2">Resume</h2>
+
+      <div class="timeline">
+        <div class="tl-head"><div class="ic">🎓</div><h3 class="h3" style="margin:0">Education</h3></div>
+        <ul class="tl-list">
+          <li class="tl-item">
+            <h4>Cornell University</h4><div class="yr">2024 — 2026</div>
+            <p><strong>Major:</strong> Operations Research &amp; Information Engineering · <strong>Minor:</strong> UX Design</p>
+            <p><strong>Study areas:</strong> HCI design, web programming, visual perception, human–AI interaction</p>
+          </li>
+          <li class="tl-item">
+            <h4>Renmin University of China</h4><div class="yr">2019 — 2024</div>
+            <p><strong>Minor:</strong> UX Design</p>
+            <p><strong>Study areas:</strong> Interaction design, information architecture, cognitive psychology in design</p>
+          </li>
+          <li class="tl-item">
+            <h4>High School of Art &amp; Design</h4><div class="yr">2016 — 2019</div>
+            <p><strong>Study areas:</strong> Intro to UX design, usability testing &amp; evaluation</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-head"><div class="ic">💼</div><h3 class="h3" style="margin:0">Experience</h3></div>
+        <ul class="tl-list">
+          <li class="tl-item">
+            <h4>Product Designer &amp; Co-Founder</h4><div class="yr">2023 — Present</div>
+            <p>Building the next generation of art-healing experiences; integrating AI into personalised art therapy and facilitating structured painting and sculpture workshops.</p>
+          </li>
+          <li class="tl-item">
+            <h4>Product Designer &amp; Co-Founder</h4><div class="yr">2022 — Present</div>
+            <p>Lead the design of full-stack adaptive AI education interfaces, run cross-team syncs, and ship features across 3 apps with 6,000+ monthly active users.</p>
+          </li>
+          <li class="tl-item">
+            <h4>App Developer &amp; User Researcher</h4><div class="yr">2021 — 2022</div>
+            <p>Prototyped iOS educational app features, designing and implementing core functionality alongside the research that shaped it.</p>
+          </li>
+          <li class="tl-item">
+            <h4>Design Tutor</h4><div class="yr">2024 — Present</div>
+            <p>Teaching design fundamentals, critique and portfolio craft to students entering UX.</p>
+          </li>
+        </ul>
+      </div>
+
+      <h3 class="h3">Design skills</h3>
+      <ul class="skills">
+        <li><div class="sk-title"><span>UI / UX Design</span><span>90%</span></div><div class="bar"><div data-w="90"></div></div></li>
+        <li><div class="sk-title"><span>Front-end Development</span><span>80%</span></div><div class="bar"><div data-w="80"></div></div></li>
+        <li><div class="sk-title"><span>Design Systems &amp; Figma</span><span>85%</span></div><div class="bar"><div data-w="85"></div></div></li>
+        <li><div class="sk-title"><span>User Research &amp; Testing</span><span>75%</span></div><div class="bar"><div data-w="75"></div></div></li>
+      </ul>
+    </article>
+
+    <!-- ---- PORTFOLIO ---- -->
+    <article data-article="portfolio">
+      <h2 class="h2">Portfolio</h2>
+      <div class="filters" id="filters">
+        <button class="active" data-f="all">All</button>
+        <button data-f="web design">Web design</button>
+        <button data-f="applications">Applications</button>
+        <button data-f="web development">Web development</button>
+      </div>
+      <div class="projects" id="projects"></div>
+    </article>
+
+    <!-- ---- CONTACT ---- -->
+    <article data-article="contact">
+      <h2 class="h2">Contact</h2>
+      <p>Say hello — collaborations, design critique, or a question about any project here.</p>
+      <h3 class="h3" style="margin-top:30px">Contact form</h3>
+      <form class="form" id="form">
+        <input type="text" placeholder="Full name" required>
+        <input type="email" placeholder="Email address" required>
+        <textarea placeholder="Your message" required></textarea>
+        <p class="note">Demo only — this form does not submit anywhere. Wire it to a Vercel serverless function or a form service before going live.</p>
+        <button class="send" type="submit">✉ Send message</button>
+      </form>
+    </article>
+  </div>
+</main>
+
+<script>
+  /* ---- sidebar toggle ---- */
+  const sidebar = document.getElementById('sidebar');
+  const toggle = document.getElementById('toggleContacts');
+  toggle.onclick = () => {
+    sidebar.classList.toggle('active');
+    toggle.textContent = sidebar.classList.contains('active') ? 'Hide Contacts' : 'Show Contacts';
+  };
+
+  /* ---- page routing ---- */
+  const navBtns = document.querySelectorAll('.navbar button');
+  const articles = document.querySelectorAll('article');
+  navBtns.forEach(btn => btn.onclick = () => {
+    navBtns.forEach(b => b.classList.toggle('active', b === btn));
+    articles.forEach(a => a.classList.toggle('active', a.dataset.article === btn.dataset.page));
+    window.scrollTo({top:0, behavior:'smooth'});
+    if (btn.dataset.page === 'resume') animateBars();
+  });
+
+  /* ---- skill bars ---- */
+  function animateBars(){
+    document.querySelectorAll('.bar div').forEach(b => {
+      b.style.width = '0';
+      requestAnimationFrame(() => setTimeout(() => b.style.width = b.dataset.w + '%', 60));
+    });
+  }
+
+  /* ---- portfolio ---- */
+  const PROJECTS = [
+    {t:'Finance',      c:'web development', g:'linear-gradient(135deg,#2b5876,#4e4376)'},
+    {t:'Orizon',       c:'web development', g:'linear-gradient(135deg,#0f2027,#2c5364)'},
+    {t:'Fundo',        c:'web design',      g:'linear-gradient(135deg,#f7971e,#ffd200)'},
+    {t:'Brawlhalla',   c:'applications',    g:'linear-gradient(135deg,#642b73,#c6426e)'},
+    {t:'DSM.',         c:'web design',      g:'linear-gradient(135deg,#134e5e,#71b280)'},
+    {t:'MetaSpark',    c:'web design',      g:'linear-gradient(135deg,#3a1c71,#d76d77)'},
+    {t:'Summary',      c:'web development', g:'linear-gradient(135deg,#1f4037,#99f2c8)'},
+    {t:'Task Manager', c:'applications',    g:'linear-gradient(135deg,#414d0b,#727a17)'},
+    {t:'Arrival',      c:'web development', g:'linear-gradient(135deg,#232526,#414345)'},
+  ];
+  const projectsEl = document.getElementById('projects');
+  let filter = 'all';
+  function renderProjects(){
+    projectsEl.innerHTML = PROJECTS
+      .filter(p => filter === 'all' || p.c === filter)
+      .map(p => `
+        <div class="proj">
+          <div class="thumb" style="background:${p.g}">${p.t.charAt(0)}</div>
+          <h4>${p.t}</h4>
+          <p class="cat">${p.c.replace(/\b\w/g, m => m.toUpperCase())}</p>
+        </div>`).join('');
+  }
+  document.getElementById('filters').addEventListener('click', e => {
+    const b = e.target.closest('button'); if(!b) return;
+    filter = b.dataset.f;
+    document.querySelectorAll('#filters button').forEach(x => x.classList.toggle('active', x === b));
+    renderProjects();
+  });
+
+  /* ---- form ---- */
+  document.getElementById('form').addEventListener('submit', e => {
+    e.preventDefault();
+    const btn = e.target.querySelector('.send');
+    btn.textContent = '✓ Demo — not sent';
+    setTimeout(() => btn.textContent = '✉ Send message', 2200);
+  });
+
+  renderProjects();
+</script>
+</body>
+</html>

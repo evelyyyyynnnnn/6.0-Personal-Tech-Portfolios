@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skillset Showcase — Demos</title>
+<meta name="description" content="Four static demo pages, one per project in 2-Skillset-Showcase.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0b0e; --card:#13151b; --card-2:#181b23; --border:#242833;
+    --fg:#eef1f6; --fg-soft:#98a1b0;
+    --sans:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.65;
+       -webkit-font-smoothing:antialiased;min-height:100vh}
+  body::before{content:'';position:fixed;inset:0;z-index:-1;
+    background:radial-gradient(800px 460px at 12% -8%,rgba(79,70,229,.22),transparent 62%),
+               radial-gradient(700px 460px at 92% 4%,rgba(14,165,233,.16),transparent 62%)}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+  a{color:inherit;text-decoration:none}
+
+  header{padding:84px 0 44px}
+  .eyebrow{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:#7dd3fc;margin-bottom:16px}
+  h1{font-size:clamp(30px,5vw,44px);line-height:1.12;letter-spacing:-.03em;font-weight:700}
+  h1 em{font-style:normal;background:linear-gradient(120deg,#818cf8,#38bdf8);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  header p{color:var(--fg-soft);max-width:62ch;margin-top:16px;font-size:16px}
+
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding-bottom:56px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;
+    display:flex;flex-direction:column;transition:transform .18s,border-color .18s;
+    box-shadow:0 16px 40px rgba(0,0,0,.4)}
+  .card:hover{transform:translateY(-4px);border-color:#3b82f6}
+  .card .top{height:96px;display:flex;align-items:center;padding:0 22px;gap:14px;font-size:26px}
+  .card .top b{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:rgba(255,255,255,.85);font-family:var(--sans)}
+  .card .body{padding:20px 22px 22px;flex:1;display:flex;flex-direction:column}
+  .card h2{font-size:19px;font-weight:600;letter-spacing:-.01em;margin-bottom:7px}
+  .card p{color:var(--fg-soft);font-size:14px;flex:1}
+  .tags{display:flex;gap:6px;flex-wrap:wrap;margin:15px 0 16px}
+  .tag{font-size:11.5px;border:1px solid var(--border);background:var(--card-2);
+    border-radius:7px;padding:3px 9px;color:var(--fg-soft)}
+  .open{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:500;color:#7dd3fc}
+  .src{font-family:ui-monospace,monospace;font-size:11.5px;color:#6b7688;margin-top:10px}
+
+  footer{border-top:1px solid var(--border);padding:26px 0 46px;color:var(--fg-soft);font-size:13px}
+  footer code{background:var(--card);border:1px solid var(--border);border-radius:5px;padding:1px 6px;font-size:12px}
+  @media(max-width:820px){.cards{grid-template-columns:1fr}header{padding:52px 0 32px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">2 · Skillset Showcase</div>
+    <h1>Four projects, four <em>demo pages</em>.</h1>
+    <p>
+      One self-contained HTML file per subfolder. Each runs with no build step and no local assets —
+      open it directly, or drop this folder on Vercel as a static site.
+    </p>
+  </header>
+
+  <div class="cards">
+    <a class="card" href="2-1-full-stack-demo.html">
+      <div class="top" style="background:linear-gradient(135deg,#3578e5,#9b5cff)">🦖 <b>2-1 · Full Stack</b></div>
+      <div class="body">
+        <h2>Full-Stack Blog Platform</h2>
+        <p>A Docusaurus 3 blog with a swizzled theme: MDX writing, i18n, PWA, Algolia search and switchable list ⇄ grid post views. The demo reproduces the blog UI and maps the repository layout.</p>
+        <div class="tags"><span class="tag">Docusaurus</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">SCSS</span></div>
+        <span class="open">Open demo →</span>
+        <span class="src">2-1-My-Full-Stack/</span>
+      </div>
+    </a>
+
+    <a class="card" href="2-2-ui-designer-demo.html">
+      <div class="top" style="background:linear-gradient(135deg,#f5c451,#b8860b)">🎨 <b>2-2 · UI Designer</b></div>
+      <div class="body">
+        <h2>UI Designer Portfolio</h2>
+        <p>A vCard-style personal site — sidebar profile, tabbed routing between About, Resume, Portfolio and Contact, filterable project grid and animated skill bars. Rebuilt here as one file.</p>
+        <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Vanilla JS</span><span class="tag">Responsive</span></div>
+        <span class="open">Open demo →</span>
+        <span class="src">2-2-My-UI-Designer-Site/</span>
+      </div>
+    </a>
+
+    <a class="card" href="2-3-website-design-demo.html">
+      <div class="top" style="background:linear-gradient(135deg,#7c5cff,#22d3ee)">🧪 <b>2-3 · Website Design</b></div>
+      <div class="body">
+        <h2>Website Design Lab</h2>
+        <p>Three mini builds in one page: a weather card that recolours itself from its own conditions, a Motorola beeper that types on paper, and an AI-categorised accounting ledger dashboard.</p>
+        <div class="tags"><span class="tag">Vanilla JS</span><span class="tag">CSS animation</span><span class="tag">React + Express</span><span class="tag">Notion API</span></div>
+        <span class="open">Open demo →</span>
+        <span class="src">2-3-Website-Design/</span>
+      </div>
+    </a>
+
+    <a class="card" href="2-4-academic-site-demo.html">
+      <div class="top" style="background:linear-gradient(135deg,#4f46e5,#ec4899)">🎓 <b>2-4 · Academic</b></div>
+      <div class="body">
+        <h2>Academic Website</h2>
+        <p>A Hugo Blox research site: gradient-mesh profile header, research statement, featured and cited publications, courses, projects, talks and posts — all composed from YAML blocks.</p>
+        <div class="tags"><span class="tag">Hugo</span><span class="tag">Hugo Blox</span><span class="tag">Markdown</span><span class="tag">GitHub Actions</span></div>
+        <span class="open">Open demo →</span>
+        <span class="src">2-4-My-Academic-Site/</span>
+      </div>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    Deploy on Vercel: framework preset <code>Other</code>, root directory <code>2-Skillset-Showcase/demos</code>,
+    no build command, output directory <code>.</code> — this <code>index.html</code> becomes the landing page.
+  </div>
+</footer>
+</body>
+</html>

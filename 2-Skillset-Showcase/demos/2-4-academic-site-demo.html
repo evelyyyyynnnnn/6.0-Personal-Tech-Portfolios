@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Academic Site — Demo</title>
+<meta name="description" content="Static demo of the Hugo Blox academic website in 2-4-My-Academic-Site.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff; --bg-soft:#f7f8fa; --card:#ffffff; --border:#e5e7eb;
+    --fg:#111827; --fg-soft:#5b6472; --fg-faint:#8b95a3;
+    --brand:#4f46e5; --brand-soft:#eef2ff; --accent:#0ea5e9;
+    --shadow:0 1px 2px rgba(16,24,40,.05),0 12px 32px rgba(16,24,40,.07);
+    --radius:16px;
+    --serif:'Newsreader',Georgia,'Times New Roman',serif;
+    --sans:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  }
+  [data-theme="dark"]{
+    --bg:#0b0f16; --bg-soft:#121821; --card:#121821; --border:#212a36;
+    --fg:#e8edf4; --fg-soft:#9fabbb; --fg-faint:#7a8698;
+    --brand:#8b8cf9; --brand-soft:#1b1f3d; --accent:#38bdf8;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 32px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.7;
+       -webkit-font-smoothing:antialiased;transition:background .25s,color .25s}
+  a{color:var(--brand);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+  h1,h2,h3,.serif{font-family:var(--serif);font-weight:500;letter-spacing:-.015em}
+
+  .banner{background:var(--bg-soft);border-bottom:1px solid var(--border);
+    font-size:12.5px;color:var(--fg-soft);text-align:center;padding:9px 20px}
+  .banner b{color:var(--fg)}
+
+  /* ---------- nav ---------- */
+  header.nav{position:sticky;top:0;z-index:30;border-bottom:1px solid var(--border);
+    background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(12px)}
+  .nav-in{display:flex;align-items:center;gap:6px;height:62px}
+  .brandname{font-family:var(--serif);font-size:18px;font-weight:600;margin-right:auto}
+  .nav-in a.link{color:var(--fg-soft);font-size:14px;padding:7px 11px;border-radius:8px}
+  .nav-in a.link:hover{background:var(--bg-soft);color:var(--fg);text-decoration:none}
+  .icon-btn{background:var(--bg-soft);border:1px solid var(--border);color:var(--fg);
+    border-radius:9px;width:34px;height:34px;cursor:pointer;font-size:15px;margin-left:8px}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+  .mesh{position:absolute;inset:0;z-index:0;
+    background:
+      radial-gradient(closest-side at 18% 25%,rgba(79,70,229,.30),transparent),
+      radial-gradient(closest-side at 78% 15%,rgba(14,165,233,.26),transparent),
+      radial-gradient(closest-side at 62% 88%,rgba(236,72,153,.20),transparent),
+      radial-gradient(closest-side at 8% 92%,rgba(34,197,94,.16),transparent);
+    filter:blur(18px)}
+  .hero-in{position:relative;z-index:1;display:grid;grid-template-columns:220px 1fr;
+    gap:44px;align-items:center;padding:72px 0}
+  .avatar{width:200px;height:200px;border-radius:50%;display:grid;place-items:center;
+    font-family:var(--serif);font-size:64px;color:#fff;
+    background:linear-gradient(140deg,#4f46e5,#0ea5e9 55%,#ec4899);
+    box-shadow:0 18px 44px rgba(79,70,229,.35),inset 0 2px 0 rgba(255,255,255,.35)}
+  .hero h1{font-size:clamp(32px,5vw,46px);line-height:1.1;margin-bottom:6px}
+  .hero .sub{color:var(--fg-soft);font-size:16px;margin-bottom:4px}
+  .hero .org{color:var(--fg-faint);font-size:14.5px;margin-bottom:20px}
+  .hero-cta{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .btn{display:inline-flex;align-items:center;gap:8px;border-radius:10px;padding:9px 17px;
+    font-size:14px;font-weight:500;border:1px solid transparent}
+  .btn-primary{background:var(--brand);color:#fff}
+  .btn-primary:hover{text-decoration:none;filter:brightness(1.07)}
+  .btn-ghost{border-color:var(--border);background:var(--card);color:var(--fg)}
+  .btn-ghost:hover{text-decoration:none;background:var(--bg-soft)}
+  .soc{display:flex;gap:6px;margin-left:4px}
+  .soc a{width:34px;height:34px;border:1px solid var(--border);border-radius:9px;background:var(--card);
+    display:grid;place-items:center;font-size:13px;color:var(--fg-soft)}
+  .soc a:hover{color:var(--brand);border-color:var(--brand);text-decoration:none}
+
+  /* ---------- sections ---------- */
+  section{padding:56px 0;border-bottom:1px solid var(--border)}
+  .sec-title{font-size:26px;margin-bottom:8px}
+  .sec-sub{color:var(--fg-soft);font-size:14.5px;margin-bottom:28px}
+
+  .two{display:grid;grid-template-columns:1fr 300px;gap:40px;align-items:start}
+  .prose p{color:var(--fg-soft);font-size:15.5px;margin-bottom:14px}
+  .prose p strong{color:var(--fg);font-weight:500}
+  .panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:20px;box-shadow:var(--shadow)}
+  .panel + .panel{margin-top:16px}
+  .panel h4{font-family:var(--sans);font-size:11.5px;text-transform:uppercase;letter-spacing:.13em;
+    color:var(--fg-faint);margin-bottom:13px;font-weight:600}
+  .panel ul{list-style:none;display:grid;gap:9px}
+  .panel li{font-size:14px;color:var(--fg-soft);display:flex;gap:9px}
+  .panel li::before{content:'—';color:var(--brand)}
+  .edu li{display:block}
+  .edu li b{display:block;color:var(--fg);font-weight:500;font-size:14px}
+  .edu li span{font-size:13px;color:var(--fg-faint)}
+
+  /* ---------- publications ---------- */
+  .pub-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:32px}
+  .pub-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    overflow:hidden;box-shadow:var(--shadow);transition:transform .18s}
+  .pub-card:hover{transform:translateY(-3px)}
+  .pub-card .cover{height:120px;display:grid;place-items:center;color:rgba(255,255,255,.9);
+    font-family:var(--serif);font-size:15px;letter-spacing:.04em;padding:0 20px;text-align:center}
+  .pub-card .body{padding:16px 18px}
+  .pub-card h3{font-size:16.5px;line-height:1.35;margin-bottom:7px}
+  .pub-card .authors{font-size:13px;color:var(--fg-soft)}
+  .pub-card .venue{font-size:12.5px;color:var(--fg-faint);margin-top:5px}
+  .badge{display:inline-block;font-family:var(--sans);font-size:10.5px;letter-spacing:.08em;
+    text-transform:uppercase;border:1px solid var(--border);border-radius:6px;
+    padding:2px 8px;color:var(--fg-faint);margin-bottom:9px}
+
+  .cite{border-left:2px solid var(--border);padding:2px 0 2px 18px;margin-bottom:20px}
+  .cite h4{font-family:var(--serif);font-size:16px;font-weight:500;margin-bottom:4px}
+  .cite p{font-size:13.5px;color:var(--fg-soft)}
+  .cite .links{margin-top:7px;display:flex;gap:8px;flex-wrap:wrap}
+  .cite .links a{font-size:12px;border:1px solid var(--border);border-radius:6px;padding:2px 9px;color:var(--fg-soft)}
+  .cite .links a:hover{color:var(--brand);border-color:var(--brand);text-decoration:none}
+
+  /* ---------- generic cards ---------- */
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .tile{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:20px;box-shadow:var(--shadow)}
+  .tile .ic{font-size:22px;display:block;margin-bottom:11px}
+  .tile h3{font-size:17px;margin-bottom:6px}
+  .tile p{font-size:13.5px;color:var(--fg-soft)}
+  .tile .meta{font-size:12px;color:var(--fg-faint);margin-top:11px}
+
+  .list-rows{display:grid;gap:2px}
+  .lrow{display:flex;gap:16px;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--border)}
+  .lrow:last-child{border-bottom:0}
+  .lrow .date{font-size:12.5px;color:var(--fg-faint);min-width:96px;font-variant-numeric:tabular-nums}
+  .lrow .t{font-family:var(--serif);font-size:16px}
+  .lrow .t small{display:block;font-family:var(--sans);font-size:13px;color:var(--fg-soft);margin-top:2px}
+
+  .stack{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+  .pill{border:1px solid var(--border);background:var(--card);border-radius:9px;padding:6px 12px;font-size:13px;color:var(--fg-soft)}
+  .pill b{color:var(--fg);font-weight:500}
+  footer{padding:30px 0 48px;color:var(--fg-faint);font-size:13px;text-align:center}
+
+  @media(max-width:880px){
+    .hero-in{grid-template-columns:1fr;text-align:center;justify-items:center;gap:26px;padding:48px 0}
+    .hero-cta{justify-content:center}
+    .two,.pub-grid,.grid-3{grid-template-columns:1fr}
+    .nav-in a.link{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="banner">
+  Static demo page for <b>2-Skillset-Showcase / 2-4-My-Academic-Site</b> — the real project is a Hugo Blox site; this single file previews its landing page, blocks and content.
+</div>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <span class="brandname">Wenke Du</span>
+    <a class="link" href="#research">Research</a>
+    <a class="link" href="#publications">Publications</a>
+    <a class="link" href="#courses">Courses</a>
+    <a class="link" href="#projects">Projects</a>
+    <a class="link" href="#talks">Talks</a>
+    <a class="link" href="#blog">Blog</a>
+    <button class="icon-btn" id="theme" title="Toggle light / dark">◐</button>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="mesh"></div>
+  <div class="wrap hero-in">
+    <div class="avatar">WD</div>
+    <div>
+      <h1>Wenke Du</h1>
+      <p class="sub">Researcher — trustworthy, agentic and decision-oriented AI</p>
+      <p class="org">Operations Research &amp; Information Engineering · Cornell University</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#" onclick="return false">↓ Download CV</a>
+        <a class="btn btn-ghost" href="#publications">Publications</a>
+        <span class="soc">
+          <a href="#" onclick="return false" title="Email">✉</a>
+          <a href="#" onclick="return false" title="Google Scholar">🎓</a>
+          <a href="#" onclick="return false" title="GitHub">⌥</a>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ---------- research ---------- -->
+  <section id="research">
+    <h2 class="sec-title">📚 My research</h2>
+    <p class="sec-sub">block: markdown · content/_index.md</p>
+    <div class="two">
+      <div class="prose">
+        <p>
+          My research focuses on building <strong>trustworthy, agentic and decision-oriented AI systems</strong>
+          at the intersection of large language models, reinforcement learning and causal inference.
+        </p>
+        <p>
+          I study how LLM-based agents can reason, verify and self-correct when operating in high-stakes
+          domains such as finance, healthcare and blockchain security. My work combines multi-modal learning
+          (text, code, time-series and structured data), curriculum reinforcement learning and self-verification
+          loops to improve robustness, interpretability and reliability.
+        </p>
+        <p>
+          Methodologically, I integrate empirical causal inference, large-scale benchmarking and system-level
+          evaluation to bridge theory and deployment.
+        </p>
+        <p>
+          I am particularly interested in how AI systems interact with human decision-making and institutional
+          constraints, and how these interactions reshape economic and social outcomes. I actively collaborate
+          with researchers in academia and industry — reach out if you work on LLM agents, trustworthy AI, or
+          AI-driven decision systems. 😃
+        </p>
+      </div>
+      <aside>
+        <div class="panel">
+          <h4>Interests</h4>
+          <ul>
+            <li>LLM agents &amp; self-verification</li>
+            <li>Reinforcement learning</li>
+            <li>Causal inference</li>
+            <li>Trustworthy &amp; evaluable AI</li>
+            <li>Quantitative finance</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h4>Education</h4>
+          <ul class="edu">
+            <li><b>Cornell University</b><span>M.Eng., Operations Research &amp; Information Engineering · 2024 — 2026</span></li>
+            <li><b>Renmin University of China</b><span>B.Sc. · 2019 — 2024</span></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ---------- publications ---------- -->
+  <section id="publications">
+    <h2 class="sec-title">Featured publications</h2>
+    <p class="sec-sub">block: collection · view: article-grid · filters: publications, featured_only</p>
+    <div class="pub-grid">
+      <article class="pub-card">
+        <div class="cover" style="background:linear-gradient(135deg,#4f46e5,#7c3aed)">Conference paper</div>
+        <div class="body">
+          <span class="badge">Conference</span>
+          <h3>Application of Support Vector Regression in a Prediction Model Using Genetic Algorithm Optimization</h3>
+          <p class="authors">Wenke Du, Ruihan Chen, Zhenglong Cong</p>
+          <p class="venue">Proceedings · PDF &amp; BibTeX in repo</p>
+        </div>
+      </article>
+      <article class="pub-card">
+        <div class="cover" style="background:linear-gradient(135deg,#0ea5e9,#0369a1)">Journal article</div>
+        <div class="body">
+          <span class="badge">Journal</span>
+          <h3>Tokyo Stock Exchange Prediction with a Hybrid Model of LightGBM and DNN</h3>
+          <p class="authors">W. Du*, Y. Yang*, X. Zhang, S. Liu · <em>*equal contribution</em></p>
+          <p class="venue">February 2026</p>
+        </div>
+      </article>
+    </div>
+
+    <h2 class="sec-title" style="font-size:22px">Recent publications</h2>
+    <p class="sec-sub">block: collection · view: citation</p>
+    <div>
+      <div class="cite">
+        <h4>Tokyo Stock Exchange Prediction with a Hybrid Model of LightGBM and DNN</h4>
+        <p>W. Du, Y. Yang, X. Zhang, S. Liu. (2026). <em>Journal article.</em></p>
+        <div class="links"><a href="#" onclick="return false">Cite</a><a href="#" onclick="return false">DOI</a></div>
+      </div>
+      <div class="cite">
+        <h4>Application of Support Vector Regression in a Prediction Model Using Genetic Algorithm Optimization</h4>
+        <p>W. Du, R. Chen, Z. Cong. <em>Conference paper.</em></p>
+        <div class="links"><a href="#" onclick="return false">Cite</a><a href="#" onclick="return false">PDF</a></div>
+      </div>
+      <div class="cite">
+        <h4>Economic Forecast of Southern China with a BP Neural Network — Taking Chongqing as an Example</h4>
+        <p>W. Du. (2021). <em>Preprint.</em></p>
+        <div class="links"><a href="#" onclick="return false">Cite</a><a href="#" onclick="return false">Preprint</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- courses ---------- -->
+  <section id="courses">
+    <h2 class="sec-title">Courses</h2>
+    <p class="sec-sub">content/courses/ · docs-type sections with a guide and a reference per course</p>
+    <div class="grid-3">
+      <div class="tile"><span class="ic">📈</span><h3>Quantitative Finance</h3><p>Pricing, portfolio construction and the statistics behind trading decisions.</p><p class="meta">Guide · Reference · Getting started</p></div>
+      <div class="tile"><span class="ic">💻</span><h3>Computer Science</h3><p>Algorithms, systems and the programming foundations the research builds on.</p><p class="meta">Guide · Reference · Getting started</p></div>
+      <div class="tile"><span class="ic">🧮</span><h3>Optimization</h3><p>Convex and combinatorial optimisation, with the solvers and duality that follow.</p><p class="meta">Guide · Reference · Getting started</p></div>
+    </div>
+  </section>
+
+  <!-- ---------- projects ---------- -->
+  <section id="projects">
+    <h2 class="sec-title">Projects</h2>
+    <p class="sec-sub">content/projects/ · each folder holds an index.md and a featured image</p>
+    <div class="grid-3">
+      <div class="tile"><span class="ic">🐼</span><h3>Pandas</h3><p>Data wrangling notebooks and the preprocessing pipelines behind the empirical work.</p></div>
+      <div class="tile"><span class="ic">🔥</span><h3>PyTorch</h3><p>Model implementations for the deep-learning side of the forecasting experiments.</p></div>
+      <div class="tile"><span class="ic">🔬</span><h3>scikit-learn</h3><p>Baselines, feature pipelines and evaluation harnesses for classical models.</p></div>
+    </div>
+  </section>
+
+  <!-- ---------- talks ---------- -->
+  <section id="talks">
+    <h2 class="sec-title">Talks &amp; events</h2>
+    <p class="sec-sub">content/events/ · block: collection</p>
+    <div class="list-rows">
+      <div class="lrow"><span class="date">Upcoming</span><span class="t">Self-verifying LLM agents in high-stakes decisions<small>Invited talk · seminar series</small></span></div>
+      <div class="lrow"><span class="date">2025</span><span class="t">Benchmarking agentic reasoning end to end<small>Workshop presentation</small></span></div>
+      <div class="lrow"><span class="date">2025</span><span class="t">Slides deck (reveal.js)<small>content/slides/ · rendered by Hugo Blox</small></span></div>
+    </div>
+  </section>
+
+  <!-- ---------- blog ---------- -->
+  <section id="blog">
+    <h2 class="sec-title">Recent posts</h2>
+    <p class="sec-sub">content/blog/ · six posts currently in the repo</p>
+    <div class="list-rows">
+      <div class="lrow"><span class="date">Data viz</span><span class="t">📈 Communicate your results effectively with the best data visualizations</span></div>
+      <div class="lrow"><span class="date">Notebooks</span><span class="t">⚡️ Turn Jupyter notebooks into blog posts</span></div>
+      <div class="lrow"><span class="date">Thinking</span><span class="t">🧠 Sharpen your thinking with a second brain</span></div>
+      <div class="lrow"><span class="date">Teaching</span><span class="t">👩🏼‍🏫 Teach academic courses</span></div>
+      <div class="lrow"><span class="date">Workflow</span><span class="t">✅ Manage your projects</span></div>
+      <div class="lrow"><span class="date">Getting started</span><span class="t">🎉 Easily create your own simple yet highly customizable blog</span></div>
+    </div>
+  </section>
+
+  <!-- ---------- stack ---------- -->
+  <section id="stack" style="border-bottom:0">
+    <h2 class="sec-title">How the site is built</h2>
+    <p class="sec-sub">Hugo Blox — pages are composed from configurable blocks in <code>content/_index.md</code></p>
+    <div class="two">
+      <div class="prose">
+        <p>
+          The landing page stacks a <strong>resume-biography-3</strong> block (profile, gradient mesh background,
+          CV button) over a <strong>markdown</strong> block for the research statement, then two
+          <strong>collection</strong> blocks — a featured article grid and a citation list — plus talks and courses.
+          Nothing here is hand-written HTML; each section is YAML pointing at a folder of Markdown.
+        </p>
+        <p>
+          Configuration lives in <code>config/_default/</code>: <code>hugo.yaml</code>, <code>params.yaml</code>
+          (identity, theme pack, colours), <code>menus.yaml</code>, <code>languages.yaml</code> and
+          <code>module.yaml</code>. Publications can be imported from BibTeX by the
+          <code>import-publications</code> GitHub Action.
+        </p>
+      </div>
+      <aside>
+        <div class="panel">
+          <h4>Stack</h4>
+          <div class="stack">
+            <span class="pill"><b>Hugo</b> extended</span>
+            <span class="pill"><b>Hugo Blox</b> v2 schema</span>
+            <span class="pill">Go modules</span>
+            <span class="pill">Tailwind theme packs</span>
+            <span class="pill">pnpm</span>
+            <span class="pill">GitHub Actions</span>
+          </div>
+        </div>
+        <div class="panel">
+          <h4>Deploy</h4>
+          <ul>
+            <li>Build: <code>hugo --minify</code></li>
+            <li>Output: <code>public/</code></li>
+            <li>Root: <code>2-4-My-Academic-Site</code></li>
+            <li><code>netlify.toml</code> already present; Vercel needs the Hugo preset + <code>HUGO_VERSION</code></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+</div>
+
+<footer>Demo page · 2-4-My-Academic-Site · single static file, no build step required.</footer>
+
+<script>
+  document.getElementById('theme').onclick = () => {
+    const r = document.documentElement;
+    r.dataset.theme = r.dataset.theme === 'dark' ? 'light' : 'dark';
+  };
+  document.querySelectorAll('.nav-in a.link').forEach(a => {
+    a.addEventListener('click', e => {
+      const el = document.querySelector(a.getAttribute('href'));
+      if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); }
+    });
+  });
+</script>
+</body>
+</html>
