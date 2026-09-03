@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Design Lab — Demo</title>
+<meta name="description" content="Static demo of the three mini web projects in 2-3-Website-Design: a living weather card, a beeper typewriter, and an AI accounting ledger.">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#08090b; --panel:#111318; --panel-2:#171a21; --border:#242833;
+    --fg:#e9ecf1; --fg-soft:#9aa3b2; --accent:#7c5cff; --accent-2:#22d3ee;
+    --radius:18px;
+    --sans:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    --type:'Special Elite',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.6;
+       -webkit-font-smoothing:antialiased}
+  body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:radial-gradient(900px 500px at 15% -5%,rgba(124,92,255,.18),transparent 60%),
+               radial-gradient(700px 500px at 95% 10%,rgba(34,211,238,.12),transparent 60%)}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+  a{color:var(--accent-2);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  .banner{border-bottom:1px solid var(--border);background:rgba(17,19,24,.6);
+    font-size:12.5px;color:var(--fg-soft);text-align:center;padding:9px 20px}
+  .banner b{color:var(--fg)}
+
+  header.hero{padding:70px 0 46px;text-align:center}
+  .eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-2);margin-bottom:16px}
+  h1{font-size:clamp(30px,5vw,46px);line-height:1.12;letter-spacing:-.03em;font-weight:700}
+  h1 em{font-style:normal;background:linear-gradient(120deg,#7c5cff,#22d3ee);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  header.hero p{color:var(--fg-soft);max-width:60ch;margin:16px auto 0;font-size:16px}
+
+  section.proj{padding:40px 0;border-top:1px solid var(--border)}
+  .proj-head{display:flex;align-items:flex-start;gap:16px;margin-bottom:26px;flex-wrap:wrap}
+  .num{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--accent),#4c2fd6);
+    display:grid;place-items:center;font-size:14px;font-weight:700;flex-shrink:0}
+  .proj-head h2{font-size:21px;letter-spacing:-.01em;font-weight:600}
+  .proj-head p{color:var(--fg-soft);font-size:14.5px;max-width:66ch;margin-top:6px}
+  .tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+  .tag{font-size:11.5px;border:1px solid var(--border);background:var(--panel);
+    border-radius:7px;padding:3px 10px;color:var(--fg-soft)}
+  .path{font-family:ui-monospace,monospace;font-size:12px;color:var(--fg-soft);
+    background:var(--panel);border:1px solid var(--border);border-radius:7px;padding:3px 9px}
+
+  .stage{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:24px;align-items:start}
+  .frame{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);
+    overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.45)}
+  .frame-bar{display:flex;align-items:center;gap:7px;padding:11px 14px;background:var(--panel-2);
+    border-bottom:1px solid var(--border)}
+  .frame-bar i{width:10px;height:10px;border-radius:50%;display:block}
+  .frame-bar span{margin-left:8px;font-size:11.5px;color:var(--fg-soft);font-family:ui-monospace,monospace}
+  .frame-body{padding:26px;display:grid;place-items:center;min-height:340px}
+  .side h4{font-size:13px;text-transform:uppercase;letter-spacing:.12em;color:var(--fg-soft);margin-bottom:12px}
+  .side ul{list-style:none;display:grid;gap:10px}
+  .side li{font-size:13.5px;color:var(--fg-soft);padding-left:18px;position:relative}
+  .side li::before{content:'▸';position:absolute;left:0;color:var(--accent)}
+  .side li b{color:var(--fg);font-weight:500}
+  .ctl{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+  .ctl button{background:var(--panel-2);border:1px solid var(--border);color:var(--fg);
+    font-family:inherit;font-size:12.5px;padding:7px 13px;border-radius:9px;cursor:pointer}
+  .ctl button:hover{border-color:var(--accent);color:#fff}
+
+  /* ============ 1. weather card ============ */
+  .wcard{--hue:210;--sat:55%;width:270px;height:400px;border-radius:26px;position:relative;
+    overflow:hidden;color:#fff;font-family:var(--sans);
+    background:linear-gradient(170deg,hsl(var(--hue),var(--sat),22%),hsl(calc(var(--hue) + 25),var(--sat),8%));
+    box-shadow:0 24px 60px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.12);
+    transition:background 1.4s ease}
+  .wcard .sun{position:absolute;top:52px;right:-34px;width:130px;height:130px;border-radius:50%;
+    background:radial-gradient(circle,hsl(var(--hue),90%,72%),transparent 68%);
+    filter:blur(6px);opacity:var(--glow,.85);transition:background 1.4s ease,opacity 1.4s ease}
+  .wcard .glass{position:absolute;inset:auto 0 0 0;padding:20px;
+    background:linear-gradient(to top,rgba(0,0,0,.55),transparent);backdrop-filter:blur(2px)}
+  .wcard .top{position:relative;padding:20px 20px 0;z-index:2}
+  .wcard .city{font-size:14px;font-weight:500;letter-spacing:.02em;opacity:.9}
+  .wcard .cond{font-size:12px;opacity:.6;margin-top:2px}
+  .wcard .temp{position:absolute;top:150px;left:20px;z-index:2;font-size:74px;font-weight:200;
+    line-height:1;letter-spacing:-.04em}
+  .wcard .temp sup{font-size:26px;vertical-align:top;opacity:.55}
+  .wcard .rows{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center;font-size:11.5px}
+  .wcard .rows div span{display:block;opacity:.55;font-size:10px;margin-bottom:3px}
+  .drops{position:absolute;inset:0;opacity:0;transition:opacity .8s;pointer-events:none}
+  .drops.on{opacity:.55}
+  .drops i{position:absolute;top:-20%;width:1px;height:26px;
+    background:linear-gradient(transparent,rgba(255,255,255,.75));animation:fall linear infinite}
+  @keyframes fall{to{transform:translateY(460px)}}
+  .stars{position:absolute;inset:0;opacity:0;transition:opacity 1.2s}
+  .stars.on{opacity:1}
+  .stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;
+    animation:twinkle 3s ease-in-out infinite}
+  @keyframes twinkle{0%,100%{opacity:.15}50%{opacity:.9}}
+
+  /* ============ 2. beeper typewriter ============ */
+  .beeper{display:flex;flex-direction:column;align-items:center;gap:22px;width:100%}
+  .console{width:290px;background:#1a1a1a;border-radius:12px;padding:16px;
+    box-shadow:0 12px 26px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.08)}
+  .console .brand{color:#95a5a6;font-family:var(--type);font-size:11px;letter-spacing:.18em;
+    text-align:center;margin-bottom:10px}
+  .lcd{background:#90be6d;border-radius:6px;padding:12px;min-height:64px;
+    font-family:var(--type);font-size:14px;color:#22301c;line-height:1.4;
+    box-shadow:inset 0 2px 8px rgba(0,0,0,.35);word-break:break-word}
+  .lcd .caret{display:inline-block;width:8px;background:#22301c;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .keys{display:flex;gap:8px;margin-top:12px}
+  .keys input{flex:1;background:#0f0f0f;border:1px solid #333;color:#90be6d;border-radius:7px;
+    padding:9px 12px;font-family:var(--type);font-size:13px;outline:none}
+  .keys input:focus{border-color:#90be6d}
+  .keys button{background:#c0392b;color:#fff;border:0;border-radius:7px;padding:9px 14px;
+    font-family:var(--type);font-size:12px;cursor:pointer;letter-spacing:.08em}
+  .keys button:active{transform:translateY(1px)}
+  .paper{width:290px;background:#fdfbf7;color:#2c2c2c;border-radius:3px;padding:18px 20px;
+    font-family:var(--type);font-size:13px;line-height:1.9;min-height:110px;
+    box-shadow:0 10px 26px rgba(0,0,0,.5);
+    background-image:repeating-linear-gradient(#fdfbf7 0 27px,#e8e2d6 27px 28px)}
+  .paper .line{white-space:pre-wrap;word-break:break-word}
+  .paper .stamp{font-size:10px;color:#a2988a;letter-spacing:.14em;margin-bottom:8px}
+
+  /* ============ 3. ledger dashboard ============ */
+  .ledger{width:100%;max-width:520px;font-size:13px}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+  .stat{background:var(--panel-2);border:1px solid var(--border);border-radius:12px;padding:13px}
+  .stat span{display:block;font-size:11px;color:var(--fg-soft);text-transform:uppercase;letter-spacing:.08em}
+  .stat b{font-size:19px;font-weight:600;letter-spacing:-.02em}
+  .stat.in b{color:#4ade80} .stat.out b{color:#fb7185} .stat.net b{color:var(--accent-2)}
+  .chart{display:flex;align-items:flex-end;gap:6px;height:110px;padding:0 2px 8px;
+    border-bottom:1px solid var(--border);margin-bottom:6px}
+  .chart div{flex:1;border-radius:5px 5px 0 0;background:linear-gradient(180deg,var(--accent),#3b1fa8);
+    transition:height .8s cubic-bezier(.2,.8,.2,1);position:relative}
+  .chart div:hover{filter:brightness(1.3)}
+  .chart-x{display:flex;gap:6px;font-size:10px;color:var(--fg-soft);margin-bottom:18px}
+  .chart-x span{flex:1;text-align:center}
+  .rows-t{display:grid;gap:8px}
+  .row{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;
+    background:var(--panel-2);border:1px solid var(--border);border-radius:10px;padding:9px 12px}
+  .row .d{color:var(--fg);font-size:12.5px}
+  .row .cat{font-size:10.5px;border:1px solid var(--border);border-radius:6px;padding:2px 8px;color:var(--accent-2)}
+  .row .amt{font-family:ui-monospace,monospace;font-size:12.5px;min-width:74px;text-align:right}
+  .row .amt.neg{color:#fb7185} .row .amt.pos{color:#4ade80}
+  .ai-note{font-size:11.5px;color:var(--fg-soft);margin-top:12px;display:flex;align-items:center;gap:7px}
+  .dot{width:6px;height:6px;border-radius:50%;background:#4ade80;box-shadow:0 0 8px #4ade80}
+
+  /* ============ files ============ */
+  .files{padding:44px 0 70px;border-top:1px solid var(--border)}
+  .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .files table{width:100%;min-width:560px;border-collapse:collapse;font-size:13.5px}
+  .files th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.12em;
+    color:var(--fg-soft);padding:0 12px 10px;font-weight:500}
+  .files td{border-top:1px solid var(--border);padding:12px;vertical-align:top;color:var(--fg-soft);overflow-wrap:anywhere}
+  .files td:first-child{font-family:ui-monospace,monospace;font-size:12px;color:var(--fg);white-space:nowrap}
+  footer{border-top:1px solid var(--border);padding:24px 0 40px;color:var(--fg-soft);font-size:12.5px}
+
+  @media(max-width:900px){
+    .stage{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<div class="banner">
+  Static demo page for <b>2-Skillset-Showcase / 2-3-Website-Design</b> — the three mini projects in this folder, recreated in miniature so the page runs on its own.
+</div>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">2-3 · Website Design</div>
+    <h1>Three small builds, three <em>different problems</em>.</h1>
+    <p>
+      A weather card that reacts to its own conditions, a paging device that types on paper,
+      and a ledger that classifies its own transactions. Each panel below is live — click through it.
+    </p>
+  </header>
+
+  <!-- ============ PROJECT 1 ============ -->
+  <section class="proj">
+    <div class="proj-head">
+      <div class="num">1</div>
+      <div>
+        <h2>Living Weather Card</h2>
+        <p>A single-file weather widget whose entire palette is derived from the current condition —
+           the theme hue, glow and particle layer all shift when the weather does.</p>
+        <div class="tags">
+          <span class="tag">HTML</span><span class="tag">CSS custom properties</span>
+          <span class="tag">Vanilla JS</span><span class="tag">No dependencies</span>
+          <span class="path">repo9-1-gemini-weather-website/index.html</span>
+        </div>
+      </div>
+    </div>
+    <div class="stage">
+      <div class="frame">
+        <div class="frame-bar"><i style="background:#ff5f56"></i><i style="background:#ffbd2e"></i><i style="background:#27c93f"></i><span>living-weather-card</span></div>
+        <div class="frame-body">
+          <div class="wcard" id="wcard">
+            <div class="sun"></div>
+            <div class="stars" id="stars"></div>
+            <div class="drops" id="drops"></div>
+            <div class="top">
+              <div class="city" id="w-city">Ithaca, NY</div>
+              <div class="cond" id="w-cond">Clear skies</div>
+            </div>
+            <div class="temp"><span id="w-temp">21</span><sup>°C</sup></div>
+            <div class="glass">
+              <div class="rows">
+                <div><span>Wind</span><b id="w-wind">7 km/h</b></div>
+                <div><span>Humidity</span><b id="w-hum">48%</b></div>
+                <div><span>UV</span><b id="w-uv">3</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="side">
+        <h4>How it works</h4>
+        <ul>
+          <li><b>One hue drives everything.</b> A single <code>--theme-hue</code> variable recolours background, glow and text.</li>
+          <li><b>Condition → theme.</b> Each weather state maps to a hue, saturation and particle layer.</li>
+          <li><b>Particles are CSS.</b> Rain and stars are generated elements animated with keyframes, not canvas.</li>
+          <li><b>Long transitions.</b> 1.4 s eases make the change feel atmospheric rather than abrupt.</li>
+        </ul>
+        <div class="ctl" id="w-ctl">
+          <button data-w="clear">☀ Clear</button>
+          <button data-w="rain">🌧 Rain</button>
+          <button data-w="night">🌙 Night</button>
+          <button data-w="sunset">🌅 Sunset</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROJECT 2 ============ -->
+  <section class="proj">
+    <div class="proj-head">
+      <div class="num">2</div>
+      <div>
+        <h2>Motorola Beeper Typewriter</h2>
+        <p>A retro pager console wired to a sheet of typewriter paper: whatever you page through the
+           device is printed, character by character, on the paper below.</p>
+        <div class="tags">
+          <span class="tag">HTML</span><span class="tag">CSS skeuomorphism</span>
+          <span class="tag">Vanilla JS</span><span class="tag">Google Fonts</span>
+          <span class="path">repo9-2-moto-beeper-typer.html</span>
+        </div>
+      </div>
+    </div>
+    <div class="stage">
+      <div class="frame">
+        <div class="frame-bar"><i style="background:#ff5f56"></i><i style="background:#ffbd2e"></i><i style="background:#27c93f"></i><span>moto-beeper-typer</span></div>
+        <div class="frame-body">
+          <div class="beeper">
+            <div class="console">
+              <div class="brand">MOTOROLA · FIX</div>
+              <div class="lcd" id="lcd">READY<span class="caret">&nbsp;</span></div>
+              <div class="keys">
+                <input id="msg" maxlength="60" placeholder="type a page…" value="MEET ME AT THE LIBRARY 7PM">
+                <button id="send">PAGE</button>
+              </div>
+            </div>
+            <div class="paper">
+              <div class="stamp">— INCOMING TRANSMISSION —</div>
+              <div class="line" id="paper"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="side">
+        <h4>How it works</h4>
+        <ul>
+          <li><b>Two surfaces, one state.</b> The LCD echoes input; the paper renders the committed message.</li>
+          <li><b>Typed output.</b> A timed loop appends one character at a time with a blinking caret.</li>
+          <li><b>Texture in CSS only.</b> The ruled paper is a repeating linear gradient; the case is layered box-shadows.</li>
+          <li><b>Special Elite</b> from Google Fonts carries the whole typewriter illusion.</li>
+        </ul>
+        <div class="ctl">
+          <button id="clear-paper">Clear paper</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROJECT 3 ============ -->
+  <section class="proj">
+    <div class="proj-head">
+      <div class="num">3</div>
+      <div>
+        <h2>Accounting Ledger · 记账系统</h2>
+        <p>A full-stack ledger that pulls entries from a Notion database, has an LLM assign a category to
+           every transaction, and renders spending trends over a selectable date range.</p>
+        <div class="tags">
+          <span class="tag">React</span><span class="tag">Express</span>
+          <span class="tag">Notion API</span><span class="tag">OpenAI GPT-4o-mini</span>
+          <span class="tag">Vercel</span>
+          <span class="path">repo9-3-github-Account-Ledger/</span>
+        </div>
+      </div>
+    </div>
+    <div class="stage">
+      <div class="frame">
+        <div class="frame-bar"><i style="background:#ff5f56"></i><i style="background:#ffbd2e"></i><i style="background:#27c93f"></i><span>account-ledger · dashboard</span></div>
+        <div class="frame-body">
+          <div class="ledger">
+            <div class="stats">
+              <div class="stat in"><span>Income</span><b>$4,820</b></div>
+              <div class="stat out"><span>Expense</span><b>$3,146</b></div>
+              <div class="stat net"><span>Net</span><b>+$1,674</b></div>
+            </div>
+            <div class="chart" id="chart"></div>
+            <div class="chart-x" id="chart-x"></div>
+            <div class="rows-t" id="ledger-rows"></div>
+            <div class="ai-note"><span class="dot"></span> AI categorisation: 24 / 24 entries classified · 0 uncategorised</div>
+          </div>
+        </div>
+      </div>
+      <div class="side">
+        <h4>How it works</h4>
+        <ul>
+          <li><b>Notion is the database.</b> The Express backend pages through the API so datasets over 100 rows sync whole.</li>
+          <li><b>AI fills the gap.</b> GPT-4o-mini reads each Description and assigns a category, cached so repeats cost nothing.</li>
+          <li><b>Deposit vs Payment.</b> A row with Deposit set is income, a row with Payment set is expense — type is inferred, never typed in.</li>
+          <li><b>Range-driven views.</b> The date picker auto-detects the earliest and latest entry and every chart follows it.</li>
+        </ul>
+        <div class="ctl" id="l-ctl">
+          <button data-r="30" class="on">Last 30 days</button>
+          <button data-r="7">Last 7 days</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FILES ============ -->
+  <section class="files">
+    <h2 style="font-size:20px;margin-bottom:18px">Folder contents</h2>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Path</th><th>What it is</th><th>Runs how</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>repo9-1-gemini-weather-website/index.html</td>
+          <td>Living Weather Card — self-contained page with the animated card and its spec notes in <code>readme.md</code>.</td>
+          <td>Open the file. Static — deploys as-is.</td>
+        </tr>
+        <tr>
+          <td>repo9-2-moto-beeper-typer.html</td>
+          <td>Motorola beeper typewriter — one file, draggable console and printed paper output.</td>
+          <td>Open the file. Static — deploys as-is.</td>
+        </tr>
+        <tr>
+          <td>repo9-3-github-Account-Ledger/</td>
+          <td>React frontend + Express backend, <code>vercel.json</code> and <code>DEPLOY.md</code> included.</td>
+          <td>Needs <code>NOTION_API_KEY</code>, database ID and <code>OPENAI_API_KEY</code> as environment variables.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+</div>
+
+<footer><div class="wrap">Demo page · 2-3-Website-Design · single static file, no build step required.</div></footer>
+
+<script>
+/* ---------------- weather ---------------- */
+const W = {
+  clear:  {hue:205, sat:'58%', temp:21, cond:'Clear skies',   wind:'7 km/h',  hum:'48%', uv:'3', glow:.85, rain:false, night:false},
+  rain:   {hue:200, sat:'22%', temp:14, cond:'Steady rain',   wind:'19 km/h', hum:'92%', uv:'1', glow:.18, rain:true,  night:false},
+  night:  {hue:245, sat:'45%', temp:9,  cond:'Clear · night', wind:'4 km/h',  hum:'71%', uv:'0', glow:.30, rain:false, night:true},
+  sunset: {hue:20,  sat:'70%', temp:18, cond:'Golden hour',   wind:'11 km/h', hum:'55%', uv:'2', glow:1,   rain:false, night:false},
+};
+const wcard = document.getElementById('wcard');
+const drops = document.getElementById('drops');
+const stars = document.getElementById('stars');
+
+drops.innerHTML = Array.from({length:34}, () => {
+  const l = Math.random()*100, d = (.5 + Math.random()*.7).toFixed(2), s = (Math.random()*1.5).toFixed(2);
+  return `<i style="left:${l}%;animation-duration:${d}s;animation-delay:${s}s"></i>`;
+}).join('');
+stars.innerHTML = Array.from({length:26}, () => {
+  const l = Math.random()*100, t = Math.random()*60, s = (Math.random()*3).toFixed(2);
+  return `<i style="left:${l}%;top:${t}%;animation-delay:${s}s"></i>`;
+}).join('');
+
+function setWeather(key){
+  const w = W[key];
+  wcard.style.setProperty('--hue', w.hue);
+  wcard.style.setProperty('--sat', w.sat);
+  wcard.style.setProperty('--glow', w.glow);
+  document.getElementById('w-temp').textContent = w.temp;
+  document.getElementById('w-cond').textContent = w.cond;
+  document.getElementById('w-wind').textContent = w.wind;
+  document.getElementById('w-hum').textContent  = w.hum;
+  document.getElementById('w-uv').textContent   = w.uv;
+  drops.classList.toggle('on', w.rain);
+  stars.classList.toggle('on', w.night);
+}
+document.getElementById('w-ctl').addEventListener('click', e => {
+  const b = e.target.closest('button'); if(b) setWeather(b.dataset.w);
+});
+setWeather('clear');
+
+/* ---------------- beeper ---------------- */
+const lcd = document.getElementById('lcd');
+const paper = document.getElementById('paper');
+const msg = document.getElementById('msg');
+let typing = null;
+
+msg.addEventListener('input', () => {
+  lcd.innerHTML = (msg.value.toUpperCase() || 'READY') + '<span class="caret">&nbsp;</span>';
+});
+
+function page(){
+  const text = msg.value.toUpperCase().trim();
+  if(!text) return;
+  clearInterval(typing);
+  let i = 0;
+  const start = paper.textContent ? paper.textContent + '\n' : '';
+  typing = setInterval(() => {
+    paper.textContent = start + text.slice(0, ++i);
+    if(i >= text.length) clearInterval(typing);
+  }, 45);
+  msg.value = '';
+  lcd.innerHTML = 'SENT<span class="caret">&nbsp;</span>';
+}
+document.getElementById('send').onclick = page;
+msg.addEventListener('keydown', e => { if(e.key === 'Enter') page(); });
+document.getElementById('clear-paper').onclick = () => { clearInterval(typing); paper.textContent = ''; };
+
+/* ---------------- ledger ---------------- */
+const ROWS = [
+  {d:'Wegmans grocery run',      c:'Groceries',     a:-86.40},
+  {d:'Monthly rent — Ithaca',    c:'Housing',       a:-1250.00},
+  {d:'Research assistantship',   c:'Income',        a:+2400.00},
+  {d:'Cornell Store · textbooks',c:'Education',     a:-142.75},
+  {d:'Amtrak NYC return',        c:'Transport',     a:-64.00},
+  {d:'Figma annual plan',        c:'Subscriptions', a:-144.00},
+  {d:'Design tutoring',          c:'Income',        a:+320.00},
+];
+function bars(n){
+  const vals = Array.from({length:n}, () => 25 + Math.random()*75);
+  document.getElementById('chart').innerHTML = vals.map(v => `<div style="height:${v}%"></div>`).join('');
+  const labels = n === 7 ? ['M','T','W','T','F','S','S'] : Array.from({length:n}, (_,i) => (i % 5 === 0 ? i + 1 : ''));
+  document.getElementById('chart-x').innerHTML = labels.map(l => `<span>${l}</span>`).join('');
+}
+document.getElementById('ledger-rows').innerHTML = ROWS.map(r => `
+  <div class="row">
+    <span class="d">${r.d}</span>
+    <span class="cat">${r.c}</span>
+    <span class="amt ${r.a < 0 ? 'neg' : 'pos'}">${r.a < 0 ? '-' : '+'}$${Math.abs(r.a).toFixed(2)}</span>
+  </div>`).join('');
+document.getElementById('l-ctl').addEventListener('click', e => {
+  const b = e.target.closest('button'); if(!b) return;
+  document.querySelectorAll('#l-ctl button').forEach(x => x.style.borderColor = x === b ? 'var(--accent)' : 'var(--border)');
+  bars(Number(b.dataset.r));
+});
+bars(30);
+document.querySelector('#l-ctl button').style.borderColor = 'var(--accent)';
+</script>
+</body>
+</html>

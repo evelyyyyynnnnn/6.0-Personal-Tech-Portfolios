@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Full-Stack Blog Platform — Demo</title>
+<meta name="description" content="Static demo of the Docusaurus-powered full-stack blog in 2-1-My-Full-Stack.">
+<style>
+  :root{
+    --bg:#ffffff; --bg-soft:#f6f7f9; --card:#ffffff; --border:#e3e6ea;
+    --fg:#1c1e21; --fg-soft:#5a6169; --brand:#3578e5; --brand-soft:#e8f0fd;
+    --shadow:0 1px 2px rgba(0,0,0,.06),0 8px 24px rgba(0,0,0,.06);
+    --radius:14px; --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;
+  }
+  [data-theme="dark"]{
+    --bg:#101418; --bg-soft:#161b22; --card:#161b22; --border:#252c34;
+    --fg:#e6edf3; --fg-soft:#9aa4af; --brand:#6cb2ff; --brand-soft:#16263c;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.65;
+       -webkit-font-smoothing:antialiased;transition:background .25s,color .25s}
+  a{color:var(--brand);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+  /* ---------- navbar ---------- */
+  header.nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+  .nav-in{display:flex;align-items:center;gap:18px;height:60px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em}
+  .logo .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#3578e5,#9b5cff);
+    display:grid;place-items:center;color:#fff;font-size:14px;font-weight:800}
+  .nav-links{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+  .nav-links button{background:none;border:0;color:var(--fg-soft);font:inherit;font-size:14px;
+    padding:6px 12px;border-radius:8px;cursor:pointer}
+  .nav-links button:hover{background:var(--bg-soft);color:var(--fg)}
+  .nav-links button[aria-current="true"]{color:var(--fg);font-weight:600}
+  .icon-btn{background:var(--bg-soft);border:1px solid var(--border);color:var(--fg);border-radius:8px;
+    width:34px;height:34px;cursor:pointer;font-size:15px;display:grid;place-items:center}
+
+  /* ---------- banner ---------- */
+  .demo-banner{background:var(--brand-soft);border-bottom:1px solid var(--border);
+    font-size:13px;color:var(--fg-soft);text-align:center;padding:8px 20px}
+  .demo-banner b{color:var(--fg)}
+
+  /* ---------- hero ---------- */
+  .hero{padding:64px 0 48px;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+  .hero h1{font-size:clamp(28px,4.4vw,44px);line-height:1.15;margin:0 0 14px;letter-spacing:-.02em}
+  .hero h1 em{font-style:normal;background:linear-gradient(135deg,#3578e5,#9b5cff);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{color:var(--fg-soft);margin:0 0 22px;font-size:16px;max-width:52ch}
+  .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:10px 18px;border-radius:10px;font-size:14px;font-weight:600;border:1px solid transparent}
+  .btn-primary{background:var(--brand);color:#fff}
+  .btn-primary:hover{text-decoration:none;filter:brightness(1.06)}
+  .btn-ghost{border-color:var(--border);color:var(--fg);background:var(--card)}
+  .btn-ghost:hover{text-decoration:none;background:var(--bg-soft)}
+  .terminal{background:#0d1117;border:1px solid #262d36;border-radius:var(--radius);overflow:hidden;
+    box-shadow:var(--shadow);font-family:var(--mono);font-size:12.5px}
+  .terminal .bar{display:flex;gap:6px;padding:10px 12px;background:#161b22;border-bottom:1px solid #262d36}
+  .terminal .bar i{width:11px;height:11px;border-radius:50%;display:block}
+  .terminal .body{padding:14px 16px;color:#9aa4af;white-space:pre;overflow-x:auto}
+  .terminal .body .g{color:#7ee787}
+  .terminal .body .b{color:#79c0ff}
+  .terminal .body .y{color:#e3b341}
+
+  /* ---------- sections ---------- */
+  section{padding:44px 0;border-top:1px solid var(--border)}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:22px;flex-wrap:wrap}
+  .sec-head h2{font-size:22px;margin:0;letter-spacing:-.01em}
+  .sec-head span{font-size:13px;color:var(--fg-soft)}
+
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
+  .card h3{margin:0 0 8px;font-size:16px}
+  .card p{margin:0;color:var(--fg-soft);font-size:14px}
+  .card .emoji{font-size:22px;display:block;margin-bottom:10px}
+
+  /* ---------- blog demo ---------- */
+  .toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:18px}
+  .chips{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{border:1px solid var(--border);background:var(--card);color:var(--fg-soft);border-radius:999px;
+    padding:5px 13px;font-size:13px;cursor:pointer;font-family:inherit}
+  .chip[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#fff}
+  .view-toggle{margin-left:auto;display:flex;border:1px solid var(--border);border-radius:9px;overflow:hidden}
+  .view-toggle button{background:var(--card);border:0;color:var(--fg-soft);padding:7px 13px;font-size:13px;cursor:pointer;font-family:inherit}
+  .view-toggle button[aria-pressed="true"]{background:var(--brand-soft);color:var(--fg);font-weight:600}
+
+  .posts{display:grid;gap:14px}
+  .posts[data-view="grid"]{grid-template-columns:repeat(3,1fr)}
+  .post{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;
+    display:flex;flex-direction:column;gap:8px;transition:transform .15s,box-shadow .15s}
+  .post:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+  .post .meta{font-size:12px;color:var(--fg-soft);display:flex;gap:10px;flex-wrap:wrap}
+  .post .t{font-size:15px;font-weight:600;margin:0}
+  .post .x{font-size:13.5px;color:var(--fg-soft);margin:0}
+  .post .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+  .tag{font-size:11.5px;border:1px solid var(--border);border-radius:6px;padding:2px 8px;color:var(--fg-soft)}
+  .empty{color:var(--fg-soft);font-size:14px;padding:24px;text-align:center;border:1px dashed var(--border);border-radius:var(--radius)}
+
+  /* ---------- tree + stack ---------- */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  pre.tree{background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius);
+    padding:18px;margin:0;font-family:var(--mono);font-size:12.5px;line-height:1.75;overflow-x:auto;color:var(--fg-soft)}
+  pre.tree b{color:var(--fg);font-weight:600}
+  .stack{display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start}
+  .pill{border:1px solid var(--border);background:var(--card);border-radius:9px;padding:7px 13px;font-size:13px}
+  .pill b{font-weight:600}
+  .kv{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:14px;margin-top:18px}
+  .kv dt{color:var(--fg-soft)}
+  .kv dd{margin:0;font-family:var(--mono);font-size:13px}
+
+  footer{border-top:1px solid var(--border);padding:28px 0 40px;color:var(--fg-soft);font-size:13px}
+  @media(max-width:860px){
+    .hero{grid-template-columns:1fr;padding-top:40px}
+    .grid-3,.split,.posts[data-view="grid"]{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-banner">
+  Static demo page for <b>2-Skillset-Showcase / 2-1-My-Full-Stack</b> — the real project is a Docusaurus 3 app; this single file previews its structure &amp; features.
+</div>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <div class="logo"><span class="mark">FS</span> Full-Stack Blog</div>
+    <nav class="nav-links">
+      <button aria-current="true" data-scroll="features">Features</button>
+      <button data-scroll="blog">Blog</button>
+      <button data-scroll="architecture">Architecture</button>
+      <button data-scroll="stack">Stack</button>
+    </nav>
+    <button class="icon-btn" id="theme" title="Toggle light / dark">◐</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div>
+      <h1>A personal blog that behaves like a <em>product</em>.</h1>
+      <p>
+        Docusaurus 3 with a heavily customised theme: MDX writing, i18n, PWA offline support,
+        Algolia full-text search, switchable blog views, and a project / resource showcase —
+        all statically generated and deployed on the edge.
+      </p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#blog">See the blog demo</a>
+        <a class="btn btn-ghost" href="#architecture">Project structure</a>
+      </div>
+    </div>
+    <div class="terminal">
+      <div class="bar"><i style="background:#ff5f56"></i><i style="background:#ffbd2e"></i><i style="background:#27c93f"></i></div>
+      <div class="body"><span class="g">$</span> pnpm install
+<span class="g">$</span> pnpm start
+<span class="b">[INFO]</span> Starting the development server...
+<span class="b">[SUCCESS]</span> Docusaurus website is running at:
+  <span class="y">http://localhost:3000/</span>
+
+<span class="g">$</span> pnpm build   <span style="color:#6e7681"># → build/ ready for Vercel</span>
+<span class="b">[SUCCESS]</span> Generated static files in "build".</div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section id="features">
+    <div class="sec-head"><h2>What the site does</h2><span>data/features.tsx · docusaurus.config.ts</span></div>
+    <div class="grid-3">
+      <div class="card"><span class="emoji">✍️</span><h3>MDX authoring</h3><p>Posts and docs are plain Markdown with React components available inline — code sandboxes, browser windows, tooltips.</p></div>
+      <div class="card"><span class="emoji">🔎</span><h3>Algolia DocSearch</h3><p>Full-text search across blog, docs and pages, indexed by a scheduled crawler defined in <code>docsearch.json</code>.</p></div>
+      <div class="card"><span class="emoji">🖥️</span><h3>PWA &amp; offline</h3><p>Installable app shell via <code>@docusaurus/plugin-pwa</code> with a custom service worker in <code>src/sw.js</code>.</p></div>
+      <div class="card"><span class="emoji">🏞️</span><h3>i18n</h3><p>Locale-aware routing and translated UI strings under <code>i18n/</code>, with a locale dropdown in the navbar.</p></div>
+      <div class="card"><span class="emoji">🗃️</span><h3>Dual blog views</h3><p>Readers switch between a reading list and a card grid; the choice is persisted in a <code>useViewType</code> hook.</p></div>
+      <div class="card"><span class="emoji">📦</span><h3>Project &amp; resource pages</h3><p>Custom pages driven by typed data files — projects, resources, friends and social links.</p></div>
+    </div>
+  </section>
+
+  <section id="blog">
+    <div class="sec-head"><h2>Blog view — interactive</h2><span>filter by category, switch list ⇄ grid</span></div>
+    <div class="toolbar">
+      <div class="chips" id="chips">
+        <button class="chip" aria-pressed="true" data-cat="all">All</button>
+        <button class="chip" data-cat="develop">develop</button>
+        <button class="chip" data-cat="program">program</button>
+        <button class="chip" data-cat="project">project</button>
+        <button class="chip" data-cat="reference">reference</button>
+        <button class="chip" data-cat="lifestyle">lifestyle</button>
+      </div>
+      <div class="view-toggle">
+        <button id="v-list" aria-pressed="true">☰ List</button>
+        <button id="v-grid" aria-pressed="false">▦ Grid</button>
+      </div>
+    </div>
+    <div class="posts" data-view="list" id="posts"></div>
+  </section>
+
+  <section id="architecture">
+    <div class="sec-head"><h2>Repository layout</h2><span>2-1-My-Full-Stack/</span></div>
+    <div class="split">
+      <pre class="tree"><b>blog/</b>                  posts, grouped by category
+├── develop/           web dev notes
+├── program/           deployment &amp; ops
+├── project/           build logs
+├── reference/         cheatsheets
+└── lifestyle/         off-topic
+
+<b>docs/</b>                  long-form notes
+├── skill/
+└── tools/
+
+<b>data/</b>                  typed content sources
+├── features.tsx       homepage highlights
+├── projects.tsx       portfolio entries
+├── resources.tsx      curated links
+├── friends.tsx        blogroll
+└── social.ts          social profiles</pre>
+      <pre class="tree"><b>src/</b>
+├── components/        UserCard, Comment, BrowserWindow,
+│                      CodeSandBox, SocialLinks, Tooltip
+├── theme/             swizzled Docusaurus components
+│   ├── BlogListPage/  list ⇄ grid switching
+│   ├── BlogPostItem/  custom post card
+│   ├── Navbar/ Footer/ TOC/
+├── pages/             index.tsx, project/, resources/,
+│                      friends/, about.mdx
+├── plugin/            plugin-content-blog override
+├── hooks/             useViewType, useReadPercent…
+├── css/custom.scss
+└── sw.js              PWA service worker
+
+<b>i18n/</b>   <b>static/</b>   <b>docusaurus.config.ts</b>   <b>sidebars.ts</b></pre>
+    </div>
+  </section>
+
+  <section id="stack">
+    <div class="sec-head"><h2>Stack &amp; deployment</h2><span>package.json</span></div>
+    <div class="split">
+      <div class="stack">
+        <span class="pill"><b>Docusaurus</b> 3.1</span>
+        <span class="pill"><b>React</b> 18</span>
+        <span class="pill"><b>TypeScript</b></span>
+        <span class="pill"><b>MDX</b></span>
+        <span class="pill"><b>Sass</b></span>
+        <span class="pill"><b>Tailwind-less</b> custom SCSS</span>
+        <span class="pill">plugin-pwa</span>
+        <span class="pill">plugin-ideal-image</span>
+        <span class="pill">theme-search-algolia</span>
+        <span class="pill">Giscus comments</span>
+        <span class="pill">ESLint + Stylelint</span>
+        <span class="pill">Prettier</span>
+        <span class="pill">pnpm</span>
+      </div>
+      <div>
+        <dl class="kv">
+          <dt>Install</dt><dd>pnpm install</dd>
+          <dt>Dev</dt><dd>pnpm start</dd>
+          <dt>Build</dt><dd>pnpm build</dd>
+          <dt>Output dir</dt><dd>build</dd>
+          <dt>Node</dt><dd>&gt;= 18</dd>
+        </dl>
+        <p style="color:var(--fg-soft);font-size:14px;margin-top:18px">
+          On Vercel: framework preset <b>Docusaurus 2</b>, root directory
+          <code>2-Skillset-Showcase/2-1-My-Full-Stack</code>. No environment variables are required
+          for a first deploy — Algolia and analytics keys are optional.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">Demo page · 2-1-My-Full-Stack · built as a single static file, no build step required.</div>
+</footer>
+
+<script>
+  const POSTS = [
+    {t:'有了 Prisma 就别用 TypeORM 了', x:'Comparing the developer experience of two Node ORMs on a real Nest.js codebase.', c:'develop', d:'2024-01-18', r:'8 min', tags:['Node','Prisma','TypeScript']},
+    {t:'pnpm monorepo 实践', x:'Workspace layout, shared configs and CI caching for a multi-package repo.', c:'develop', d:'2023-12-02', r:'11 min', tags:['pnpm','Monorepo']},
+    {t:'SSE 服务器发送事件', x:'Streaming server updates to the browser without the weight of WebSocket.', c:'develop', d:'2023-11-14', r:'6 min', tags:['HTTP','Realtime']},
+    {t:'Vite 使用 WebWorker', x:'Moving expensive parsing off the main thread with Vite worker imports.', c:'develop', d:'2023-09-27', r:'5 min', tags:['Vite','Performance']},
+    {t:'Rust 实现 MD5 加密并打包成 WebAssembly 调用', x:'Compiling a Rust hashing routine to WASM and calling it from the browser.', c:'develop', d:'2023-08-05', r:'9 min', tags:['Rust','WASM']},
+    {t:'使用 Github Action 自动化部署', x:'A CI pipeline that builds, lints and ships the site on every push to main.', c:'program', d:'2023-07-21', r:'7 min', tags:['CI/CD','GitHub']},
+    {t:'搭建 GitLab 代码管理仓库', x:'Self-hosting GitLab: runners, backups and the memory budget nobody warns you about.', c:'program', d:'2023-06-09', r:'12 min', tags:['DevOps','Git']},
+    {t:'记 ThinkPHP 项目部署', x:'Notes from putting a legacy PHP app behind Nginx with zero downtime.', c:'program', d:'2023-05-16', r:'6 min', tags:['Nginx','PHP']},
+    {t:'基于 Axios 封装 HTTP 类库', x:'A typed request layer: interceptors, retries and cancellation in one place.', c:'project', d:'2023-04-30', r:'10 min', tags:['TypeScript','Axios']},
+    {t:'nest.js 添加 swagger 响应数据文档', x:'Generating accurate OpenAPI responses from decorators instead of by hand.', c:'project', d:'2023-03-11', r:'7 min', tags:['Nest.js','OpenAPI']},
+    {t:'HTTP 请求之 Content-Type', x:'A reference for form-data, urlencoded, JSON and the bugs each one causes.', c:'reference', d:'2023-02-22', r:'5 min', tags:['HTTP']},
+    {t:'开源许可证', x:'MIT, Apache-2.0, GPL — what each one actually asks of you.', c:'reference', d:'2023-01-08', r:'4 min', tags:['Open Source']},
+    {t:'代码备份方案', x:'Three-tier backups for side projects that outlive the laptop they started on.', c:'lifestyle', d:'2022-12-19', r:'5 min', tags:['Workflow']},
+  ];
+
+  const postsEl = document.getElementById('posts');
+  let cat = 'all';
+
+  function render(){
+    const list = POSTS.filter(p => cat === 'all' || p.c === cat);
+    if(!list.length){ postsEl.innerHTML = '<div class="empty">No posts in this category yet.</div>'; return; }
+    postsEl.innerHTML = list.map(p => `
+      <article class="post">
+        <div class="meta"><span>${p.d}</span><span>·</span><span>${p.c}</span><span>·</span><span>${p.r} read</span></div>
+        <h3 class="t">${p.t}</h3>
+        <p class="x">${p.x}</p>
+        <div class="tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+      </article>`).join('');
+  }
+
+  document.getElementById('chips').addEventListener('click', e => {
+    const b = e.target.closest('.chip'); if(!b) return;
+    cat = b.dataset.cat;
+    [...document.querySelectorAll('.chip')].forEach(c => c.setAttribute('aria-pressed', String(c === b)));
+    render();
+  });
+
+  const vList = document.getElementById('v-list'), vGrid = document.getElementById('v-grid');
+  function setView(v){
+    postsEl.dataset.view = v;
+    vList.setAttribute('aria-pressed', String(v === 'list'));
+    vGrid.setAttribute('aria-pressed', String(v === 'grid'));
+  }
+  vList.onclick = () => setView('list');
+  vGrid.onclick = () => setView('grid');
+
+  document.getElementById('theme').onclick = () => {
+    const root = document.documentElement;
+    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  };
+
+  document.querySelectorAll('.nav-links button').forEach(b => {
+    b.onclick = () => {
+      document.getElementById(b.dataset.scroll).scrollIntoView({behavior:'smooth'});
+      document.querySelectorAll('.nav-links button').forEach(x => x.setAttribute('aria-current', String(x === b)));
+    };
+  });
+
+  render();
+</script>
+</body>
+</html>
