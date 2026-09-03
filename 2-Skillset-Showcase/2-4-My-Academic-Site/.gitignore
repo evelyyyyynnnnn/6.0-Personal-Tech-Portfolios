@@ -28,6 +28,9 @@ hugo_stats.json
 # Dependencies
 node_modules/
 
+# pnpm content-addressable store (re-created by `pnpm install`)
+.pnpm-store/
+
 # ============================================================================
 # Environment & Configuration
 # ============================================================================
