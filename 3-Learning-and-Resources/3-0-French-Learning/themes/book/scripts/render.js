@@ -19,6 +19,16 @@ hexo.extend.filter.register('after_post_render', function (data) {
   let checkbox_pattern = /<li>([\s]*)<input type="checkbox" id="(\w*)"(>| checked="true">| checked>)/g;
   let checkbox_replacement = "<li class=\"checkbox-item\">$1<input type=\"checkbox\" id=\"$2\"$3";
   data.content = data.content.replace(checkbox_pattern, checkbox_replacement);
+
+  // table wrapper
+  // The theme styles `.book-post .table-wrapper table`, but the markdown
+  // renderer emits a bare <table>, so every table on the site rendered
+  // unstyled -- borders, padding and horizontal scroll all missing. Wrap
+  // them here, which is the same hook the checkbox fix above uses.
+  data.content = data.content.replace(
+    /<table>([\s\S]*?)<\/table>/g,
+    '<div class="table-wrapper"><table>$1</table></div>');
+
   return data;
 })
 

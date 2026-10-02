@@ -1,23 +1,47 @@
 
 # [Home](/Home/index.html)
 
-##### Word and Phraze
+##### 🇫🇷 Français
 
-- [Alphabet](/Word-Phraze/Alphabet.html)
-- [Basic-Verb](/Word-Phraze/Basic-Verb.html)
+- **Word & Phrase**
+  - [Alphabet](/French/Word-Phrase/Alphabet.html)
+  - [Basic Verbs](/French/Word-Phrase/Basic-Verb.html)
+- **Grammar**
+  - [Chapter 1](/French/Grammar/chapter1.html)
+  - [Chapter 2](/French/Grammar/chapter2.html)
+- **Dialogue & Passage**
+  - [Chapter 1](/French/Dialogue/chapter1.html)
+  - [Chapter 2](/French/Dialogue/chapter2.html)
+- **Culture & Media**
+  - [Books](/French/Culture/Book.html)
+  - [Film & TV](/French/Culture/Movie.html)
 
-##### Grammar
+##### 🇰🇷 한국어 · Korean
 
-- [Chapter1](/Grammars/chapter1.html)
-- [Chapter2](/Grammars/chapter2.html)
+- **Word & Phrase**
+  - [Alphabet](/Korean/Word-Phrase/Alphabet.html)
+  - [Basic Verbs](/Korean/Word-Phrase/Basic-Verb.html)
+- **Grammar**
+  - [Chapter 1](/Korean/Grammar/chapter1.html)
+  - [Chapter 2](/Korean/Grammar/chapter2.html)
+- **Dialogue & Passage**
+  - [Chapter 1](/Korean/Dialogue/chapter1.html)
+  - [Chapter 2](/Korean/Dialogue/chapter2.html)
+- **Culture & Media**
+  - [Books](/Korean/Culture/Book.html)
+  - [Film & TV](/Korean/Culture/Movie.html)
 
-##### Dialogue and Passage 
+##### 🇯🇵 日本語 · Japanese
 
-- [Chapter1](/Dialogue-passage/chapter1.html)
-- [Chapter2](/Dialogue-passage/chapter2.html)
-
-##### Culture and Media
-
-- [Chapter1](/Culture-media/Book.html)
-- [Chapter2](/Culture-media/Movie.html)
-
+- **Word & Phrase**
+  - [Alphabet](/Japanese/Word-Phrase/Alphabet.html)
+  - [Basic Verbs](/Japanese/Word-Phrase/Basic-Verb.html)
+- **Grammar**
+  - [Chapter 1](/Japanese/Grammar/chapter1.html)
+  - [Chapter 2](/Japanese/Grammar/chapter2.html)
+- **Dialogue & Passage**
+  - [Chapter 1](/Japanese/Dialogue/chapter1.html)
+  - [Chapter 2](/Japanese/Dialogue/chapter2.html)
+- **Culture & Media**
+  - [Books](/Japanese/Culture/Book.html)
+  - [Film & TV](/Japanese/Culture/Movie.html)

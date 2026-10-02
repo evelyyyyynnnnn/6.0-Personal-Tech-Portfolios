@@ -3,9 +3,9 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: French
-subtitle: ''
-description: ''
+title: Languages
+subtitle: 'Français · 한국어 · 日本語'
+description: 'Notes on learning French, Korean and Japanese — one structure, three languages.'
 keywords:
 author: Vicky Du
 language: en

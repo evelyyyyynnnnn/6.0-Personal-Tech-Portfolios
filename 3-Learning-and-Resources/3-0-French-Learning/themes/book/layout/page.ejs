@@ -1,5 +1,8 @@
 
-<article id="page">
+<!-- `book-post` carries the theme's content typography: tables, lists,
+     images, blockquotes, code. post.ejs applies it; page.ejs never did,
+     so every standalone page rendered unstyled. -->
+<article id="page" class="book-post">
   <h1><%=page.title%></h1>
   <%-page.content%>
 </article>
