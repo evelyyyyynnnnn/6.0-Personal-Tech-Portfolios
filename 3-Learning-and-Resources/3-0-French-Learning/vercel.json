@@ -1,0 +1,37 @@
+{
+  "ignoreCommand": "if [ -z \"$VERCEL_GIT_PREVIOUS_SHA\" ] || ! git cat-file -e \"$VERCEL_GIT_PREVIOUS_SHA^{commit}\" 2>/dev/null; then exit 1; fi; git diff --quiet \"$VERCEL_GIT_PREVIOUS_SHA\" HEAD -- ./",
+  "git": {
+    "deploymentEnabled": {
+      "claude/*": false,
+      "claude/**": false
+    }
+  },
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "yarn install --frozen-lockfile",
+  "buildCommand": "yarn build",
+  "outputDirectory": "public",
+  "cleanUrls": false,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    },
+    {
+      "source": "/(.*).html",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/fonts/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ]
+}
