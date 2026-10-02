@@ -86,6 +86,21 @@ Two settings matter beyond the static serving:
 - **`git.deploymentEnabled`** — `claude/*` and `claude/**` are set to `false`, so
   pushes to working branches don't create preview deployments.
 
+## Checking the content against a reference copy
+
+`tools/compare.py` walks every page of this site in Chromium and diffs its
+visible text against a reference copy of the same site (a directory of rendered
+HTML), so a rebuild can be shown to have lost nothing:
+
+```bash
+python3 -m http.server 8731 &          # serve this folder
+python3 tools/compare.py path/to/reference-html/
+```
+
+It compares text, not markup: whitespace is collapsed, `<br>` and block
+boundaries are treated the way `innerText` treats them, and an image is reduced
+to its filename, so only real content differences show up.
+
 ## Status of the content
 
 The **French** pages are the real thing, carried over from the original site.
