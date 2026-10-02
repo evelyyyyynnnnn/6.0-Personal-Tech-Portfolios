@@ -8,10 +8,10 @@
   },
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "installCommand": "yarn install --frozen-lockfile",
-  "buildCommand": "yarn build",
-  "outputDirectory": "public",
-  "cleanUrls": false,
+  "installCommand": "echo \"no dependencies\"",
+  "buildCommand": "echo \"static site - nothing to build\"",
+  "outputDirectory": ".",
+  "cleanUrls": true,
   "trailingSlash": false,
   "headers": [
     {
@@ -22,13 +22,20 @@
       ]
     },
     {
-      "source": "/(.*).html",
+      "source": "/index.html",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
       ]
     },
     {
-      "source": "/fonts/(.*)",
+      "source": "/source/(.*).md",
+      "headers": [
+        { "key": "Content-Type", "value": "text/markdown; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/picture/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]

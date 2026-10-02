@@ -1,5 +1,5 @@
 ---
-title: dialogue-passage
+title: 2️⃣ Journal télévisé (News Broadcast)
 date: 2023-09-08 23:48:37
 ---
 Now let's enjoy the news videos from French

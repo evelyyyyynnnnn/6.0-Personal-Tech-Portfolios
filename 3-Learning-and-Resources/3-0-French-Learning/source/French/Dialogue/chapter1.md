@@ -1,5 +1,5 @@
 ---
-title: dialogue-passage
+title: 1️⃣ Email from the Alliance Française
 date: 2023-09-08 23:48:37
 ---
 The following is the email that I received from ALLIANCE FRANCE

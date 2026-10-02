@@ -1,77 +1,94 @@
 # Languages — Français · 한국어 · 日本語
 
-A Hexo site holding notes for **three** languages under one structure, so a
-chapter in one has a counterpart in the others.
+One site for three languages. French, Korean and Japanese each carry the **same
+four sections**, so a chapter in one has a counterpart in the others.
 
-Built with [hexo-theme-book](https://github.com/kaiiiz/hexo-theme-book).
+## How it is built
 
-## Structure
+It isn't. There is no build step, no `node_modules`, no Hexo, no generator —
+Vercel just serves these files. That is the same pattern as the subfolders in
+`7.0-Side-Interest-Tools`.
 
 ```
-source/
-  home.md                  the landing page
-  menu.md                  the whole sidebar — one accordion per language
-  Home/index.md            about & contact
-  French/ | Korean/ | Japanese/
-    Word-Phrase/           Alphabet.md · Basic-Verb.md
-    Grammar/               chapter1.md · chapter2.md
-    Dialogue/              chapter1.md · chapter2.md
-    Culture/               Book.md · Movie.md
+index.html          the whole site: styling, sidebar, router
+content.js          the table of contents — the one file you edit to add a page
+source/**/*.md      the content, one markdown file per page (front matter kept)
+picture/            images referenced as /picture/...
+lib/marked.min.js   marked 4.3.0, vendored (MIT) so there is no CDN to depend on
+vercel.json         static serving + the ignoreCommand
 ```
 
-Every language carries **the same four sections and the same eight files**.
-That is the point: it keeps the three comparable, and it means adding a page
-to one language tells you exactly where it goes in the other two.
+`index.html` fetches the markdown file for whatever page the URL hash names,
+renders it with marked, and drops it into the reading column. Because the
+markdown is fetched rather than compiled in, **editing a `.md` file is the whole
+update** — commit it and the page changes. No rebuild, nothing to regenerate.
 
 ## Adding a page
 
-1. Drop the `.md` file in the right folder — it needs only `title` and `date`
-   in the front matter.
-2. Add one line to `source/menu.md` under the right language and section.
+1. Put the markdown at `source/<Language>/<Section>/<name>.md`, with front
+   matter:
 
-That is all. The sidebar, the styling and the routing follow from those two.
+   ```markdown
+   ---
+   title: 3️⃣ Something New
+   date: 2026-10-02 00:00:00
+   ---
+   ```
 
-## How the sidebar works
+   The `title:` becomes the page's `<h1>`; you never write it twice.
 
-`source/menu.md` is rendered to HTML and injected into every page, then
-`themes/book/source/js/book-menu.js` turns it into navigation:
+2. Add one line to the matching section in `content.js`:
 
-- an `h1` and its list stay permanently open (that is the **Home** link)
-- every other heading becomes a **collapsible accordion** wrapping the list
-  that follows it — which is why there is one `#####` per language
-- the accordion containing the page you are on **opens itself**, and the
-  current link is highlighted
+   ```js
+   { slug: 'name', nav: 'Short label for the sidebar' }
+   ```
 
-So the heading levels in `menu.md` are not cosmetic. Changing `#####` to
-something else changes the behaviour.
+That's it — the sidebar entry, the route (`#language-section-name`) and the
+styling all follow from those two edits.
 
-## Two theme fixes live here
+## Viewing it locally
 
-Both are in `themes/`, so they survive a rebuild but would be lost if the
-theme were ever replaced wholesale.
-
-**1. Pages had no typography.** `layout/post.ejs` wraps posts in
-`.book-post`, which is what carries the theme's styling for tables, lists,
-images, blockquotes and code. `layout/page.ejs` never did — and every page on
-this site is a Hexo *page*, not a post. So none of it applied. `page.ejs` now
-adds the same class.
-
-**2. Tables were never wrapped.** The theme styles
-`.book-post .table-wrapper table`, but the markdown renderer emits a bare
-`<table>` with no wrapper, so tables got no borders, no padding and no
-horizontal scroll. `scripts/render.js` now wraps them in its
-`after_post_render` filter — the same hook the theme already used for
-checkboxes.
-
-## Local development
+The page fetches the markdown, so `file://` will not work (the browser blocks
+it). Serve the folder instead:
 
 ```bash
-npm install
-npx hexo clean && npx hexo generate   # build to public/
-npx hexo server                       # http://localhost:4000
+python3 -m http.server 8000     # then open http://127.0.0.1:8000/
 ```
 
-Note that the theme loads Spectre.css, tocbot and Zooming from
-`cdnjs.cloudflare.com`. On a network that blocks it the page still renders and
-reads fine, but the sidebar accordions will not collapse and the table of
-contents will not appear — those are the CDN, not the site.
+## Links and images inside the markdown
+
+The markdown keeps the paths the old Hexo site used, and `index.html` rewrites
+them when it renders:
+
+| In the markdown | What happens |
+|---|---|
+| `/French/Grammar/chapter1.html` | becomes the hash route `#french-grammar-chapter1` |
+| `../Word-Phrase/Basic-Verb.html` | resolved against the page's folder, then routed the same way |
+| `#note` | left alone — the browser scrolls to it, the page does not reload |
+| `/picture/author.jpg` | served straight from `picture/` |
+| `https://…` | opens in a new tab |
+
+An image whose host has gone away leaves a labelled slot with a link to the
+original, instead of a broken-image icon. Several of the French pages point at
+`picss.sunbangyan.cn` / `picdm.sunbangyan.cn`, which may or may not still be up;
+replacing those with files under `picture/` is a safe cleanup whenever you get
+to it.
+
+## vercel.json
+
+Two settings matter beyond the static serving:
+
+- **`ignoreCommand`** — compares `$VERCEL_GIT_PREVIOUS_SHA` (the last *successful
+  deployment*, not `HEAD^`) against `HEAD` for this folder only. Exit 0 skips the
+  build, exit 1 runs it. Without it, a commit anywhere in the repo redeploys
+  every project pointing at this repo, which burns through the daily deployment
+  limit fast.
+- **`git.deploymentEnabled`** — `claude/*` and `claude/**` are set to `false`, so
+  pushes to working branches don't create preview deployments.
+
+## Status of the content
+
+The **French** pages are the real thing, carried over from the original site.
+The **Korean** and **Japanese** pages are scaffolds: the structure, the sidebar
+entries and the styling are wired, and each page says what belongs in it. Fill
+them in by editing the markdown — nothing else needs to change.

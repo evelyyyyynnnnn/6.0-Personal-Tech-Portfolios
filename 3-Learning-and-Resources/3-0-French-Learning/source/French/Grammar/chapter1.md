@@ -52,7 +52,7 @@ Example: Je n'aime pas le café. (I don't like coffee.)
 
 
 
-If you want to see how the above grammar is used in the real life,you could refer to the page like [Basic Words]((../Word-Phraze/Basic-Verb.html)) here.
+If you want to see how the above grammar is used in the real life,you could refer to the page like [Basic Words](../Word-Phrase/Basic-Verb.html) here.
 
 
 ## Note 
