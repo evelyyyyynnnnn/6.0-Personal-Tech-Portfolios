@@ -180,6 +180,11 @@ function rewrite(el, dir){
     const abs = h.startsWith('/') ? h
               : new URL(h, 'http://x/' + dir.replace(/^source\//,'')).pathname;
     if(PATH2ID[abs]) { a.setAttribute('href', '#'+PATH2ID[abs]); return; }
+    // a real file served next to the page (a book, an image) is not a route:
+    // leave it alone and open it in a new tab
+    if(/\.[a-z0-9]{2,5}$/i.test(abs) && !/\.html?$/i.test(abs)) {
+      a.target = '_blank'; a.rel = 'noopener'; return;
+    }
     a.setAttribute('href', '#home');                         // dead Hexo path
   });
   el.querySelectorAll('img').forEach(img => {

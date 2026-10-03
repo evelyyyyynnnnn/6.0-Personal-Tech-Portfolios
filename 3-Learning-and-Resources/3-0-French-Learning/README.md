@@ -14,6 +14,7 @@ index.html          the whole site: styling, sidebar, router
 content.js          the table of contents — the one file you edit to add a page
 source/**/*.md      the content, one markdown file per page (front matter kept)
 picture/            images referenced as /picture/...
+pdf/                the five books the Korean Culture & Media page links to
 lib/marked.min.js   marked 4.3.0, vendored (MIT) so there is no CDN to depend on
 vercel.json         static serving + the ignoreCommand
 ```
@@ -134,10 +135,10 @@ They are worth knowing about before you edit:
 - French `culture-media/book` and `culture-media/movie` are **empty on the
   original site** — a heading and nothing else. Japanese `culture-media/movie`
   and `show` are nearly empty.
-- Korean `culture-media/books` links to PDFs. Those are two full novels, 20 MB,
-  so they are **not** copied into this repo; the links point at the original
-  host instead. Three more PDF links were already 404 on the original site and
-  still are.
+- Korean `culture-media/books` links to five books, which **are** in this repo
+  under `pdf/` — four PDFs and one EPUB, 73 MB in total. They were renamed to
+  ASCII slugs, because percent-encoded Korean filenames are a liability in both
+  a repo and a URL; the Korean titles stay in the link text.
 - Images on several pages come from `s2.loli.net` and `*.sunbangyan.cn`. If a
   host has gone away the page shows a labelled slot with a link to the
   original, rather than a broken-image icon. Replacing those with files under
