@@ -77,6 +77,8 @@ You need to come tomorrow.         ← translation
 ```pair                        a line and its translation
 당신은 날 설레게 만들어
 You make my heart flutter
+zh: 你让我心动                       optional Chinese line; the page then
+                                   shows an EN / 中文 switch
                                    (blank line between pairs)
 ```
 
