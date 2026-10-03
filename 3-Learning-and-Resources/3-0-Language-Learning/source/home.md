@@ -3,7 +3,7 @@ title: 👋 Bonjour · 안녕하세요 · こんにちは
 date: 2023-09-02 10:15:38
 ---
 <div align=center>
-<img src="/picture/homepage.png" width = "400" height = "400"/>
+<img src="/picture/homepage-v2.png" width = "400" height = "400"/>
 </div>
 
 ## Preview

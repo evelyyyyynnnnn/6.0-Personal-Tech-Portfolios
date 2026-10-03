@@ -85,9 +85,14 @@ one cheap request and keeps an edited file from going stale.
 
 **Do not put `immutable` on these.** It means "never ask again", which is only
 true for a filename that carries a content hash. These filenames are stable and
-the files get edited in place — `picture/homepage.png` was replaced with a
+the files get edited in place — the homepage logo was replaced with a
 transparent version and every browser that had already seen the old one kept
 showing it, because the header said not to check for a year.
+
+That is why the logo is `picture/homepage-v2.png` and not `homepage.png`: a new
+name was the only way to reach browsers already holding the year-long entry.
+With `must-revalidate` in place this is a one-off — editing an image in place
+now works, and the file does not need renaming again.
 
 `pdf/` is cached for a week. Those are books; they are not edited.
 
