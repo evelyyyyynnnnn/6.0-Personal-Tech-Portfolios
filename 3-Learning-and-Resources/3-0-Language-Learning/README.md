@@ -1,7 +1,10 @@
 # Languages — Français · 한국어 · 日本語
 
 One site for three languages. French, Korean and Japanese each carry the **same
-four sections**, so a chapter in one has a counterpart in the others.
+spine** — About · Foundations · Vocabulary · Grammar · Reading · Listening ·
+Culture & Media · Journal — so a chapter in one has a counterpart in the others,
+and anything new has an obvious home. What differs is the level each language is
+organised by: **CEFR** for French, **TOPIK** for Korean, **JLPT** for Japanese.
 
 ## How it is built
 
@@ -45,7 +48,58 @@ update** — commit it and the page changes. No rebuild, nothing to regenerate.
    ```
 
 That's it — the sidebar entry, the route (`#language-section-name`) and the
-styling all follow from those two edits.
+styling all follow from those two edits. Add `soon: true` to the `content.js`
+line while a page is still a placeholder, and drop it once you write the page.
+
+## Writing a page
+
+Plain markdown works everywhere. For the shapes that repeat, write a fenced
+block and the site renders it as a component — the `.md` file still reads as
+plain text, one item per line.
+
+````markdown
+```grammar                     numbered pattern cards
+Le subjonctif | Subjunctive        ← pattern | gloss
+Il faut que tu **viennes** demain. ← example
+You need to come tomorrow.         ← translation
+                                   (blank line between cards)
+```
+
+```vocab                       a term table
+# 단어 | Romanisation | Meaning     ← optional header row, starts with #
+안녕하세요 | annyeonghaseyo | hello
+```
+
+```chart                       a kana / hangul / alphabet grid
+あ a | い i | う u | え e | お o
+```
+
+```pair                        a line and its translation
+당신은 날 설레게 만들어
+You make my heart flutter
+                                   (blank line between pairs)
+```
+
+```media                       books, films, shows
+마녀식당으로 오세요 | Demon Girl Canteen | /pdf/manyeo-sikdang.pdf
+```
+
+```notes                       the glossary at the foot of a page
+본성 | nature
+```
+
+```contact                     small icons, not full-width logos
+mail | you@example.com | mailto:you@example.com
+```
+
+```soon                        a page that is not written yet
+😛 This place hasn't been explored by the author…..
+Journal · nothing here yet
+```
+````
+
+A block whose contents don't parse falls back to showing the source, so a typo
+never takes a page down.
 
 ## Viewing it locally
 

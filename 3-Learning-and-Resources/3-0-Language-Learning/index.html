@@ -8,100 +8,183 @@
 <link rel="icon" href="picture/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400&family=Roboto+Slab:wght@500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,0..100,0..1;1,9..144,400..600,0..100,0..1&family=Newsreader:ital,wght@0,400..600;1,400&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+KR:wght@400;600&family=Noto+Serif+JP:wght@400;600&display=swap">
 <style>
-/* layout: fixed left rail of collapsible language groups + single reading column */
+/* ===========================================================================
+   Typography: Fraunces (display) · Newsreader (body) · Noto Serif KR/JP
+   · JetBrains Mono. CJK has real webfonts here, so Korean and Japanese are
+   set deliberately instead of falling back to whatever the OS happens to own.
+   =========================================================================== */
 :root{
-  --paper:#FBFAF7; --panel:#F3F1EA; --ink:#1A1917; --ink-soft:#5F5A4F;
-  --rule:#E2DED4; --quote:#F1EFE7; --accent:#3B4C8A; --accent-soft:#E7EAF5;
-  --display:'Roboto Slab',Georgia,'Songti SC',serif;
-  --body:'Lora',Georgia,'Songti SC','Hiragino Mincho ProN','Nanum Myeongjo',serif;
-  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --paper:#FBFAF6; --panel:#F4F1E9; --quote:#F4F1E9; --card:transparent;
+  --ink:#1C1A16; --ink-soft:#6B6354; --rule:#E4DFD2;
+  --accent:#8A3324; --accent-soft:#F6E9E4; --on-accent:#FFFFFF;
+  --disp:'Fraunces',Georgia,'Songti SC',serif;
+  --body:'Newsreader','Noto Serif KR','Noto Serif JP',Georgia,'Songti SC',serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
   color-scheme:light;
   padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --paper:#171613; --panel:#1E1C18; --ink:#EDEAE1; --ink-soft:#A49E90;
-  --rule:#332F28; --quote:#201E19; --accent:#92A4E8; --accent-soft:#232742; color-scheme:dark}}
+  --paper:#17150F; --panel:#1F1C15; --quote:#201D16; --ink:#EDE8DC; --ink-soft:#A79E8B;
+  --rule:#342F25; --accent:#E8A08D; --accent-soft:#2C211C; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --paper:#171613; --panel:#1E1C18; --ink:#EDEAE1; --ink-soft:#A49E90;
-  --rule:#332F28; --quote:#201E19; --accent:#92A4E8; --accent-soft:#232742; color-scheme:dark}
+  --paper:#17150F; --panel:#1F1C15; --quote:#201D16; --ink:#EDE8DC; --ink-soft:#A79E8B;
+  --rule:#342F25; --accent:#E8A08D; --accent-soft:#2C211C; color-scheme:dark}
+
 *{box-sizing:border-box}
 html,body{height:100%}
-body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.72 var(--body);
-  -webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.75 var(--body);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 [hidden]{display:none!important}
-.shell{display:grid;grid-template-columns:248px minmax(0,1fr);min-height:100%}
-.rail{background:var(--panel);border-right:1px solid var(--rule);padding:22px 0 40px;
+.shell{display:grid;grid-template-columns:260px minmax(0,1fr);min-height:100%}
+
+/* ── rail ──────────────────────────────────────────────────────────────── */
+.rail{background:var(--panel);border-right:1px solid var(--rule);padding:20px 0 48px;
   position:sticky;top:env(safe-area-inset-top,0px);align-self:start;overflow-y:auto;
   height:calc(100vh - env(safe-area-inset-top,0px))}
-.brand{display:flex;align-items:center;gap:9px;padding:0 20px 16px;margin-bottom:6px;
-  border-bottom:1px solid var(--rule);font:600 15px/1.2 var(--display);letter-spacing:.01em}
-.brand b{font-size:19px}
+.brand{display:flex;align-items:center;gap:11px;padding:0 20px 18px;margin-bottom:4px;
+  border-bottom:1px solid var(--rule);text-decoration:none}
+.bmark{width:30px;height:30px;border-radius:8px;background:var(--accent);color:var(--on-accent);
+  display:grid;place-items:center;font:600 15px/1 var(--disp);flex:0 0 auto}
+.brand b{display:block;font:600 17px/1.2 var(--disp);color:var(--ink)}
+.brand em{display:block;font-style:normal;font:400 11.5px/1.3 var(--mono);color:var(--ink-soft);margin-top:2px}
 .railbtn{display:block;width:100%;text-align:left;background:none;border:0;cursor:pointer;
-  font:600 12px/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-soft);
-  padding:13px 20px 9px}
-.railbtn:hover{color:var(--ink)}
+  font:500 10.5px/1.3 var(--mono);letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-soft);padding:14px 20px 10px}
+.railbtn:hover,.railbtn.on{color:var(--accent)}
 .grp{border-top:1px solid var(--rule)}
-.grp summary{cursor:pointer;list-style:none;padding:13px 20px;display:flex;align-items:center;gap:8px;
-  font:600 13px/1.2 var(--display);color:var(--ink)}
+.grp summary{cursor:pointer;list-style:none;padding:13px 20px;display:flex;align-items:center;gap:9px;
+  font:600 15px/1.2 var(--disp);color:var(--ink)}
 .grp summary::-webkit-details-marker{display:none}
 .grp summary::after{content:'';margin-left:auto;width:6px;height:6px;border-right:1.5px solid var(--ink-soft);
   border-bottom:1.5px solid var(--ink-soft);transform:rotate(45deg);transition:transform .15s}
 .grp[open] summary::after{transform:rotate(-135deg)}
-.sec{font:600 11px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);
-  padding:12px 20px 5px}
-.rail a{display:block;padding:5px 20px 5px 30px;color:var(--ink-soft);text-decoration:none;font-size:14px}
+.flag{font-size:15px;line-height:1}
+.lv{font:500 10px/1.4 var(--mono);letter-spacing:.06em;color:var(--accent);
+  background:var(--accent-soft);padding:2px 7px;border-radius:999px}
+.sec{font:500 10.5px/1.3 var(--mono);letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-soft);padding:13px 20px 5px}
+.rail a{display:block;padding:6px 20px 6px 30px;color:var(--ink-soft);text-decoration:none;
+  font:400 14.5px/1.5 var(--body)}
 .rail a:hover{color:var(--ink)}
-.rail a.on{color:var(--accent);font-weight:650;background:var(--accent-soft);
+.rail a.on{color:var(--accent);font-weight:600;background:var(--accent-soft);
   box-shadow:inset 2px 0 0 var(--accent)}
-main{padding:40px 32px 90px;min-width:0}
-.doc{max-width:68ch;margin:0 auto}
-.crumb{font:500 12px/1.3 var(--mono);letter-spacing:.07em;text-transform:uppercase;
-  color:var(--ink-soft);margin-bottom:14px}
+.rail a.soon::after{content:'·';margin-left:6px;color:var(--ink-soft);opacity:.6}
+
+/* ── document ──────────────────────────────────────────────────────────── */
+main{padding:52px 40px 100px;min-width:0}
+.doc{max-width:70ch;margin:0 auto;overflow-wrap:anywhere}
+.crumb{font:500 11px/1.3 var(--mono);letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-soft);margin-bottom:12px}
+.doc h1{font:600 clamp(28px,4.4vw,40px)/1.12 var(--disp);margin:0 0 20px;letter-spacing:-.015em;
+  text-wrap:balance;font-variation-settings:'SOFT' 0,'WONK' 1}
+.doc h2{font:600 23px/1.3 var(--disp);margin:40px 0 14px;padding-bottom:8px;
+  border-bottom:1px solid var(--rule);text-wrap:balance}
+.doc h3{font:600 18px/1.35 var(--disp);margin:26px 0 8px}
+.doc h4{font:600 15px/1.4 var(--disp);margin:22px 0 8px;color:var(--ink-soft)}
+.doc p{margin:0 0 15px}
+.doc a{color:var(--accent);text-underline-offset:3px;overflow-wrap:anywhere}
+.doc ul,.doc ol{margin:0 0 15px;padding-left:22px}
+.doc li{margin:0 0 7px}
+.doc strong{color:var(--ink);font-weight:650}
+.doc blockquote{margin:18px 0;padding:12px 18px;border-left:2px solid var(--accent);
+  background:var(--quote);color:var(--ink-soft)}
+.doc blockquote p:last-child{margin:0}
+.doc code{font:500 .87em/1.5 var(--mono);background:var(--quote);padding:1px 5px;border-radius:3px}
+.doc hr{border:0;border-top:1px solid var(--rule);margin:30px 0}
+.doc img{max-width:min(100%,520px);height:auto;border-radius:6px;display:block}
+.doc pre{margin:0 0 15px;padding:13px 15px;background:var(--quote);border-radius:6px;
+  font:500 13px/1.6 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere;overflow-x:auto}
+.doc pre code{background:none;padding:0;font-size:inherit}
+.tablewrap{overflow-x:auto;margin:18px 0;border:1px solid var(--rule);border-radius:6px}
+.doc table{width:100%;border-collapse:collapse;font-size:15px;min-width:0}
+.doc th,.doc td{padding:10px 13px;border-bottom:1px solid var(--rule);text-align:left}
+.doc th{background:var(--quote);font:500 10.5px/1.3 var(--mono);letter-spacing:.09em;
+  text-transform:uppercase;color:var(--ink-soft);white-space:nowrap}
+.doc tr:last-child td{border-bottom:0}
+.state{color:var(--ink-soft);font:500 14px/1.6 var(--mono)}
+
+/* ── components (see README: the fenced blocks you write in markdown) ──── */
+
+/* grammar — numbered pattern cards */
+.c-grammar{margin:18px 0}
+.gp{margin:0 0 4px;padding:16px 0 18px 18px;border-left:2px solid var(--rule)}
+.gp:hover{border-left-color:var(--accent)}
+.gp-h{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:9px}
+.gp-n{font:600 12px/1 var(--mono);color:var(--accent)}
+.gp-t{font:600 18px/1.35 var(--disp);color:var(--ink)}
+.gp-g{font:italic 400 14px/1.5 var(--body);color:var(--ink-soft)}
+.gp .ex{margin:0 0 4px;font:400 18px/1.6 var(--body);color:var(--ink)}
+.gp .ex strong{color:var(--accent);font-weight:700}
+.gp .tr{margin:0;font:400 15px/1.6 var(--body);color:var(--ink-soft)}
+
+/* vocab — term / reading / meaning table */
+.c-vocab .term{font-weight:600;white-space:nowrap}
+.c-vocab .rom{font:400 13px/1.4 var(--mono);color:var(--ink-soft);white-space:nowrap}
+
+/* chart — kana / hangul / alphabet grid */
+.c-chart{display:grid;grid-template-columns:repeat(auto-fit,minmax(78px,1fr));gap:8px;margin:18px 0}
+.c-chart .k{border:1px solid var(--rule);border-radius:6px;padding:12px 6px;text-align:center;
+  background:var(--quote)}
+.c-chart .k b{display:block;font:400 28px/1.15 var(--body);font-weight:400;color:var(--ink)}
+.c-chart .k i{display:block;font:400 12.5px/1.4 var(--mono);font-style:normal;
+  color:var(--ink-soft);margin-top:4px}
+
+/* pair — a line in the language, its translation underneath */
+.c-pair{margin:18px 0}
+.pr{margin:0 0 14px;padding-left:14px;border-left:2px solid var(--accent-soft)}
+.pr .src{margin:0 0 2px;font:400 17px/1.7 var(--body);color:var(--ink)}
+.pr .dst{margin:0;font:400 15px/1.6 var(--body);color:var(--ink-soft)}
+
+/* media — books, films, shows */
+.c-media{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin:18px 0}
+.md{border:1px solid var(--rule);border-radius:8px;padding:14px 16px;background:var(--quote);
+  display:flex;flex-direction:column;gap:3px}
+.md b{font:600 16px/1.4 var(--body);color:var(--ink)}
+.md span{font:400 14px/1.5 var(--body);color:var(--ink-soft)}
+.md a{font:500 12px/1.4 var(--mono);color:var(--accent);text-decoration:none;margin-top:6px}
+.md a:hover{text-decoration:underline}
+
+/* notes — the [1]term:meaning glossaries */
+.c-notes{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:4px 18px;
+  margin:18px 0;padding:16px 18px;background:var(--quote);border-radius:6px}
+.c-notes div{font:400 14.5px/1.6 var(--body);color:var(--ink-soft)}
+.c-notes b{color:var(--ink);font-weight:600}
+
+/* contact — small icons, not full-width logos */
+.c-contact{display:flex;flex-wrap:wrap;gap:9px;margin:18px 0}
+.c-contact a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);
+  font:400 15px/1.6 var(--body);border:1px solid var(--rule);border-radius:999px;padding:7px 15px}
+.c-contact a:hover{border-color:var(--accent);color:var(--accent)}
+.c-contact .ci{display:grid;place-items:center;width:19px;height:19px;border-radius:50%;
+  background:var(--accent-soft);color:var(--accent);font:500 10px/1 var(--mono);flex:0 0 auto}
+
+/* the author photo on a Self-introduction page, and a page's opening image */
+.doc .avatar{margin:0 0 18px}
+.doc .avatar img{width:116px;height:116px;border-radius:50%;object-fit:cover;
+  border:1px solid var(--rule)}
+.doc .hero{margin:0 0 24px;text-align:center}
+.doc .hero img{max-width:340px;width:100%;border-radius:10px}
+
+/* a page that exists in the structure but has nothing in it yet */
+.c-soon{margin:22px 0;padding:22px;border:1px dashed var(--rule);border-radius:8px;
+  background:var(--quote);text-align:center}
+.c-soon p{margin:0;font:italic 400 16px/1.6 var(--body);color:var(--ink-soft)}
+.c-soon small{display:block;margin-top:6px;font:500 11px/1.4 var(--mono);letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink-soft);opacity:.75}
+
 .burger{display:none}
 @media (max-width:860px){
   .shell{grid-template-columns:1fr}
   .rail{position:static;height:auto;border-right:0;border-bottom:1px solid var(--rule);display:none}
   .rail.open{display:block}
-  .burger{display:flex;align-items:center;gap:8px;position:sticky;top:env(safe-area-inset-top,0px);z-index:9;
-    width:100%;padding:12px 16px;background:var(--panel);border:0;border-bottom:1px solid var(--rule);
-    color:var(--ink);font:600 14px/1 var(--display);cursor:pointer}
+  .burger{display:flex;align-items:center;gap:8px;position:sticky;top:env(safe-area-inset-top,0px);
+    z-index:9;width:100%;padding:13px 16px;background:var(--panel);border:0;
+    border-bottom:1px solid var(--rule);color:var(--ink);font:600 15px/1 var(--disp);cursor:pointer}
   main{padding:26px 16px 70px}
+  .c-chart{grid-template-columns:repeat(auto-fit,minmax(64px,1fr))}
 }
-
-/* ── content typography, themed through the same tokens ───────────────── */
-.doc h1{font:600 clamp(26px,4.2vw,34px)/1.18 var(--display);margin:0 0 18px;text-wrap:balance;letter-spacing:-.01em}
-.doc h2{font:600 20px/1.3 var(--display);margin:34px 0 12px;padding-bottom:7px;border-bottom:1px solid var(--rule);text-wrap:balance}
-.doc h3{font:600 16px/1.35 var(--display);margin:24px 0 8px}
-.doc p{margin:0 0 14px}
-.doc{overflow-wrap:anywhere}          /* long bare URLs in the French enrolment email */
-.doc a{overflow-wrap:anywhere;color:var(--accent);text-underline-offset:3px}
-.doc ul,.doc ol{margin:0 0 14px;padding-left:22px}
-.doc li{margin:0 0 6px}
-.doc strong{color:var(--ink);font-weight:650}
-.doc blockquote{margin:16px 0;padding:12px 16px;border-left:3px solid var(--accent);
-  background:var(--quote);border-radius:0 6px 6px 0;color:var(--ink-soft)}
-.doc blockquote p:last-child{margin:0}
-.doc code{font:500 .88em/1.5 var(--mono);background:var(--quote);padding:1px 5px;border-radius:3px}
-.doc hr{border:0;border-top:1px solid var(--rule);margin:28px 0}
-.doc img{max-width:100%;height:auto;border-radius:6px}
-/* the French enrolment email is prose inside a code block: wrap it, don't clip it */
-.doc pre{margin:0 0 14px;padding:12px 14px;background:var(--quote);border-radius:6px;
-  font:500 13px/1.6 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere;overflow-x:auto}
-.doc pre code{background:none;padding:0;font-size:inherit}
-.tablewrap{overflow-x:auto;margin:16px 0;border:1px solid var(--rule);border-radius:8px}
-.doc table{width:100%;border-collapse:collapse;font-size:14px;min-width:0}
-.doc th,.doc td{padding:9px 12px;border-bottom:1px solid var(--rule);text-align:left;white-space:nowrap}
-/* no text-transform here: in the kana tables the header cells ARE the
-   vowels (a i u e o), so uppercasing them changes what the table says */
-.doc th{background:var(--quote);font:600 12px/1.3 var(--mono);letter-spacing:.04em;color:var(--ink-soft)}
-.doc tr:last-child td{border-bottom:0}
-/* an image whose host has gone away still leaves a labelled slot, not a broken icon */
-.img-missing{display:block;margin:16px 0;padding:18px;border:1px dashed var(--rule);border-radius:8px;
-  background:var(--quote);font:500 13px/1.5 var(--mono);color:var(--ink-soft);text-align:center}
-.img-missing a{color:var(--accent)}
-.state{color:var(--ink-soft);font:500 14px/1.6 var(--mono)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -123,8 +206,8 @@ const rail = document.getElementById('rail');
 const doc  = document.getElementById('doc');
 
 /* ── routes ─────────────────────────────────────────────────────────────
-   Every page gets a flat hash id: french-grammar-chapter1. A single file
-   means no server rewrites and no 404s — the hash is the whole router.    */
+   Every page gets a flat hash id: french-grammar-a1. A single file means no
+   server rewrites and no 404s — the hash is the whole router.             */
 const idOf = (l,s,p) => (l+'-'+s+'-'+p).toLowerCase().replace(/[^a-z0-9]+/g,'-');
 const ROUTES = {};
 D.langs.forEach(L => L.sections.forEach(S => S.pages.forEach(P => {
@@ -134,7 +217,7 @@ D.langs.forEach(L => L.sections.forEach(S => S.pages.forEach(P => {
 })));
 ROUTES['home'] = { home:true, file:D.home.file, dir:'source/' };
 
-let shown = 'home';                                  // the route actually on screen
+let shown = 'home';
 function current(){
   const h = location.hash.replace(/^#/,'');
   if(ROUTES[h]) return h;
@@ -144,13 +227,109 @@ function current(){
   return 'home';
 }
 
-/* ── markdown ───────────────────────────────────────────────────────────
-   The .md files keep their Hexo front matter, so the same files render
-   here and would still render under Hexo. Titles come from `title:`.      */
-// smartypants stays OFF: the markdown imported from the three sites already
-// carries the exact punctuation they render, so transforming it again would
-// change quotes the source deliberately has straight
-marked.setOptions({ gfm:true, breaks:true, headerIds:true, mangle:false });
+/* ── components ─────────────────────────────────────────────────────────
+   Each is a fenced block in the markdown. The .md files stay readable as
+   plain text: a reader who never sees the site still sees the pairs, the
+   terms and the examples, one per line.                                   */
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const md  = s => marked.parseInline(s.trim());
+const rows   = c => c.split('\n').map(l => l.trim()).filter(Boolean);
+const groups = c => c.split(/\n\s*\n/).map(g => rows(g)).filter(g => g.length);
+const cells  = l => l.split('|').map(s => s.trim());
+
+const COMPONENT = {
+  // pattern | gloss  /  example  /  translation
+  grammar(code){
+    return '<div class="c-grammar">' + groups(code).map((g,i) => {
+      const [term, gloss] = cells(g[0]);
+      return '<div class="gp"><div class="gp-h">' +
+        '<span class="gp-n">' + String(i+1).padStart(2,'0') + '</span>' +
+        '<span class="gp-t">' + md(term) + '</span>' +
+        (gloss ? '<span class="gp-g">' + md(gloss) + '</span>' : '') + '</div>' +
+        (g[1] ? '<p class="ex">' + md(g[1]) + '</p>' : '') +
+        (g[2] ? '<p class="tr">' + md(g[2]) + '</p>' : '') + '</div>';
+    }).join('') + '</div>';
+  },
+  // optional "# a | b | c" header row, then term | reading | meaning | …
+  vocab(code){
+    const r = rows(code);
+    let head = '';
+    if(r.length && r[0].startsWith('#')){
+      head = '<thead><tr>' + cells(r.shift().replace(/^#\s*/,''))
+             .map(c => '<th>' + esc(c) + '</th>').join('') + '</tr></thead>';
+    }
+    const body = r.map(l => '<tr>' + cells(l).map((c,i) =>
+      '<td class="' + (i === 0 ? 'term' : i === 1 ? 'rom' : '') + '">' + md(c) + '</td>'
+    ).join('') + '</tr>').join('');
+    return '<div class="tablewrap c-vocab"><table>' + head + '<tbody>' + body + '</tbody></table></div>';
+  },
+  // glyph romanisation | glyph romanisation | …
+  chart(code){
+    const out = [];
+    rows(code).forEach(l => cells(l).forEach(c => {
+      if(!c) return;
+      const m = /^(\S+)\s*(.*)$/.exec(c);
+      out.push('<div class="k"><b>' + esc(m[1]) + '</b>' +
+               (m[2] ? '<i>' + esc(m[2]) + '</i>' : '') + '</div>');
+    }));
+    return '<div class="c-chart">' + out.join('') + '</div>';
+  },
+  // source line / translation line(s), groups split by a blank line
+  pair(code){
+    return '<div class="c-pair">' + groups(code).map(g =>
+      '<div class="pr"><p class="src">' + md(g[0]) + '</p>' +
+      g.slice(1).map(l => '<p class="dst">' + md(l) + '</p>').join('') + '</div>'
+    ).join('') + '</div>';
+  },
+  // title | subtitle | url
+  media(code){
+    return '<div class="c-media">' + rows(code).map(l => {
+      const [title, sub, url] = cells(l);
+      return '<div class="md"><b>' + md(title) + '</b>' +
+        (sub ? '<span>' + md(sub) + '</span>' : '') +
+        (url ? '<a href="' + encodeURI(url) + '">Open &rarr;</a>' : '') + '</div>';
+    }).join('') + '</div>';
+  },
+  // term | meaning
+  notes(code){
+    return '<div class="c-notes">' + rows(code).map(l => {
+      const [t, m] = cells(l);
+      return '<div><b>' + md(t) + '</b> &middot; ' + md(m || '') + '</div>';
+    }).join('') + '</div>';
+  },
+  // icon | label | url
+  contact(code){
+    const ICON = { mail:'@', github:'GH', instagram:'IG', site:'W', linkedin:'in' };
+    return '<div class="c-contact">' + rows(code).map(l => {
+      const [kind, label, url] = cells(l);
+      return '<a href="' + encodeURI(url || '#') + '"' +
+        (/^https?:/i.test(url||'') ? ' target="_blank" rel="noopener"' : '') + '>' +
+        '<span class="ci">' + (ICON[kind.toLowerCase()] || '&bull;') + '</span>' +
+        esc(label || kind) + '</a>';
+    }).join('') + '</div>';
+  },
+  // a page that is in the structure but not written yet
+  soon(code){
+    const r = rows(code);
+    return '<div class="c-soon"><p>' + md(r[0] || 'Not written yet.') + '</p>' +
+      (r[1] ? '<small>' + esc(r[1]) + '</small>' : '') + '</div>';
+  }
+};
+
+const renderer = new marked.Renderer();
+const codeBase = renderer.code.bind(renderer);
+renderer.code = function(code, info, escaped){
+  const lang = (info || '').trim().split(/\s+/)[0].toLowerCase();
+  if(COMPONENT[lang]){
+    try { return COMPONENT[lang](code); }
+    catch(e){ return codeBase(code, info, escaped); }   // malformed block: show the source
+  }
+  return codeBase(code, info, escaped);
+};
+
+// smartypants stays OFF: the markdown carries the exact punctuation it
+// renders, so transforming it again would change quotes the source has straight
+marked.setOptions({ gfm:true, breaks:true, headerIds:true, mangle:false, renderer });
 
 function frontMatter(text){
   const m = /^\s*---\r?\n([\s\S]*?)\r?\n---\r?\n?/.exec(text);
@@ -160,10 +339,8 @@ function frontMatter(text){
   return { title, body:text.slice(m[0].length) };
 }
 
-/* Links and images in the markdown are written for the Hexo site
-   (/French/Grammar/chapter1.html, /picture/author.jpg). Rewrite them for
-   the flat site: page links become hash routes, root-absolute assets stay
-   root-absolute, bare relative images resolve next to their .md file.     */
+/* Links in the markdown point at page slugs. Rewrite them to hash routes;
+   real files (a book, an image) open in a new tab.                        */
 const PATH2ID = {};
 D.langs.forEach(L => L.sections.forEach(S => S.pages.forEach(P => {
   PATH2ID['/'+L.slug+'/'+S.slug+'/'+P.slug+'.html'] = idOf(L.slug,S.slug,P.slug);
@@ -174,30 +351,20 @@ function rewrite(el, dir){
   el.querySelectorAll('a[href]').forEach(a => {
     const h = a.getAttribute('href');
     if(/^https?:/i.test(h)) { a.target='_blank'; a.rel='noopener'; return; }
-    if(h.startsWith('#')) return;                            // in-page anchor
-    // resolve ../Word-Phrase/Basic-Verb.html against the page's own folder,
-    // then look the result up the same way as an absolute /French/... path
+    if(h.startsWith('#')) return;
     const abs = h.startsWith('/') ? h
               : new URL(h, 'http://x/' + dir.replace(/^source\//,'')).pathname;
     if(PATH2ID[abs]) { a.setAttribute('href', '#'+PATH2ID[abs]); return; }
-    // a real file served next to the page (a book, an image) is not a route:
-    // leave it alone and open it in a new tab
     if(/\.[a-z0-9]{2,5}$/i.test(abs) && !/\.html?$/i.test(abs)) {
       a.target = '_blank'; a.rel = 'noopener'; return;
     }
-    a.setAttribute('href', '#home');                         // dead Hexo path
+    a.setAttribute('href', '#home');
   });
   el.querySelectorAll('img').forEach(img => {
     const s = img.getAttribute('src') || '';
     if(!/^(https?:|data:|\/)/i.test(s)) img.setAttribute('src', dir + s);
-    img.addEventListener('error', () => {
-      const slot = document.createElement('div');
-      slot.className = 'img-missing';
-      slot.dataset.src = s;
-      slot.innerHTML = 'Image unavailable &mdash; <a href="' + encodeURI(s) +
-                       '" target="_blank" rel="noopener">open the original</a>';
-      img.replaceWith(slot);
-    }, { once:true });
+    // an image that cannot load leaves nothing behind rather than a broken icon
+    img.addEventListener('error', () => img.remove(), { once:true });
   });
   el.querySelectorAll('table').forEach(t => {
     if(t.parentElement.classList.contains('tablewrap')) return;
@@ -219,17 +386,21 @@ function load(file){
 
 /* ── render ─────────────────────────────────────────────────────────── */
 function sidebar(id, R){
-  let n = '<div class="brand"><b>&#128218;</b> ' + D.brand + '</div>';
-  n += '<button class="railbtn" data-go="home">' + D.home.nav + '</button>';
+  let n = '<a class="brand" href="#home"><span class="bmark">A</span>' +
+          '<span><b>' + D.brand + '</b><em>' + D.subtitle + '</em></span></a>';
+  n += '<button class="railbtn' + (id === 'home' ? ' on' : '') + '" data-go="home">' +
+       D.home.nav + '</button>';
   D.langs.forEach(L => {
     const open = R.lang && R.lang.slug === L.slug;
     n += '<details class="grp"' + (open ? ' open' : '') + '><summary>' +
-         L.flag + ' ' + L.label + '</summary>';
+         '<span class="flag">' + L.flag + '</span> ' + L.label +
+         (L.level ? ' <span class="lv">' + L.level + '</span>' : '') + '</summary>';
     L.sections.forEach(S => {
       n += '<div class="sec">' + S.label + '</div>';
       S.pages.forEach(P => {
         const pid = idOf(L.slug,S.slug,P.slug);
-        n += '<a href="#' + pid + '"' + (pid === id ? ' class="on"' : '') + '>' + P.nav + '</a>';
+        n += '<a href="#' + pid + '" class="' + (pid === id ? 'on' : '') +
+             (P.soon ? ' soon' : '') + '">' + P.nav + '</a>';
       });
     });
     n += '</details>';

@@ -2,9 +2,7 @@
 title: 👋 Bonjour · 안녕하세요 · こんにちは
 date: 2023-09-02 10:15:38
 ---
-<div align=center>
-<img src="/picture/homepage-v2.png" width = "400" height = "400"/>
-</div>
+<p class="hero"><img src="/picture/homepage-v2.png" alt=""></p>
 
 ## Preview
 
@@ -23,15 +21,15 @@ learning, and never built a system of my own. So I started building one.
 
 | | | |
 |---|---|---|
-| 🇫🇷 **Français** | alphabet, tenses, TEF notes | [Start →](/French/word-phraze/alphabet.html) |
-| 🇰🇷 **한국어** | TOPIK I & II, listening, daily notes | [Start →](/Korean/word-phraze/topik-i.html) |
-| 🇯🇵 **日本語** | 五十音, grammar, dialogue | [Start →](/Japanese/word-phraze/chapter1.html) |
+| 🇫🇷 **Français** | A1–B1 grammar, alphabet, TEF notes | [Start →](/French/foundations/alphabet.html) |
+| 🇰🇷 **한국어** | TOPIK I & II, listening, a reading library | [Start →](/Korean/vocabulary/topik-i.html) |
+| 🇯🇵 **日本語** | 五十音, N5–N3 patterns, dialogue | [Start →](/Japanese/foundations/hiragana.html) |
 
-The three sections every language shares are **Word & Phrase**, **Grammar** and
-**Dialogue & Passage**, plus **Culture & Media** for books, film and television.
-Korean carries two more that grew out of how I actually studied it —
-**Listening** and **Learn Everyday** — and each language keeps its own
-**About** page.
+Every language carries the same spine — **About**, **Foundations**, **Vocabulary**,
+**Grammar**, **Reading**, **Listening**, **Culture & Media** and a **Journal** — so a
+chapter in one has a counterpart in the others, and anything new has an obvious home.
+What differs is the level each is organised by: **CEFR** for French, **TOPIK** for
+Korean, **JLPT** for Japanese. Korean also keeps a **Library** of the books I read.
 
 ## Background
 
