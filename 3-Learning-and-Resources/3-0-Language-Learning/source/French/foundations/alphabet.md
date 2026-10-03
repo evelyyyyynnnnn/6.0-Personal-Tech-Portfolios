@@ -4,8 +4,9 @@ date: 2026-10-03 00:00:00
 ---
 
 ```pair
-✔️Here I will introduce the first chapter of the learning French which is the alphabet.
 ✔️Ici, je vais vous présenter le premier chapitre de l’apprentissage du français, l’alphabet.
+✔️Here I will introduce the first chapter of the learning French which is the alphabet.
+zh: ✔️在这里，我将介绍法语学习的第一章——字母表。
 ```
 
 ```chart

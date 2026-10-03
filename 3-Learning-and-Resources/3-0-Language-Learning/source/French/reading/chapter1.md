@@ -3,7 +3,10 @@ title: 1️⃣ An Email · TEF Canada
 date: 2026-10-03 00:00:00
 ---
 
+```tr
 The following is the email that I received from ALLIANCE FRANCE
+zh: 以下是我收到的法语联盟（ALLIANCE FRANCE）的邮件
+```
 
 > Bonjour,
 > Nous avons bien reçu votre demande de renseignements concernant le TEF CANADA et nous vous remercions de l’intérêt que vous portez à cette formation.
