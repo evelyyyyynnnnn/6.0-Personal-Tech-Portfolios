@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Languages · Français · 한국어 · 日本語</title>
+<meta name="description" content="Learning French, Korean and Japanese in one place rather than three.">
+<link rel="icon" href="picture/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400&family=Roboto+Slab:wght@500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* layout: fixed left rail of collapsible language groups + single reading column */
+:root{
+  --paper:#FBFAF7; --panel:#F3F1EA; --ink:#1A1917; --ink-soft:#5F5A4F;
+  --rule:#E2DED4; --quote:#F1EFE7; --accent:#3B4C8A; --accent-soft:#E7EAF5;
+  --display:'Roboto Slab',Georgia,'Songti SC',serif;
+  --body:'Lora',Georgia,'Songti SC','Hiragino Mincho ProN','Nanum Myeongjo',serif;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  color-scheme:light;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#171613; --panel:#1E1C18; --ink:#EDEAE1; --ink-soft:#A49E90;
+  --rule:#332F28; --quote:#201E19; --accent:#92A4E8; --accent-soft:#232742; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#171613; --panel:#1E1C18; --ink:#EDEAE1; --ink-soft:#A49E90;
+  --rule:#332F28; --quote:#201E19; --accent:#92A4E8; --accent-soft:#232742; color-scheme:dark}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.72 var(--body);
+  -webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}
+.shell{display:grid;grid-template-columns:248px minmax(0,1fr);min-height:100%}
+.rail{background:var(--panel);border-right:1px solid var(--rule);padding:22px 0 40px;
+  position:sticky;top:env(safe-area-inset-top,0px);align-self:start;overflow-y:auto;
+  height:calc(100vh - env(safe-area-inset-top,0px))}
+.brand{display:flex;align-items:center;gap:9px;padding:0 20px 16px;margin-bottom:6px;
+  border-bottom:1px solid var(--rule);font:600 15px/1.2 var(--display);letter-spacing:.01em}
+.brand b{font-size:19px}
+.railbtn{display:block;width:100%;text-align:left;background:none;border:0;cursor:pointer;
+  font:600 12px/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-soft);
+  padding:13px 20px 9px}
+.railbtn:hover{color:var(--ink)}
+.grp{border-top:1px solid var(--rule)}
+.grp summary{cursor:pointer;list-style:none;padding:13px 20px;display:flex;align-items:center;gap:8px;
+  font:600 13px/1.2 var(--display);color:var(--ink)}
+.grp summary::-webkit-details-marker{display:none}
+.grp summary::after{content:'';margin-left:auto;width:6px;height:6px;border-right:1.5px solid var(--ink-soft);
+  border-bottom:1.5px solid var(--ink-soft);transform:rotate(45deg);transition:transform .15s}
+.grp[open] summary::after{transform:rotate(-135deg)}
+.sec{font:600 11px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);
+  padding:12px 20px 5px}
+.rail a{display:block;padding:5px 20px 5px 30px;color:var(--ink-soft);text-decoration:none;font-size:14px}
+.rail a:hover{color:var(--ink)}
+.rail a.on{color:var(--accent);font-weight:650;background:var(--accent-soft);
+  box-shadow:inset 2px 0 0 var(--accent)}
+main{padding:40px 32px 90px;min-width:0}
+.doc{max-width:68ch;margin:0 auto}
+.crumb{font:500 12px/1.3 var(--mono);letter-spacing:.07em;text-transform:uppercase;
+  color:var(--ink-soft);margin-bottom:14px}
+.burger{display:none}
+@media (max-width:860px){
+  .shell{grid-template-columns:1fr}
+  .rail{position:static;height:auto;border-right:0;border-bottom:1px solid var(--rule);display:none}
+  .rail.open{display:block}
+  .burger{display:flex;align-items:center;gap:8px;position:sticky;top:env(safe-area-inset-top,0px);z-index:9;
+    width:100%;padding:12px 16px;background:var(--panel);border:0;border-bottom:1px solid var(--rule);
+    color:var(--ink);font:600 14px/1 var(--display);cursor:pointer}
+  main{padding:26px 16px 70px}
+}
+
+/* ── content typography, themed through the same tokens ───────────────── */
+.doc h1{font:600 clamp(26px,4.2vw,34px)/1.18 var(--display);margin:0 0 18px;text-wrap:balance;letter-spacing:-.01em}
+.doc h2{font:600 20px/1.3 var(--display);margin:34px 0 12px;padding-bottom:7px;border-bottom:1px solid var(--rule);text-wrap:balance}
+.doc h3{font:600 16px/1.35 var(--display);margin:24px 0 8px}
+.doc p{margin:0 0 14px}
+.doc{overflow-wrap:anywhere}          /* long bare URLs in the French enrolment email */
+.doc a{overflow-wrap:anywhere;color:var(--accent);text-underline-offset:3px}
+.doc ul,.doc ol{margin:0 0 14px;padding-left:22px}
+.doc li{margin:0 0 6px}
+.doc strong{color:var(--ink);font-weight:650}
+.doc blockquote{margin:16px 0;padding:12px 16px;border-left:3px solid var(--accent);
+  background:var(--quote);border-radius:0 6px 6px 0;color:var(--ink-soft)}
+.doc blockquote p:last-child{margin:0}
+.doc code{font:500 .88em/1.5 var(--mono);background:var(--quote);padding:1px 5px;border-radius:3px}
+.doc hr{border:0;border-top:1px solid var(--rule);margin:28px 0}
+.doc img{max-width:100%;height:auto;border-radius:6px}
+/* the French enrolment email is prose inside a code block: wrap it, don't clip it */
+.doc pre{margin:0 0 14px;padding:12px 14px;background:var(--quote);border-radius:6px;
+  font:500 13px/1.6 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere;overflow-x:auto}
+.doc pre code{background:none;padding:0;font-size:inherit}
+.tablewrap{overflow-x:auto;margin:16px 0;border:1px solid var(--rule);border-radius:8px}
+.doc table{width:100%;border-collapse:collapse;font-size:14px;min-width:0}
+.doc th,.doc td{padding:9px 12px;border-bottom:1px solid var(--rule);text-align:left;white-space:nowrap}
+/* no text-transform here: in the kana tables the header cells ARE the
+   vowels (a i u e o), so uppercasing them changes what the table says */
+.doc th{background:var(--quote);font:600 12px/1.3 var(--mono);letter-spacing:.04em;color:var(--ink-soft)}
+.doc tr:last-child td{border-bottom:0}
+/* an image whose host has gone away still leaves a labelled slot, not a broken icon */
+.img-missing{display:block;margin:16px 0;padding:18px;border:1px dashed var(--rule);border-radius:8px;
+  background:var(--quote);font:500 13px/1.5 var(--mono);color:var(--ink-soft);text-align:center}
+.img-missing a{color:var(--accent)}
+.state{color:var(--ink-soft);font:500 14px/1.6 var(--mono)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<button class="burger" id="burger">&#9776; <span>Languages</span></button>
+<div class="shell">
+  <nav class="rail" id="rail"></nav>
+  <main><article class="doc" id="doc"></article></main>
+</div>
+
+<!-- marked 4.3.0, vendored so the site has no CDN to depend on and works offline -->
+<script src="lib/marked.min.js"></script>
+<script src="content.js"></script>
+<script>
+(function(){
+'use strict';
+const D = window.LANG_SITE;
+const rail = document.getElementById('rail');
+const doc  = document.getElementById('doc');
+
+/* ── routes ─────────────────────────────────────────────────────────────
+   Every page gets a flat hash id: french-grammar-chapter1. A single file
+   means no server rewrites and no 404s — the hash is the whole router.    */
+const idOf = (l,s,p) => (l+'-'+s+'-'+p).toLowerCase().replace(/[^a-z0-9]+/g,'-');
+const ROUTES = {};
+D.langs.forEach(L => L.sections.forEach(S => S.pages.forEach(P => {
+  ROUTES[idOf(L.slug,S.slug,P.slug)] =
+    { lang:L, sec:S, page:P, file:'source/'+L.slug+'/'+S.slug+'/'+P.slug+'.md',
+      dir:'source/'+L.slug+'/'+S.slug+'/' };
+})));
+ROUTES['home'] = { home:true, file:D.home.file, dir:'source/' };
+
+let shown = 'home';                                  // the route actually on screen
+function current(){
+  const h = location.hash.replace(/^#/,'');
+  if(ROUTES[h]) return h;
+  // not a route: the markdown has in-page anchors (#note). If the open page
+  // owns that id, stay put — the browser scrolls to it on its own.
+  if(h && document.getElementById(h)) return shown;
+  return 'home';
+}
+
+/* ── markdown ───────────────────────────────────────────────────────────
+   The .md files keep their Hexo front matter, so the same files render
+   here and would still render under Hexo. Titles come from `title:`.      */
+// smartypants stays OFF: the markdown imported from the three sites already
+// carries the exact punctuation they render, so transforming it again would
+// change quotes the source deliberately has straight
+marked.setOptions({ gfm:true, breaks:true, headerIds:true, mangle:false });
+
+function frontMatter(text){
+  const m = /^\s*---\r?\n([\s\S]*?)\r?\n---\r?\n?/.exec(text);
+  if(!m) return { title:'', body:text };
+  const title = (/^title:\s*(.*)$/m.exec(m[1]) || ['',''])[1].trim()
+                  .replace(/^['"]|['"]$/g,'');
+  return { title, body:text.slice(m[0].length) };
+}
+
+/* Links and images in the markdown are written for the Hexo site
+   (/French/Grammar/chapter1.html, /picture/author.jpg). Rewrite them for
+   the flat site: page links become hash routes, root-absolute assets stay
+   root-absolute, bare relative images resolve next to their .md file.     */
+const PATH2ID = {};
+D.langs.forEach(L => L.sections.forEach(S => S.pages.forEach(P => {
+  PATH2ID['/'+L.slug+'/'+S.slug+'/'+P.slug+'.html'] = idOf(L.slug,S.slug,P.slug);
+})));
+PATH2ID['/index.html'] = 'home';
+
+function rewrite(el, dir){
+  el.querySelectorAll('a[href]').forEach(a => {
+    const h = a.getAttribute('href');
+    if(/^https?:/i.test(h)) { a.target='_blank'; a.rel='noopener'; return; }
+    if(h.startsWith('#')) return;                            // in-page anchor
+    // resolve ../Word-Phrase/Basic-Verb.html against the page's own folder,
+    // then look the result up the same way as an absolute /French/... path
+    const abs = h.startsWith('/') ? h
+              : new URL(h, 'http://x/' + dir.replace(/^source\//,'')).pathname;
+    if(PATH2ID[abs]) { a.setAttribute('href', '#'+PATH2ID[abs]); return; }
+    // a real file served next to the page (a book, an image) is not a route:
+    // leave it alone and open it in a new tab
+    if(/\.[a-z0-9]{2,5}$/i.test(abs) && !/\.html?$/i.test(abs)) {
+      a.target = '_blank'; a.rel = 'noopener'; return;
+    }
+    a.setAttribute('href', '#home');                         // dead Hexo path
+  });
+  el.querySelectorAll('img').forEach(img => {
+    const s = img.getAttribute('src') || '';
+    if(!/^(https?:|data:|\/)/i.test(s)) img.setAttribute('src', dir + s);
+    img.addEventListener('error', () => {
+      const slot = document.createElement('div');
+      slot.className = 'img-missing';
+      slot.dataset.src = s;
+      slot.innerHTML = 'Image unavailable &mdash; <a href="' + encodeURI(s) +
+                       '" target="_blank" rel="noopener">open the original</a>';
+      img.replaceWith(slot);
+    }, { once:true });
+  });
+  el.querySelectorAll('table').forEach(t => {
+    if(t.parentElement.classList.contains('tablewrap')) return;
+    const w = document.createElement('div'); w.className = 'tablewrap';
+    t.parentNode.insertBefore(w, t); w.appendChild(t);
+  });
+}
+
+const cache = new Map();
+function load(file){
+  if(cache.has(file)) return cache.get(file);
+  const p = fetch(file).then(r => {
+    if(!r.ok) throw new Error(r.status + ' ' + file);
+    return r.text();
+  }).then(frontMatter);
+  cache.set(file, p);
+  return p;
+}
+
+/* ── render ─────────────────────────────────────────────────────────── */
+function sidebar(id, R){
+  let n = '<div class="brand"><b>&#128218;</b> ' + D.brand + '</div>';
+  n += '<button class="railbtn" data-go="home">' + D.home.nav + '</button>';
+  D.langs.forEach(L => {
+    const open = R.lang && R.lang.slug === L.slug;
+    n += '<details class="grp"' + (open ? ' open' : '') + '><summary>' +
+         L.flag + ' ' + L.label + '</summary>';
+    L.sections.forEach(S => {
+      n += '<div class="sec">' + S.label + '</div>';
+      S.pages.forEach(P => {
+        const pid = idOf(L.slug,S.slug,P.slug);
+        n += '<a href="#' + pid + '"' + (pid === id ? ' class="on"' : '') + '>' + P.nav + '</a>';
+      });
+    });
+    n += '</details>';
+  });
+  rail.innerHTML = n;
+}
+
+let token = 0;
+function render(){
+  const id = current();
+  if(id === shown && doc.childElementCount) return;   // just an anchor jump
+  const R = ROUTES[id], mine = ++token;
+  sidebar(id, R);
+  const crumb = R.home ? 'Home'
+              : (R.lang.flag + ' ' + R.lang.label + ' &middot; ' + R.sec.label);
+  load(R.file).then(fm => {
+    if(mine !== token) return;                       // a newer click won
+    doc.innerHTML = '<div class="crumb">' + crumb + '</div>' +
+                    '<h1>' + fm.title + '</h1>' + marked.parse(fm.body);
+    rewrite(doc, R.dir);
+    shown = id;
+    window.scrollTo(0,0);
+  }).catch(err => {
+    if(mine !== token) return;
+    doc.innerHTML = '<div class="crumb">' + crumb + '</div>' +
+      '<h1>Page not found</h1><p class="state">Could not load <code>' +
+      R.file + '</code> (' + err.message + ').</p>';
+  });
+  if(window.innerWidth <= 860) rail.classList.remove('open');
+}
+
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-go]');
+  if(b){ location.hash = b.dataset.go; }
+});
+document.getElementById('burger').onclick = () => rail.classList.toggle('open');
+window.addEventListener('hashchange', render);
+render();
+})();
+</script>
+</body>
+</html>
