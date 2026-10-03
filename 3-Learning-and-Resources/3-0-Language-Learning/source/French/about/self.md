@@ -5,7 +5,7 @@ date: 2026-10-03 00:00:00
 
 <p class="avatar"><img src="/picture/author.jpg" alt=""></p>
 
-**Self-Introduction · Présentation de soi**
+**{{Self-Introduction // 自我介绍}} · Présentation de soi**
 
 ```pair
 🍿Mon film français préféré est [Amélie](https://en.wikipedia.org/wiki/Am%C3%A9lie).
@@ -25,7 +25,7 @@ zh: 📺我最喜欢的法国节目是[《圈子》](https://en.wikipedia.org/wi
 zh: 🌟我最喜欢的法国女演员是[苏菲·玛索](https://en.wikipedia.org/wiki/Sophie_Marceau)。
 ```
 
-## Contact
+## {{Contact // 联系方式}}
 
 ```contact
 mail | vickydu1213@gmail.com | mailto:vickydu1213@gmail.com

@@ -1,5 +1,5 @@
 ---
-title: 1️⃣ 五十音 Hiragana
+title: 1️⃣ 五十音 {{Hiragana // 平假名}}
 date: 2026-10-03 00:00:00
 ---
 

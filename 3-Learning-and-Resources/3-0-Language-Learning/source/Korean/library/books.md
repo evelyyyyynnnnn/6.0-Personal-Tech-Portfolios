@@ -1,5 +1,5 @@
 ---
-title: 📥 Books to Download
+title: 📥 {{Books to Download // 书籍下载}}
 date: 2026-10-03 00:00:00
 ---
 

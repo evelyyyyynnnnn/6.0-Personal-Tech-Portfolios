@@ -4,7 +4,7 @@ date: 2023-09-02 10:15:38
 ---
 <p class="hero"><img src="/picture/homepage-v2.png" alt=""></p>
 
-## Preview
+## {{Preview // 预览}}
 
 👋 **Bonjour, tout le monde. 안녕하세요. こんにちは。**
 
@@ -23,20 +23,20 @@ zh: 🌊 起因是我身边的知识太零散了。每次想得到一个直接�
 zh: ⚠️ 本网站不得用于商业用途。
 ```
 
-## The three languages
+## {{The three languages // 三种语言}}
 
 | | | |
 |---|---|---|
-| 🇫🇷 **Français** | <span class="has-zh"><span class="tr-en">A1–B1 grammar, alphabet, TEF notes</span><span class="tr-zh" lang="zh">A1–B1 语法、字母、TEF 笔记</span></span> | [Start →](/French/foundations/alphabet.html) |
-| 🇰🇷 **한국어** | <span class="has-zh"><span class="tr-en">TOPIK I &amp; II, listening, a reading library</span><span class="tr-zh" lang="zh">TOPIK I 和 II、听力、阅读书库</span></span> | [Start →](/Korean/vocabulary/topik-i.html) |
-| 🇯🇵 **日本語** | <span class="has-zh"><span class="tr-en">五十音, N5–N3 patterns, dialogue</span><span class="tr-zh" lang="zh">五十音、N5–N3 句型、对话</span></span> | [Start →](/Japanese/foundations/hiragana.html) |
+| 🇫🇷 **Français** | <span class="has-zh"><span class="tr-en">A1–B1 grammar, alphabet, TEF notes</span><span class="tr-zh" lang="zh">A1–B1 语法、字母、TEF 笔记</span></span> | [{{Start → // 开始 →}}](/French/foundations/alphabet.html) |
+| 🇰🇷 **한국어** | <span class="has-zh"><span class="tr-en">TOPIK I &amp; II, listening, a reading library</span><span class="tr-zh" lang="zh">TOPIK I 和 II、听力、阅读书库</span></span> | [{{Start → // 开始 →}}](/Korean/vocabulary/topik-i.html) |
+| 🇯🇵 **日本語** | <span class="has-zh"><span class="tr-en">五十音, N5–N3 patterns, dialogue</span><span class="tr-zh" lang="zh">五十音、N5–N3 句型、对话</span></span> | [{{Start → // 开始 →}}](/Japanese/foundations/hiragana.html) |
 
 ```tr
 Every language carries the same spine — **About**, **Foundations**, **Vocabulary**, **Grammar**, **Reading**, **Listening**, **Culture & Media** and a **Journal** — so a chapter in one has a counterpart in the others, and anything new has an obvious home. What differs is the level each is organised by: **CEFR** for French, **TOPIK** for Korean, **JLPT** for Japanese. Korean also keeps a **Library** of the books I read.
 zh: 每种语言都有相同的框架——**关于**、**基础**、**词汇**、**语法**、**阅读**、**听力**、**文化与媒体**和**日记**——所以一种语言里的章节在另外两种里都有对应，新内容也总有明确的归属。不同的是各自依据的等级体系：法语用 **CEFR**，韩语用 **TOPIK**，日语用 **JLPT**。韩语另外还有一个**图书馆**，收录我读过的书。
 ```
 
-## Background
+## {{Background // 背景}}
 
 ```tr
 😃 This site started with me, as someone who enjoys learning languages.
@@ -53,7 +53,7 @@ zh: 💕 上大学后我开始学习法语、日语、韩语和粤语；英语�
 zh: 💫 三种文字，三套语法，一个地方收纳它们。
 ```
 
-## Content
+## {{Content // 内容}}
 
 ```tr
 📝 I share what I learn a little at a time — grammatical structure, words and phrases, plus the media, television, books and writing of my own around them.

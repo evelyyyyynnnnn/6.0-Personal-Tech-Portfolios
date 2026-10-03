@@ -5,7 +5,7 @@ date: 2026-10-03 00:00:00
 
 <p class="avatar"><img src="/picture/author.jpg" alt=""></p>
 
-**Self-Introduction · 제가 좋아하는**
+**{{Self-Introduction // 自我介绍}} · 제가 좋아하는**
 
 ```pair
 🍿제가 가장 좋아하는 한국영화는 [도가니](https://ko.wikipedia.org/wiki/%EB%8F%84%EA%B0%80%EB%8B%88_\(%EC%98%81%ED%99%94\)) 입니다
@@ -25,7 +25,7 @@ zh: 📺我最喜欢的韩国综艺是[《认识的哥哥》](https://www.youtub
 zh: 🌟我最喜欢的韩国偶像是[太妍](https://www.youtube.com/@taeyeonofficial)。
 ```
 
-## Contact연락
+## {{Contact // 联系方式}}연락
 
 ```contact
 mail | vickydu1213@gmail.com | mailto:vickydu1213@gmail.com

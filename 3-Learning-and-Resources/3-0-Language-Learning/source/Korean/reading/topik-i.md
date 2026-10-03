@@ -1,5 +1,5 @@
 ---
-title: 1️⃣ TOPIK I · Reading
+title: 1️⃣ TOPIK I · {{Reading // 阅读}}
 date: 2026-10-03 00:00:00
 ---
 

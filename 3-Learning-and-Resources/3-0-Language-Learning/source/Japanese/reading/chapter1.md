@@ -1,5 +1,5 @@
 ---
-title: 1️⃣ News & Culture
+title: 1️⃣ {{News & Culture // 新闻与文化}}
 date: 2026-10-03 00:00:00
 ---
 

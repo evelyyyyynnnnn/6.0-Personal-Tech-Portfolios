@@ -1,11 +1,11 @@
 ---
-title: 1️⃣ TOPIK I · Everyday Words
+title: 1️⃣ TOPIK I · {{Everyday Words // 日常词汇}}
 date: 2026-10-03 00:00:00
 ---
 
 接下来我们来聊聊韩语中的常用词语다음은 한국어 중 흔히 쓰는 단어:
 
-## Part 1
+## {{Part 1 // 第一部分}}
 
 ```vocab
 # 단어 | 中文

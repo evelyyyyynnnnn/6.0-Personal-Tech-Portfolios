@@ -1,5 +1,5 @@
 ---
-title: 1️⃣ An Email · TEF Canada
+title: 1️⃣ {{An Email // 一封邮件}} · TEF Canada
 date: 2026-10-03 00:00:00
 ---
 

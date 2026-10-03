@@ -1,5 +1,5 @@
 ---
-title: 2️⃣ The Evening News
+title: 2️⃣ {{The Evening News // 晚间新闻}}
 date: 2026-10-03 00:00:00
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: 📚 Books · 村上春樹
+title: 📚 {{Books // 书籍}} · 村上春樹
 date: 2026-10-03 00:00:00
 ---
 
@@ -35,7 +35,7 @@ A story that follows a lonely protagonist’s journey of self-discovery. It feat
 zh: 一部讲述孤独主人公自我探寻与成长之旅的作品，富有象征意味的元素和扑朔迷离的叙事令人印象深刻。
 ```
 
-## Note
+## {{Note // 笔记}}
 
 ```notes
 본성 | nature // 本性

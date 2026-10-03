@@ -1,5 +1,5 @@
 ---
-title: 2️⃣ Basic Words
+title: 2️⃣ {{Basic Words // 基础词汇}}
 date: 2026-10-03 00:00:00
 ---
 
@@ -9,10 +9,10 @@ date: 2026-10-03 00:00:00
 zh: ✔️下面我将介绍法语动词的基础内容：
 ```
 
-## Nouns
+## {{Nouns // 名词}}
 
 ```vocab
-# Français | English
+# Français | English // 中文
 livre | book // 书
 maison | house // 房子
 élève | student // 学生
@@ -25,10 +25,10 @@ personne | person // 人
 pays | country // 国家
 ```
 
-## Verbs
+## {{Verbs // 动词}}
 
 ```vocab
-# Français | English
+# Français | English // 中文
 parler | to speak // 说
 manger | to eat // 吃
 travailler | to work // 工作
@@ -41,10 +41,10 @@ faire | to do/make // 做／制作
 penser | to think // 想；认为
 ```
 
-## Adjectives
+## {{Adjectives // 形容词}}
 
 ```vocab
-# Français | English
+# Français | English // 中文
 grand(e) | big // 大的
 petit(e) | small // 小的
 beau/belle | beautiful // 美丽的
@@ -57,7 +57,7 @@ fort(e) | strong // 强壮的
 gentil(le) | kind // 友善的
 ```
 
-## Note
+## {{Note // 笔记}}
 
 ```notes
 créé | created // 创建的

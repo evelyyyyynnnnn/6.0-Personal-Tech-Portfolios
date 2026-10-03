@@ -1,5 +1,5 @@
 ---
-title: 📚 Books
+title: 📚 {{Books // 书籍}}
 date: 2026-10-03 00:00:00
 ---
 
@@ -28,7 +28,7 @@ The books themselves are in the [Library](/Korean/library/books.html).
 zh: 书本身可以在[图书馆](/Korean/library/books.html)里找到。
 ```
 
-## Note
+## {{Note // 笔记}}
 
 ```notes
 본성 | nature // 本性

@@ -5,7 +5,7 @@ date: 2026-10-03 00:00:00
 
 <p class="hero"><img src="/picture/homepage-v2.png" alt=""></p>
 
-## Preview （Avant-première）
+## {{Preview // 预览}} （Avant-première）
 
 ```pair
 👋Bonjour,tout le monde.
@@ -25,7 +25,7 @@ zh: 🌊创建这个网站的初衷，是我感到身边的知识实在太零散
 zh: ⚠️本网站不得用于商业用途。
 ```
 
-## Background (Arrière-plan)
+## {{Background // 背景}} (Arrière-plan)
 
 ```pair
 😃Le début de ce site, c’est moi, en tant que passionné par l’apprentissage des langues.
@@ -41,7 +41,7 @@ zh: 💕从大学生活开始，我就开始学习法语、日语、韩语和粤
 zh: 💫所以本网站将主要用两种语言（韩语、英语）撰写
 ```
 
-## Content （contenu）
+## {{Content // 内容}} （contenu）
 
 ```pair
 📝Je partagerai ce que j’ai appris petit à petit comme la structure grammaticale, les mots et les expressions en dehors des médias intéressants, de la télévision, des livres et de ma propre création.
@@ -61,7 +61,7 @@ zh: 🥹坚持更新绝对不是一件容易的事。如果这个网站能成为
 zh: ☀️祝大家今天过得愉快。
 ```
 
-## Note
+## {{Note // 笔记}}
 
 ```notes
 créé | created // 创建的
