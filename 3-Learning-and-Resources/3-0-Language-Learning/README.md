@@ -77,6 +77,22 @@ to it.
 
 ## vercel.json
 
+### Caching
+
+`picture/` and `index.html` are served `max-age=0, must-revalidate`: the
+browser always asks, and the answer is a 304 when nothing changed. That costs
+one cheap request and keeps an edited file from going stale.
+
+**Do not put `immutable` on these.** It means "never ask again", which is only
+true for a filename that carries a content hash. These filenames are stable and
+the files get edited in place — `picture/homepage.png` was replaced with a
+transparent version and every browser that had already seen the old one kept
+showing it, because the header said not to check for a year.
+
+`pdf/` is cached for a week. Those are books; they are not edited.
+
+### Deployment
+
 Two settings matter beyond the static serving:
 
 - **`ignoreCommand`** — compares `$VERCEL_GIT_PREVIOUS_SHA` (the last *successful
