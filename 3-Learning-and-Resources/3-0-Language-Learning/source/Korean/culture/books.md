@@ -23,7 +23,10 @@ zh: 📖所以我在下面收录了一些韩国书籍：
 zh: 📧如果你对其他书更感兴趣，欢迎在下方留言或给我发邮件，我会把PDF发给你！
 ```
 
+```tr
 The books themselves are in the [Library](/Korean/library/books.html).
+zh: 书本身可以在[图书馆](/Korean/library/books.html)里找到。
+```
 
 ## Note
 

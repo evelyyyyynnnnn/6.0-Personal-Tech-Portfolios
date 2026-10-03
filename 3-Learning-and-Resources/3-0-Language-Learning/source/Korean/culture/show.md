@@ -23,7 +23,10 @@ zh: ⭐️明星嘉宾：韩国综艺节目通常会邀请一些知名明星作�
 zh: 🌟独特主题：韩国综艺节目通常有独特的主题，例如旅行、美食、音乐等。这些主题旨在吸引不同类型的观众，并提供一些创新的内容。
 ```
 
+```tr
 Here I include the following 4 as my favorite:
+zh: 以下是我最喜欢的 4 个节目：
+```
 
 ```media
 나 혼자 산다 | I Live Alone // 我独自生活 | https://www.mgtv123.com/dsplay/woduzishenghuo-1-39/

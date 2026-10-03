@@ -320,6 +320,11 @@ const COMPONENT = {
         tr.map(l => trLine('dst', l)).join('') + '</div>';
     }).join('') + '</div>';
   },
+  // an English sentence of its own, then "zh:" and its Chinese
+  tr(code){
+    return groups(code).map(g =>
+      '<div class="has-zh">' + g.map(l => trLine('', l)).join('') + '</div>').join('');
+  },
   // title | subtitle | url
   media(code){
     return '<div class="c-media">' + rows(code).map(l => {

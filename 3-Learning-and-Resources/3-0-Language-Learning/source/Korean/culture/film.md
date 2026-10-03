@@ -27,7 +27,10 @@ zh: –📆20世纪90年代以来，随着政治和经济的稳定，韩国电�
 zh: ❤️韩国电影不再局限于爱情题材，正逐渐发展出纪录片、战争片、恐怖片等更成熟的类型。
 ```
 
+```tr
 The full list of recommended Korean movie is [here](https://www.timeout.com/film/the-greatest-korean-films-of-all-time),among which I select my favorite 5 here:
+zh: 推荐的韩国电影完整片单在[这里](https://www.timeout.com/film/the-greatest-korean-films-of-all-time)，我从中选出了最喜欢的 5 部：
+```
 
 ```media
 7번방의 선물 | Miracle in Cell No.7 // 七号房的礼物 | https://baike.baidu.com/item/7%E5%8F%B7%E6%88%BF%E7%9A%84%E7%A4%BC%E7%89%A9/1901914?fromtitle=%E4%B8%83%E5%8F%B7%E6%88%BF%E7%9A%84%E7%A4%BC%E7%89%A9&fromid=5147120

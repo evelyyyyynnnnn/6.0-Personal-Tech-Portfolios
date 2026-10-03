@@ -82,6 +82,11 @@ zh: 你让我心动                       optional Chinese version of the line
                                    (blank line between pairs)
 ```
 
+```tr                          an English sentence on its own
+Now let’s continue.
+zh: 我们继续。
+```
+
 ```media                       books, films, shows
 마녀식당으로 오세요 | Demon Girl Canteen | /pdf/manyeo-sikdang.pdf
 ```
