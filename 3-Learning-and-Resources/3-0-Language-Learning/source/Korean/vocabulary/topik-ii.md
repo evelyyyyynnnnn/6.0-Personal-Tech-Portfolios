@@ -1,11 +1,11 @@
 ---
-title: 2️⃣ TOPIK II · Work & Ideas
+title: 2️⃣ TOPIK II · {{Work & Ideas // 工作与观点}}
 date: 2026-10-03 00:00:00
 ---
 
 接下来我们来聊聊韩语中的常用词语다음은 한국어 중 흔히 쓰는 단어:
 
-## Part 2
+## {{Part 2 // 第二部分}}
 
 ```vocab
 # 단어 | 中文

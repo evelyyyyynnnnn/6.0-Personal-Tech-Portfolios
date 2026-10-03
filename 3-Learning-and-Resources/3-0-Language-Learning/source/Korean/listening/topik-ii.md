@@ -1,5 +1,5 @@
 ---
-title: 2️⃣ TOPIK II · Listening
+title: 2️⃣ TOPIK II · {{Listening // 听力}}
 date: 2026-10-03 00:00:00
 ---
 

@@ -108,6 +108,17 @@ Journal · nothing here yet
 A block whose contents don't parse falls back to showing the source, so a typo
 never takes a page down.
 
+### English / 中文
+
+Every page has an EN / 中文 switch. It swaps only the English, never the
+French, Korean or Japanese. Give English a Chinese version with:
+
+- a `zh:` line under a translation in `pair`, `grammar` or `tr` blocks
+- `English // 中文` in a table cell, grammar gloss, note or media subtitle
+- `{{English // 中文}}` anywhere else: page titles, headings, running text,
+  e.g. `## {{Preview // 预览}} （Avant-première）`
+- `zh:` next to a section `label` or page `nav` in `content.js` for the sidebar
+
 ## Viewing it locally
 
 The page fetches the markdown, so `file://` will not work (the browser blocks

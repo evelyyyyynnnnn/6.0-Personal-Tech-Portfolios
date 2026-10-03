@@ -5,7 +5,7 @@ date: 2026-10-03 00:00:00
 
 <p class="avatar"><img src="/picture/author.jpg" alt=""></p>
 
-**Self-Introduction · 自己紹介**
+**{{Self-Introduction // 自我介绍}} · 自己紹介**
 
 ```pair
 🍿私の好きな日本映画は [天空の城ラピュタ](https://www.ghibli.jp/works/)です
@@ -25,7 +25,7 @@ zh: 📺我最喜欢的日本节目是[《有点心机又如何》](https://baik
 zh: 🌟我最喜欢的日本偶像是[石原里美](https://baike.baidu.com/item/%e7%9f%b3%e5%8e%9f%e9%87%8c%e7%be%8e/10629668)。
 ```
 
-## Contact接触
+## {{Contact // 联系方式}}接触
 
 ```contact
 mail | vickydu1213@gmail.com | mailto:vickydu1213@gmail.com

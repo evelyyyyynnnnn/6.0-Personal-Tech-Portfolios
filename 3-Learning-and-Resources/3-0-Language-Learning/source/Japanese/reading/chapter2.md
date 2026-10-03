@@ -1,5 +1,5 @@
 ---
-title: 2️⃣ 茶道 · The Tea Ceremony
+title: 2️⃣ 茶道 · {{The Tea Ceremony // 茶道}}
 date: 2026-10-03 00:00:00
 ---
 

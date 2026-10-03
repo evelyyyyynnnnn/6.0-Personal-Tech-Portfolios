@@ -1,5 +1,5 @@
 ---
-title: 1️⃣ Alphabet & Sounds
+title: 1️⃣ {{Alphabet & Sounds // 字母与发音}}
 date: 2026-10-03 00:00:00
 ---
 

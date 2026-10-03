@@ -208,7 +208,7 @@ main{padding:52px 40px 100px;min-width:0}
 </style>
 </head>
 <body>
-<button class="burger" id="burger">&#9776; <span>Languages</span></button>
+<button class="burger" id="burger">&#9776; <span class="has-zh"><span class="tr-en">Languages</span><span class="tr-zh" lang="zh">语言</span></span></button>
 <div class="shell">
   <nav class="rail" id="rail"></nav>
   <main><article class="doc" id="doc"></article></main>
@@ -263,12 +263,17 @@ const isZh = l => /^zh:/i.test(l);
 const trLine = (cls, l) => isZh(l)
   ? '<p class="' + cls + ' tr-zh" lang="zh">' + md(l.replace(/^zh:\s*/i,'')) + '</p>'
   : '<p class="' + cls + ' tr-en">' + md(l) + '</p>';
+const biHTML = (en, zh) => '<span class="has-zh"><span class="tr-en">' + en + '</span>' +
+  '<span class="tr-zh" lang="zh">' + zh + '</span></span>';
 function bi(s){
   const i = s.indexOf(' // ');
-  if(i < 0) return md(s);
-  return '<span class="has-zh"><span class="tr-en">' + md(s.slice(0,i)) + '</span>' +
-    '<span class="tr-zh" lang="zh">' + md(s.slice(i+4)) + '</span></span>';
+  return i < 0 ? md(s) : biHTML(md(s.slice(0,i)), md(s.slice(i+4)));
 }
+/* anywhere else — headings, page titles, running text — write
+   "{{English // 中文}}" around just the part that should switch          */
+const biText = s => s.replace(/\{\{([^{}]*?) \/\/ ([^{}]*?)\}\}/g, (_, en, zh) => biHTML(en, zh));
+// a sidebar / breadcrumb label from content.js: {nav or label, zh}
+const lbl = (text, zh) => zh ? biHTML(text, zh) : text;
 
 const COMPONENT = {
   // pattern | gloss  /  example  /  translation
@@ -292,7 +297,7 @@ const COMPONENT = {
     let head = '';
     if(r.length && r[0].startsWith('#')){
       head = '<thead><tr>' + cells(r.shift().replace(/^#\s*/,''))
-             .map(c => '<th>' + esc(c) + '</th>').join('') + '</tr></thead>';
+             .map(c => '<th>' + bi(c) + '</th>').join('') + '</tr></thead>';
     }
     const body = r.map(l => '<tr>' + cells(l).map((c,i) =>
       '<td class="' + (i === 0 ? 'term' : i === 1 ? 'rom' : '') + '">' + (i ? bi(c) : md(c)) + '</td>'
@@ -331,7 +336,7 @@ const COMPONENT = {
       const [title, sub, url] = cells(l);
       return '<div class="md"><b>' + md(title) + '</b>' +
         (sub ? '<span>' + bi(sub) + '</span>' : '') +
-        (url ? '<a href="' + encodeURI(url) + '">Open &rarr;</a>' : '') + '</div>';
+        (url ? '<a href="' + encodeURI(url) + '">' + biHTML('Open &rarr;', '打开 &rarr;') + '</a>' : '') + '</div>';
     }).join('') + '</div>';
   },
   // term | meaning
@@ -356,7 +361,7 @@ const COMPONENT = {
   soon(code){
     const r = rows(code);
     return '<div class="c-soon"><p>' + md(r[0] || 'Not written yet.') + '</p>' +
-      (r[1] ? '<small>' + esc(r[1]) + '</small>' : '') + '</div>';
+      (r[1] ? '<small>' + md(r[1]) + '</small>' : '') + '</div>';
   }
 };
 
@@ -449,20 +454,20 @@ function load(file){
 /* ── render ─────────────────────────────────────────────────────────── */
 function sidebar(id, R){
   let n = '<a class="brand" href="#home"><span class="bmark">A</span>' +
-          '<span><b>' + D.brand + '</b><em>' + D.subtitle + '</em></span></a>';
+          '<span><b>' + lbl(D.brand, D.brandZh) + '</b><em>' + D.subtitle + '</em></span></a>';
   n += '<button class="railbtn' + (id === 'home' ? ' on' : '') + '" data-go="home">' +
-       D.home.nav + '</button>';
+       lbl(D.home.nav, D.home.zh) + '</button>';
   D.langs.forEach(L => {
     const open = R.lang && R.lang.slug === L.slug;
     n += '<details class="grp"' + (open ? ' open' : '') + '><summary>' +
          '<span class="flag">' + L.flag + '</span> ' + L.label +
          (L.level ? ' <span class="lv">' + L.level + '</span>' : '') + '</summary>';
     L.sections.forEach(S => {
-      n += '<div class="sec">' + S.label + '</div>';
+      n += '<div class="sec">' + lbl(S.label, S.zh) + '</div>';
       S.pages.forEach(P => {
         const pid = idOf(L.slug,S.slug,P.slug);
         n += '<a href="#' + pid + '" class="' + (pid === id ? 'on' : '') +
-             (P.soon ? ' soon' : '') + '">' + P.nav + '</a>';
+             (P.soon ? ' soon' : '') + '">' + lbl(P.nav, P.zh) + '</a>';
       });
     });
     n += '</details>';
@@ -476,13 +481,13 @@ function render(){
   if(id === shown && doc.childElementCount) return;   // just an anchor jump
   const R = ROUTES[id], mine = ++token;
   sidebar(id, R);
-  const crumb = R.home ? 'Home'
-              : (R.lang.flag + ' ' + R.lang.label + ' &middot; ' + R.sec.label);
+  const crumb = R.home ? lbl(D.home.nav, D.home.zh)
+              : (R.lang.flag + ' ' + R.lang.label + ' &middot; ' + lbl(R.sec.label, R.sec.zh));
   load(R.file).then(fm => {
     if(mine !== token) return;                       // a newer click won
-    const body = marked.parse(fm.body);
+    const body = marked.parse(biText(fm.body));
     doc.innerHTML = '<div class="crumbrow"><div class="crumb">' + crumb + '</div>' + trSwitch() + '</div>' +
-                    '<h1>' + fm.title + '</h1>' + body;
+                    '<h1>' + biText(fm.title) + '</h1>' + body;
     rewrite(doc, R.dir);
     shown = id;
     window.scrollTo(0,0);

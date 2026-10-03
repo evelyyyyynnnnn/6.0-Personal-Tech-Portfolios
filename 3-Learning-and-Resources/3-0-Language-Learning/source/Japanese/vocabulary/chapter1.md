@@ -1,10 +1,10 @@
 ---
-title: 1️⃣ Everyday Words
+title: 1️⃣ {{Everyday Words // 日常词汇}}
 date: 2026-10-03 00:00:00
 ---
 
 ```vocab
-# 日本語 | Reading | 中文
+# 日本語 | Reading // 读音 | 中文
 こんにちは | Konnichiwa | 你好
 ありがとう | Arigatou | 谢谢
 すみません | Sumimasen | 对不起/请问

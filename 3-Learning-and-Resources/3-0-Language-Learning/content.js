@@ -22,70 +22,73 @@
    language is organised by: CEFR for French, TOPIK for Korean, JLPT for
    Japanese. `soon: true` marks a page that exists in the structure but is
    still waiting to be written; drop the flag once you write it.
+
+   `zh` on a section or page is its Chinese name, shown in the sidebar when
+   the EN / 中文 switch is on 中文.
 --------------------------------------------------------------------------- */
 window.LANG_SITE = {
-  brand:    'Languages',
+  brand:    'Languages', brandZh: '语言',
   subtitle: 'Français · 한국어 · 日本語',
 
-  home: { file: 'source/home.md', nav: 'Home' },
+  home: { file: 'source/home.md', nav: 'Home', zh: '首页' },
 
   langs: [
     {
       slug: 'French', label: 'Français', flag: '🇫🇷', level: 'CEFR',
       sections: [
-        { slug: 'about', label: 'About', pages: [
-          { slug: 'intro', nav: 'Intro' },
-          { slug: 'self',  nav: 'Self-introduction' } ] },
-        { slug: 'foundations', label: 'Foundations', pages: [
-          { slug: 'alphabet',   nav: 'Alphabet & Sounds' },
-          { slug: 'basic-verb', nav: 'Basic Words' },
-          { slug: 'numbers',    nav: 'Numbers', soon: true } ] },
-        { slug: 'grammar', label: 'Grammar', pages: [
-          { slug: 'a1', nav: 'A1 · Foundations' },
-          { slug: 'a2', nav: 'A2 · Moods & Tenses' },
-          { slug: 'b1', nav: 'B1 · Nuance', soon: true } ] },
-        { slug: 'vocabulary', label: 'Vocabulary', pages: [
-          { slug: 'themes', nav: 'Thematic Decks', soon: true } ] },
-        { slug: 'reading', label: 'Reading & Dialogue', pages: [
-          { slug: 'chapter1', nav: 'An Email · TEF' },
-          { slug: 'chapter2', nav: 'The Evening News' } ] },
-        { slug: 'listening', label: 'Listening', pages: [
-          { slug: 'podcasts', nav: 'Podcasts & Songs', soon: true } ] },
-        { slug: 'culture', label: 'Culture & Media', pages: [
-          { slug: 'film',  nav: 'Film',  soon: true },
-          { slug: 'books', nav: 'Books', soon: true },
-          { slug: 'tv',    nav: 'Television', soon: true } ] },
-        { slug: 'journal', label: 'Journal', pages: [
+        { slug: 'about', label: 'About', zh: '关于', pages: [
+          { slug: 'intro', nav: 'Intro', zh: '简介' },
+          { slug: 'self',  nav: 'Self-introduction', zh: '自我介绍' } ] },
+        { slug: 'foundations', label: 'Foundations', zh: '基础', pages: [
+          { slug: 'alphabet',   nav: 'Alphabet & Sounds', zh: '字母与发音' },
+          { slug: 'basic-verb', nav: 'Basic Words', zh: '基础词汇' },
+          { slug: 'numbers',    nav: 'Numbers', zh: '数字', soon: true } ] },
+        { slug: 'grammar', label: 'Grammar', zh: '语法', pages: [
+          { slug: 'a1', nav: 'A1 · Foundations', zh: 'A1 · 基础' },
+          { slug: 'a2', nav: 'A2 · Moods & Tenses', zh: 'A2 · 语式与时态' },
+          { slug: 'b1', nav: 'B1 · Nuance', zh: 'B1 · 细微差别', soon: true } ] },
+        { slug: 'vocabulary', label: 'Vocabulary', zh: '词汇', pages: [
+          { slug: 'themes', nav: 'Thematic Decks', zh: '主题词卡', soon: true } ] },
+        { slug: 'reading', label: 'Reading & Dialogue', zh: '阅读与对话', pages: [
+          { slug: 'chapter1', nav: 'An Email · TEF', zh: '一封邮件 · TEF' },
+          { slug: 'chapter2', nav: 'The Evening News', zh: '晚间新闻' } ] },
+        { slug: 'listening', label: 'Listening', zh: '听力', pages: [
+          { slug: 'podcasts', nav: 'Podcasts & Songs', zh: '播客与歌曲', soon: true } ] },
+        { slug: 'culture', label: 'Culture & Media', zh: '文化与媒体', pages: [
+          { slug: 'film',  nav: 'Film', zh: '电影',  soon: true },
+          { slug: 'books', nav: 'Books', zh: '书籍', soon: true },
+          { slug: 'tv',    nav: 'Television', zh: '电视节目', soon: true } ] },
+        { slug: 'journal', label: 'Journal', zh: '日记', pages: [
           { slug: '2026-10', nav: '2026-10', soon: true } ] }
       ]
     },
     {
       slug: 'Korean', label: '한국어', flag: '🇰🇷', level: 'TOPIK',
       sections: [
-        { slug: 'about', label: 'About', pages: [
-          { slug: 'intro', nav: 'Intro' },
-          { slug: 'self',  nav: 'Self-introduction' } ] },
-        { slug: 'foundations', label: 'Foundations', pages: [
-          { slug: 'hangul', nav: '한글 Hangul', soon: true } ] },
-        { slug: 'vocabulary', label: 'Vocabulary', pages: [
+        { slug: 'about', label: 'About', zh: '关于', pages: [
+          { slug: 'intro', nav: 'Intro', zh: '简介' },
+          { slug: 'self',  nav: 'Self-introduction', zh: '自我介绍' } ] },
+        { slug: 'foundations', label: 'Foundations', zh: '基础', pages: [
+          { slug: 'hangul', nav: '한글 Hangul', zh: '한글 韩文字母', soon: true } ] },
+        { slug: 'vocabulary', label: 'Vocabulary', zh: '词汇', pages: [
           { slug: 'topik-i',  nav: 'TOPIK I' },
           { slug: 'topik-ii', nav: 'TOPIK II' } ] },
-        { slug: 'grammar', label: 'Grammar', pages: [
+        { slug: 'grammar', label: 'Grammar', zh: '语法', pages: [
           { slug: 'topik-i',  nav: 'TOPIK I' },
           { slug: 'topik-ii', nav: 'TOPIK II' } ] },
-        { slug: 'reading', label: 'Reading & Writing', pages: [
+        { slug: 'reading', label: 'Reading & Writing', zh: '阅读与写作', pages: [
           { slug: 'topik-i',  nav: 'TOPIK I' },
           { slug: 'topik-ii', nav: 'TOPIK II' } ] },
-        { slug: 'listening', label: 'Listening', pages: [
+        { slug: 'listening', label: 'Listening', zh: '听力', pages: [
           { slug: 'topik-i',  nav: 'TOPIK I' },
           { slug: 'topik-ii', nav: 'TOPIK II' } ] },
-        { slug: 'library', label: 'Library', pages: [
-          { slug: 'books', nav: 'Books to Download' } ] },
-        { slug: 'culture', label: 'Culture & Media', pages: [
-          { slug: 'books', nav: 'Books' },
-          { slug: 'film',  nav: 'Film' },
-          { slug: 'show',  nav: 'Television' } ] },
-        { slug: 'journal', label: 'Journal · 매일', pages: [
+        { slug: 'library', label: 'Library', zh: '图书馆', pages: [
+          { slug: 'books', nav: 'Books to Download', zh: '书籍下载' } ] },
+        { slug: 'culture', label: 'Culture & Media', zh: '文化与媒体', pages: [
+          { slug: 'books', nav: 'Books', zh: '书籍' },
+          { slug: 'film',  nav: 'Film', zh: '电影' },
+          { slug: 'show',  nav: 'Television', zh: '电视节目' } ] },
+        { slug: 'journal', label: 'Journal · 매일', zh: '日记 · 매일', pages: [
           { slug: '2023-10', nav: '2023-10' },
           { slug: '2023-11', nav: '2023-11' } ] }
       ]
@@ -93,28 +96,28 @@ window.LANG_SITE = {
     {
       slug: 'Japanese', label: '日本語', flag: '🇯🇵', level: 'JLPT',
       sections: [
-        { slug: 'about', label: 'About', pages: [
-          { slug: 'intro', nav: 'Intro' },
-          { slug: 'self',  nav: 'Self-introduction' } ] },
-        { slug: 'foundations', label: 'Foundations', pages: [
-          { slug: 'hiragana', nav: '五十音 Hiragana' },
-          { slug: 'katakana', nav: 'カタカナ Katakana', soon: true },
-          { slug: 'kanji',    nav: '漢字 Kanji', soon: true } ] },
-        { slug: 'vocabulary', label: 'Vocabulary', pages: [
-          { slug: 'chapter1', nav: 'Everyday Words' },
-          { slug: 'chapter2', nav: 'Culture & Aesthetics' } ] },
-        { slug: 'grammar', label: 'Grammar', pages: [
-          { slug: 'n5-n3', nav: 'N5–N3 · Sentence Patterns' } ] },
-        { slug: 'reading', label: 'Reading & Dialogue', pages: [
-          { slug: 'chapter1', nav: 'News & Culture' },
-          { slug: 'chapter2', nav: 'Everyday Scenes' } ] },
-        { slug: 'listening', label: 'Listening', pages: [
-          { slug: 'podcasts', nav: 'Podcasts & Songs', soon: true } ] },
-        { slug: 'culture', label: 'Culture & Media', pages: [
-          { slug: 'books', nav: 'Books' },
-          { slug: 'film',  nav: 'Film',  soon: true },
-          { slug: 'show',  nav: 'Television', soon: true } ] },
-        { slug: 'journal', label: 'Journal', pages: [
+        { slug: 'about', label: 'About', zh: '关于', pages: [
+          { slug: 'intro', nav: 'Intro', zh: '简介' },
+          { slug: 'self',  nav: 'Self-introduction', zh: '自我介绍' } ] },
+        { slug: 'foundations', label: 'Foundations', zh: '基础', pages: [
+          { slug: 'hiragana', nav: '五十音 Hiragana', zh: '五十音 平假名' },
+          { slug: 'katakana', nav: 'カタカナ Katakana', zh: 'カタカナ 片假名', soon: true },
+          { slug: 'kanji',    nav: '漢字 Kanji', zh: '漢字 汉字', soon: true } ] },
+        { slug: 'vocabulary', label: 'Vocabulary', zh: '词汇', pages: [
+          { slug: 'chapter1', nav: 'Everyday Words', zh: '日常词汇' },
+          { slug: 'chapter2', nav: 'Culture & Aesthetics', zh: '文化与美学' } ] },
+        { slug: 'grammar', label: 'Grammar', zh: '语法', pages: [
+          { slug: 'n5-n3', nav: 'N5–N3 · Sentence Patterns', zh: 'N5–N3 · 句型' } ] },
+        { slug: 'reading', label: 'Reading & Dialogue', zh: '阅读与对话', pages: [
+          { slug: 'chapter1', nav: 'News & Culture', zh: '新闻与文化' },
+          { slug: 'chapter2', nav: 'Everyday Scenes', zh: '日常场景' } ] },
+        { slug: 'listening', label: 'Listening', zh: '听力', pages: [
+          { slug: 'podcasts', nav: 'Podcasts & Songs', zh: '播客与歌曲', soon: true } ] },
+        { slug: 'culture', label: 'Culture & Media', zh: '文化与媒体', pages: [
+          { slug: 'books', nav: 'Books', zh: '书籍' },
+          { slug: 'film',  nav: 'Film', zh: '电影',  soon: true },
+          { slug: 'show',  nav: 'Television', zh: '电视节目', soon: true } ] },
+        { slug: 'journal', label: 'Journal', zh: '日记', pages: [
           { slug: '2026-10', nav: '2026-10', soon: true } ] }
       ]
     }

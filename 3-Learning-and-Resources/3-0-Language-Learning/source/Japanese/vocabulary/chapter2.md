@@ -1,10 +1,10 @@
 ---
-title: 2️⃣ Culture & Aesthetics
+title: 2️⃣ {{Culture & Aesthetics // 文化与美学}}
 date: 2026-10-03 00:00:00
 ---
 
 ```vocab
-# 日本語 | 読み | English
+# 日本語 | 読み | English // 中文
 悠久 | ゆうきゅう | ancient, timeless // 悠久，永恒
 精緻 | せいち | exquisite, refined // 精致，精巧
 美意識 | びいしき | aesthetic consciousness // 审美意识

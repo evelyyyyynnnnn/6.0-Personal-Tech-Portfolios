@@ -1,5 +1,5 @@
 ---
-title: 🎥 Film
+title: 🎥 {{Film // 电影}}
 date: 2026-10-03 00:00:00
 ---
 
@@ -40,7 +40,7 @@ zh: 推荐的韩国电影完整片单在[这里](https://www.timeout.com/film/th
 아가씨 | The Handmaiden // 小姐 | https://baike.baidu.com/item/%E5%B0%8F%E5%A7%90/15483798
 ```
 
-## Note
+## {{Note // 笔记}}
 
 ```notes
 발전사 | developing history // 发展史

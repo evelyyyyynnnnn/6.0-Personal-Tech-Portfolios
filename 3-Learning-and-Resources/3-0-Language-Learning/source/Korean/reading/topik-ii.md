@@ -1,5 +1,5 @@
 ---
-title: 2️⃣ TOPIK II · Patterns in Writing
+title: 2️⃣ TOPIK II · {{Patterns in Writing // 写作句型}}
 date: 2026-10-03 00:00:00
 ---
 

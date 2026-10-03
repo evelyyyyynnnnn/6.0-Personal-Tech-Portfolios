@@ -1,5 +1,5 @@
 ---
-title: 1️⃣ TOPIK I · Grammar
+title: 1️⃣ TOPIK I · {{Grammar // 语法}}
 date: 2026-10-03 00:00:00
 ---
 
@@ -53,7 +53,7 @@ date: 2026-10-03 00:00:00
 请谈论一下旅行。
 ```
 
-## 왜 초급 문법인가 · Why beginner grammar matters
+## 왜 초급 문법인가 · {{Why beginner grammar matters // 为什么初级语法很重要}}
 
 🚩초급 문법이 한국어 학습에 매우 중요한 이유는 다음과 같습니다:
 
