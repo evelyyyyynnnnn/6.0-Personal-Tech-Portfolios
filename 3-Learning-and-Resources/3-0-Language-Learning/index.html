@@ -164,8 +164,10 @@ main{padding:52px 40px 100px;min-width:0}
 .doc .avatar{margin:0 0 18px}
 .doc .avatar img{width:116px;height:116px;border-radius:50%;object-fit:cover;
   border:1px solid var(--rule)}
-.doc .hero{margin:0 0 24px;text-align:center}
-.doc .hero img{max-width:340px;width:100%;border-radius:10px}
+.doc .hero{margin:0 0 24px}
+/* the image is display:block, so it centres on its own margins — text-align
+   alone would leave it hard against the left edge of the column */
+.doc .hero img{max-width:340px;width:100%;border-radius:10px;margin-inline:auto}
 
 /* a page that exists in the structure but has nothing in it yet */
 .c-soon{margin:22px 0;padding:22px;border:1px dashed var(--rule);border-radius:8px;
