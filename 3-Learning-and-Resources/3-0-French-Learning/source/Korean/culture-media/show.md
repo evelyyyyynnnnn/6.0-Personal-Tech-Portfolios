@@ -3,7 +3,7 @@ title: 🔍Show
 date: 2026-10-03 00:00:00
 ---
 
-![](https://s2.loli.net/2023/10/06/rEkFeAsvzxLQydR.webp)
+![](/picture/rEkFeAsvzxLQydR.webp)
 🎉Reality shows: Korean variety shows are usually reality shows, mainly aimed at entertaining audiences. These programs usually consist of a group of guests who engage in various activities and games in different scenes. These programs usually showcase the interaction and friendship between guests, as well as their performance in different environments.
 🎉리얼리티: 한국 예능은 보통 리얼리티 쇼로 오락 시청자를 위주로 합니다.이러한 프로그램은 일반적으로 다양한 시나리오에서 다양한 이벤트와 게임을 수행하는 게스트 그룹으로 구성됩니다.이러한 프로그램은 일반적으로 게스트 간의 상호 작용과 우정, 다양한 환경에서 그들의 성과를 보여줍니다.
 🧠Games and Challenges: Korean variety shows usually include various games and challenges, such as escape games, obstacle races, etc. These games and challenges are usually aimed at testing the intelligence, physical strength, and responsiveness of guests, while also providing some interesting moments for the audience.

@@ -3,7 +3,7 @@ title: 🎥Movie
 date: 2026-10-03 00:00:00
 ---
 
-![](https://s2.loli.net/2023/10/07/jGw1KVtQWxPa9kU.jpg)
+![](/picture/jGw1KVtQWxPa9kU.jpg)
 – 📆The development history of Korean cinema can be traced back to the 1910s, when South Korea was still under Japanese colonial rule. During this period, Japanese films were widely popular in South Korea, but the Korean film industry did not develop.
 – 📆한국영화의 발전사는 1910년대로 거슬러 올라갈 수 있는데, 이 시기에 한국에서는 일본영화가 널리 인기를 끌었지만 한국영화산업은 발전하지 못했습니다.
 – 📆It was not until 1945, after Japan surrendered, that South Korea began to have its own film industry. In the 1950s, with the outbreak of the Korean War, the Korean film industry entered a trough period. In the 1960s, with the stability of the political situation and economic development, the Korean film industry gradually recovered.

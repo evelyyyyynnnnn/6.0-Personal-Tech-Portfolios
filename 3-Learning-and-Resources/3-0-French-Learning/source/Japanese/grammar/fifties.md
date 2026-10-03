@@ -5,7 +5,7 @@ date: 2026-10-03 00:00:00
 
 Here I will introduce the first chapter of the learning Japanese which is the fifties.
 まず、日本語学習の第一章である五十音を紹介します
-![fifties](https://s2.loli.net/2023/09/10/h2wQSnsRx3MNyv4.png)
+![fifties](/picture/h2wQSnsRx3MNyv4.png)
 あ (a) い (i) う (u) え (e) お (o)
 か (ka) き (ki) く (ku) け (ke) こ (ko)
 さ (sa) し (shi) す (su) せ (se) そ (so)

@@ -139,10 +139,14 @@ They are worth knowing about before you edit:
   under `pdf/` — four PDFs and one EPUB, 73 MB in total. They were renamed to
   ASCII slugs, because percent-encoded Korean filenames are a liability in both
   a repo and a URL; the Korean titles stay in the link text.
-- Images on several pages come from `s2.loli.net` and `*.sunbangyan.cn`. If a
-  host has gone away the page shows a labelled slot with a link to the
-  original, rather than a broken-image icon. Replacing those with files under
-  `picture/` is a safe cleanup whenever you get to it.
+- The external image hosts were checked one URL at a time. **`s2.loli.net` is
+  alive**, so those five images now live in `picture/` and the pages point at
+  them. **`*.sunbangyan.cn` is dead** — all 13 of its images return 404, so
+  they are already broken on the original sites too. Those 15 references are
+  left as they are, and the page shows a labelled slot with a link to the
+  original rather than a broken-image icon. They affect 15 pages: 6 French,
+  3 Korean, 6 Japanese. The images themselves are not recoverable from the
+  host; the Wayback Machine is the only remaining avenue.
 
 ### Verifying against the originals
 

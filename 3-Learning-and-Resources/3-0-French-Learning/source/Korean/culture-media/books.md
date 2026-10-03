@@ -3,7 +3,7 @@ title: 📚Books
 date: 2026-10-03 00:00:00
 ---
 
-![](https://s2.loli.net/2023/10/06/ZohiYmUdVDTRguz.png)
+![](/picture/ZohiYmUdVDTRguz.png)
 🔍I consider one of the most outstanding characteristics of the Korean books is the detailed description of human nature, human psychology, emotions, social forms, and social stories
 🔍나는 한국 책의 가장 두드러진 특징 중 하나는 인간의 본성, 인간의 심리, 감정, 사회적 형태, 사회적 이야기에 대한 상세한 기술이라고 생각한다
 🕺If you’re the big fan of Korean drama,varie show or any korean movies,you will definetely agree with me.
