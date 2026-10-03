@@ -3,8 +3,11 @@ title: 1️⃣ 五十音 Hiragana
 date: 2026-10-03 00:00:00
 ---
 
-Here I will introduce the first chapter of the learning Japanese which is the fifties.
+```pair
 まず、日本語学習の第一章である五十音を紹介します
+Here I will introduce the first chapter of the learning Japanese which is the fifties.
+zh: 首先，我来介绍日语学习的第一章——五十音。
+```
 
 ![fifties](/picture/h2wQSnsRx3MNyv4.png)
 
