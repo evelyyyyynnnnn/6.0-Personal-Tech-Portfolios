@@ -136,6 +136,22 @@ main{padding:52px 40px 100px;min-width:0}
 .pr{margin:0 0 14px;padding-left:14px;border-left:2px solid var(--accent-soft)}
 .pr .src{margin:0 0 2px;font:400 17px/1.7 var(--body);color:var(--ink)}
 .pr .dst{margin:0;font:400 15px/1.6 var(--body);color:var(--ink-soft)}
+/* a pair can carry an English and a Chinese translation; the toggle picks
+   one. A line with no Chinese counterpart stays visible either way. */
+.pr .dst.zh{font-family:var(--body),'Songti SC','Noto Serif SC',serif}
+:root:not([data-tr="zh"]) .pr.has-zh .dst.zh,
+:root[data-tr="zh"] .pr.has-zh .dst.en{display:none}
+
+/* EN / 中文 switch, beside the breadcrumb on pages that have Chinese */
+.crumbrow{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  flex-wrap:wrap;margin-bottom:12px}
+.crumbrow .crumb{margin-bottom:0}
+.trswitch{display:inline-flex;border:1px solid var(--rule);border-radius:999px;padding:2px;
+  background:var(--quote)}
+.trswitch button{border:0;background:none;cursor:pointer;color:var(--ink-soft);
+  font:500 11px/1 var(--mono);letter-spacing:.06em;padding:6px 11px;border-radius:999px}
+.trswitch button:hover{color:var(--ink)}
+.trswitch button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
 
 /* media — books, films, shows */
 .c-media{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin:18px 0}
@@ -276,12 +292,20 @@ const COMPONENT = {
     }));
     return '<div class="c-chart">' + out.join('') + '</div>';
   },
-  // source line / translation line(s), groups split by a blank line
+  // source line / translation line(s), groups split by a blank line.
+  // A translation line starting "zh:" is the Chinese one; the EN / 中文
+  // switch shows either it or the plain (English) lines.
   pair(code){
-    return '<div class="c-pair">' + groups(code).map(g =>
-      '<div class="pr"><p class="src">' + md(g[0]) + '</p>' +
-      g.slice(1).map(l => '<p class="dst">' + md(l) + '</p>').join('') + '</div>'
-    ).join('') + '</div>';
+    return '<div class="c-pair">' + groups(code).map(g => {
+      const tr = g.slice(1).map(l => {
+        const zh = /^zh:\s*/i.exec(l);
+        return zh ? '<p class="dst zh" lang="zh">' + md(l.slice(zh[0].length)) + '</p>'
+                  : '<p class="dst en">' + md(l) + '</p>';
+      });
+      const hasZh = g.slice(1).some(l => /^zh:/i.test(l));
+      return '<div class="pr' + (hasZh ? ' has-zh' : '') + '"><p class="src">' + md(g[0]) + '</p>' +
+        tr.join('') + '</div>';
+    }).join('') + '</div>';
   },
   // title | subtitle | url
   media(code){
@@ -375,6 +399,24 @@ function rewrite(el, dir){
   });
 }
 
+/* ── translation language ──────────────────────────────────────────────
+   Only the English lines swap; the French / Korean / Japanese source never
+   changes. The choice is remembered per browser when storage allows.      */
+let tr = 'en';
+try { if(localStorage.getItem('lang-tr') === 'zh') tr = 'zh'; } catch(e){}
+function setTr(v){
+  tr = v;
+  document.documentElement.setAttribute('data-tr', v);
+  document.querySelectorAll('.trswitch button').forEach(b =>
+    b.setAttribute('aria-pressed', String(b.dataset.tr === v)));
+  try { localStorage.setItem('lang-tr', v); } catch(e){}
+}
+document.documentElement.setAttribute('data-tr', tr);
+const trSwitch = () =>
+  '<div class="trswitch" role="group" aria-label="Translation language">' +
+  '<button type="button" data-tr="en" aria-pressed="' + (tr === 'en') + '">EN</button>' +
+  '<button type="button" data-tr="zh" aria-pressed="' + (tr === 'zh') + '" lang="zh">中文</button></div>';
+
 const cache = new Map();
 function load(file){
   if(cache.has(file)) return cache.get(file);
@@ -420,8 +462,10 @@ function render(){
               : (R.lang.flag + ' ' + R.lang.label + ' &middot; ' + R.sec.label);
   load(R.file).then(fm => {
     if(mine !== token) return;                       // a newer click won
-    doc.innerHTML = '<div class="crumb">' + crumb + '</div>' +
-                    '<h1>' + fm.title + '</h1>' + marked.parse(fm.body);
+    const body = marked.parse(fm.body);
+    const sw = body.includes('class="dst zh"') ? trSwitch() : '';
+    doc.innerHTML = '<div class="crumbrow"><div class="crumb">' + crumb + '</div>' + sw + '</div>' +
+                    '<h1>' + fm.title + '</h1>' + body;
     rewrite(doc, R.dir);
     shown = id;
     window.scrollTo(0,0);
@@ -437,6 +481,8 @@ function render(){
 document.addEventListener('click', e => {
   const b = e.target.closest('[data-go]');
   if(b){ location.hash = b.dataset.go; }
+  const t = e.target.closest('.trswitch [data-tr]');
+  if(t){ setTr(t.dataset.tr); }
 });
 document.getElementById('burger').onclick = () => rail.classList.toggle('open');
 window.addEventListener('hashchange', render);
