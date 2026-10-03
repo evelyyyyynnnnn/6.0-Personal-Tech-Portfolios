@@ -3,7 +3,7 @@ title: 👋안녕하세요, 여러분.
 date: 2026-10-03 00:00:00
 ---
 
-![](/picture/homepage.png)
+![](/picture/homepage-v2.png)
 ## Preview 사전 검토
 👋안녕하세요,여러분.
 이 사이트는 대학생으로서🎓 한국어를 공부한 기록입니다.

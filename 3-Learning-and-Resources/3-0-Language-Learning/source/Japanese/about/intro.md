@@ -3,7 +3,7 @@ title: 👋みなさん、こんにちは.
 date: 2026-10-03 00:00:00
 ---
 
-![](/picture/homepage.png)
+![](/picture/homepage-v2.png)
 ## Preview 試写会
 👋みなさん、こんにちは.
 🌐このサイトは🎓大学生の私が日本語学習を記録するために作成しました.

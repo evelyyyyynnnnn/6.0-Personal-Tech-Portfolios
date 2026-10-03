@@ -3,7 +3,7 @@ title: 👋Bonjour,tout le monde.
 date: 2026-10-03 00:00:00
 ---
 
-![](/picture/homepage.png)
+![](/picture/homepage-v2.png)
 ## Preview （Avant-première）
 👋Bonjour,tout le monde.
 🌐Ce site est créé par moi, un étudiant universitaire 🎓 pour enregistrer l’apprentissage du japonais.
