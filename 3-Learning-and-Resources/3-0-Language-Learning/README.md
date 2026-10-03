@@ -117,17 +117,16 @@ them when it renders:
 
 | In the markdown | What happens |
 |---|---|
-| `/French/Grammar/chapter1.html` | becomes the hash route `#french-grammar-chapter1` |
-| `../Word-Phrase/Basic-Verb.html` | resolved against the page's folder, then routed the same way |
+| `/French/grammar/a1.html` | becomes the hash route `#french-grammar-a1` |
+| `../foundations/basic-verb.html` | resolved against the page's folder, then routed the same way |
 | `#note` | left alone — the browser scrolls to it, the page does not reload |
 | `/picture/author.jpg` | served straight from `picture/` |
 | `https://…` | opens in a new tab |
 
-An image whose host has gone away leaves a labelled slot with a link to the
-original, instead of a broken-image icon. Several of the French pages point at
-`picss.sunbangyan.cn` / `picdm.sunbangyan.cn`, which may or may not still be up;
-replacing those with files under `picture/` is a safe cleanup whenever you get
-to it.
+An image that cannot load is removed from the page rather than left as a broken
+icon. The 17 references to the dead `*.sunbangyan.cn` host have been deleted
+outright — they were decorative headers, and the pages read the same without
+them. Every image the site still references is a local file under `picture/`.
 
 ## vercel.json
 
@@ -196,32 +195,28 @@ language's own Intro and Self-introduction pages live under its `about` section.
 
 ### What the import kept as-is
 
-The import is faithful, so a few things the original sites have are still here.
+The import was faithful, so a few things the original sites have are still here.
 They are worth knowing about before you edit:
 
-- Several pages share a title with their sibling, because the original does:
-  French `dialogue-passage` ch1 and ch2 are both *dialogue-passage*, French
-  `grammars/chapter2` is titled *Word-Phraze*, Japanese `word-phraze` ch1 and
-  ch2 are both *Word-Phraze*, Japanese `grammar/grammar2` is titled *Basement*,
-  Korean `word-phraze/topik-ii` is titled *Topik-I*, and both Korean
-  `learn-korean-everyday` pages share one title.
-- `Word and Phraze` is the sites' own spelling of "Phrase", kept so the paths
-  match.
-- French `culture-media/book` and `culture-media/movie` are **empty on the
-  original site** — a heading and nothing else. Japanese `culture-media/movie`
-  and `show` are nearly empty.
-- Korean `culture-media/books` links to five books, which **are** in this repo
-  under `pdf/` — four PDFs and one EPUB, 73 MB in total. They were renamed to
-  ASCII slugs, because percent-encoded Korean filenames are a liability in both
-  a repo and a URL; the Korean titles stay in the link text.
+- `Word and Phraze` was the sites' own spelling of "Phrase". The sections are
+  now `vocabulary/` and `foundations/`, so the spelling only survives inside
+  page text.
+- Duplicate and placeholder page titles from the original sites (*dialogue-passage*,
+  *Word-Phraze*, *Basement*, two *Topik-I*s) have been replaced with titles that
+  say what the page holds.
+- French `culture/books` and `culture/film` were **empty on the original site** —
+  a heading and nothing else. They now carry the same placeholder as every other
+  unwritten page, as do Japanese `culture/film` and `culture/show`.
+- Korean's five books are in this repo under `pdf/` — four PDFs and one EPUB,
+  73 MB in total. They were renamed to ASCII slugs, because percent-encoded
+  Korean filenames are a liability in both a repo and a URL; the Korean titles
+  stay in the link text. They are listed on `Korean/library/books`.
 - The external image hosts were checked one URL at a time. **`s2.loli.net` is
-  alive**, so those five images now live in `picture/` and the pages point at
-  them. **`*.sunbangyan.cn` is dead** — all 13 of its images return 404, so
-  they are already broken on the original sites too. Those 15 references are
-  left as they are, and the page shows a labelled slot with a link to the
-  original rather than a broken-image icon. They affect 15 pages: 6 French,
-  3 Korean, 6 Japanese. The images themselves are not recoverable from the
-  host; the Wayback Machine is the only remaining avenue.
+  alive**, so those five images live in `picture/` and the pages point at them.
+  **`*.sunbangyan.cn` is dead** — every one of its images returned 404, so they
+  were already broken on the original sites. Those references have been removed.
+  The images are not recoverable from the host; the Wayback Machine is the only
+  remaining avenue if you ever want them back.
 
 ### Verifying against the originals
 
