@@ -136,13 +136,14 @@ main{padding:52px 40px 100px;min-width:0}
 .pr{margin:0 0 14px;padding-left:14px;border-left:2px solid var(--accent-soft)}
 .pr .src{margin:0 0 2px;font:400 17px/1.7 var(--body);color:var(--ink)}
 .pr .dst{margin:0;font:400 15px/1.6 var(--body);color:var(--ink-soft)}
-/* a pair can carry an English and a Chinese translation; the toggle picks
-   one. A line with no Chinese counterpart stays visible either way. */
-.pr .dst.zh{font-family:var(--body),'Songti SC','Noto Serif SC',serif}
-:root:not([data-tr="zh"]) .pr.has-zh .dst.zh,
-:root[data-tr="zh"] .pr.has-zh .dst.en{display:none}
+/* English / Chinese translations. Anything marked .tr-zh is the Chinese
+   version of the .tr-en next to it, inside a .has-zh block; the EN / 中文
+   switch shows one or the other. English with no Chinese counterpart (no
+   .has-zh around it) stays visible either way. */
+:root:not([data-tr="zh"]) .tr-zh,
+:root[data-tr="zh"] .has-zh .tr-en{display:none}
 
-/* EN / 中文 switch, beside the breadcrumb on pages that have Chinese */
+/* EN / 中文 switch, beside the breadcrumb on every page */
 .crumbrow{display:flex;align-items:center;justify-content:space-between;gap:12px;
   flex-wrap:wrap;margin-bottom:12px}
 .crumbrow .crumb{margin-bottom:0}
@@ -255,17 +256,34 @@ const rows   = c => c.split('\n').map(l => l.trim()).filter(Boolean);
 const groups = c => c.split(/\n\s*\n/).map(g => rows(g)).filter(g => g.length);
 const cells  = l => l.split('|').map(s => s.trim());
 
+/* Chinese alongside English, for the EN / 中文 switch:
+   a whole line   — a translation line starting "zh:" is the Chinese one
+   inside a cell  — "English // 中文"                                       */
+const isZh = l => /^zh:/i.test(l);
+const trLine = (cls, l) => isZh(l)
+  ? '<p class="' + cls + ' tr-zh" lang="zh">' + md(l.replace(/^zh:\s*/i,'')) + '</p>'
+  : '<p class="' + cls + ' tr-en">' + md(l) + '</p>';
+function bi(s){
+  const i = s.indexOf(' // ');
+  if(i < 0) return md(s);
+  return '<span class="has-zh"><span class="tr-en">' + md(s.slice(0,i)) + '</span>' +
+    '<span class="tr-zh" lang="zh">' + md(s.slice(i+4)) + '</span></span>';
+}
+
 const COMPONENT = {
   // pattern | gloss  /  example  /  translation
+  // (gloss may be "English // 中文"; a "zh:" line after the translation
+  //  is its Chinese version)
   grammar(code){
     return '<div class="c-grammar">' + groups(code).map((g,i) => {
       const [term, gloss] = cells(g[0]);
-      return '<div class="gp"><div class="gp-h">' +
+      const tr = g.slice(2);
+      return '<div class="gp' + (tr.some(isZh) ? ' has-zh' : '') + '"><div class="gp-h">' +
         '<span class="gp-n">' + String(i+1).padStart(2,'0') + '</span>' +
         '<span class="gp-t">' + md(term) + '</span>' +
-        (gloss ? '<span class="gp-g">' + md(gloss) + '</span>' : '') + '</div>' +
+        (gloss ? '<span class="gp-g">' + bi(gloss) + '</span>' : '') + '</div>' +
         (g[1] ? '<p class="ex">' + md(g[1]) + '</p>' : '') +
-        (g[2] ? '<p class="tr">' + md(g[2]) + '</p>' : '') + '</div>';
+        tr.map(l => trLine('tr', l)).join('') + '</div>';
     }).join('') + '</div>';
   },
   // optional "# a | b | c" header row, then term | reading | meaning | …
@@ -277,7 +295,7 @@ const COMPONENT = {
              .map(c => '<th>' + esc(c) + '</th>').join('') + '</tr></thead>';
     }
     const body = r.map(l => '<tr>' + cells(l).map((c,i) =>
-      '<td class="' + (i === 0 ? 'term' : i === 1 ? 'rom' : '') + '">' + md(c) + '</td>'
+      '<td class="' + (i === 0 ? 'term' : i === 1 ? 'rom' : '') + '">' + (i ? bi(c) : md(c)) + '</td>'
     ).join('') + '</tr>').join('');
     return '<div class="tablewrap c-vocab"><table>' + head + '<tbody>' + body + '</tbody></table></div>';
   },
@@ -297,14 +315,9 @@ const COMPONENT = {
   // switch shows either it or the plain (English) lines.
   pair(code){
     return '<div class="c-pair">' + groups(code).map(g => {
-      const tr = g.slice(1).map(l => {
-        const zh = /^zh:\s*/i.exec(l);
-        return zh ? '<p class="dst zh" lang="zh">' + md(l.slice(zh[0].length)) + '</p>'
-                  : '<p class="dst en">' + md(l) + '</p>';
-      });
-      const hasZh = g.slice(1).some(l => /^zh:/i.test(l));
-      return '<div class="pr' + (hasZh ? ' has-zh' : '') + '"><p class="src">' + md(g[0]) + '</p>' +
-        tr.join('') + '</div>';
+      const tr = g.slice(1);
+      return '<div class="pr' + (tr.some(isZh) ? ' has-zh' : '') + '"><p class="src">' + md(g[0]) + '</p>' +
+        tr.map(l => trLine('dst', l)).join('') + '</div>';
     }).join('') + '</div>';
   },
   // title | subtitle | url
@@ -312,7 +325,7 @@ const COMPONENT = {
     return '<div class="c-media">' + rows(code).map(l => {
       const [title, sub, url] = cells(l);
       return '<div class="md"><b>' + md(title) + '</b>' +
-        (sub ? '<span>' + md(sub) + '</span>' : '') +
+        (sub ? '<span>' + bi(sub) + '</span>' : '') +
         (url ? '<a href="' + encodeURI(url) + '">Open &rarr;</a>' : '') + '</div>';
     }).join('') + '</div>';
   },
@@ -320,7 +333,7 @@ const COMPONENT = {
   notes(code){
     return '<div class="c-notes">' + rows(code).map(l => {
       const [t, m] = cells(l);
-      return '<div><b>' + md(t) + '</b> &middot; ' + md(m || '') + '</div>';
+      return '<div><b>' + md(t) + '</b> &middot; ' + bi(m || '') + '</div>';
     }).join('') + '</div>';
   },
   // icon | label | url
@@ -463,8 +476,7 @@ function render(){
   load(R.file).then(fm => {
     if(mine !== token) return;                       // a newer click won
     const body = marked.parse(fm.body);
-    const sw = body.includes('class="dst zh"') ? trSwitch() : '';
-    doc.innerHTML = '<div class="crumbrow"><div class="crumb">' + crumb + '</div>' + sw + '</div>' +
+    doc.innerHTML = '<div class="crumbrow"><div class="crumb">' + crumb + '</div>' + trSwitch() + '</div>' +
                     '<h1>' + fm.title + '</h1>' + body;
     rewrite(doc, R.dir);
     shown = id;

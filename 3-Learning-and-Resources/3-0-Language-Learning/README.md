@@ -77,8 +77,8 @@ You need to come tomorrow.         ← translation
 ```pair                        a line and its translation
 당신은 날 설레게 만들어
 You make my heart flutter
-zh: 你让我心动                       optional Chinese line; the page then
-                                   shows an EN / 中文 switch
+zh: 你让我心动                       optional Chinese version of the line
+                                   above (EN / 中文 switch picks one)
                                    (blank line between pairs)
 ```
 
@@ -87,8 +87,8 @@ zh: 你让我心动                       optional Chinese line; the page then
 ```
 
 ```notes                       the glossary at the foot of a page
-본성 | nature
-```
+본성 | nature // 本性           a cell can carry "English // 中文" too
+```                                (grammar glosses, vocab, notes, media)
 
 ```contact                     small icons, not full-width logos
 mail | you@example.com | mailto:you@example.com
