@@ -17,11 +17,22 @@ from playwright.sync_api import sync_playwright
 REF  = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else 'langpreview')
 BASE = sys.argv[2] if len(sys.argv) > 2 else 'http://127.0.0.1:8731/'
 
-LANGS = ['French', 'Korean', 'Japanese']
-SECS  = {'Word-Phrase': ['Alphabet', 'Basic-Verb'],
-         'Grammar':     ['chapter1', 'chapter2'],
-         'Dialogue':    ['chapter1', 'chapter2'],
-         'Culture':     ['Book', 'Movie']}
+# The page list comes from content.js, so the comparator never drifts from the
+# site: a page added there is compared the next time this runs.
+def manifest():
+    js = (pathlib.Path(__file__).resolve().parent.parent / 'content.js').read_text()
+    langs = []
+    for lm in re.finditer(r"slug: '([^']+)', label: '([^']+)', flag: '([^']+)',\s*"
+                          r"sections: \[(.*?)\n      \]", js, re.S):
+        slug, label, flag, secblob = lm.groups()
+        secs = []
+        for sm in re.finditer(r"\{ slug: '([^']+)', label: '([^']+)', pages: \[(.*?)\] \}",
+                              secblob, re.S):
+            sslug, slabel, pblob = sm.groups()
+            pages = re.findall(r"slug: '([^']+)'", pblob)
+            secs.append((sslug, slabel, pages))
+        langs.append((slug, label, flag, secs))
+    return langs
 
 def idOf(l, s, p):
     return re.sub(r'[^a-z0-9]+', '-', f'{l}-{s}-{p}'.lower())
@@ -37,7 +48,8 @@ class Body(HTMLParser):
         self.skip = 0; self.out = []
     def _is_post(self, a):
         d = dict(a)
-        return 'book-post' in (d.get('class') or '') or d.get('id') == 'page'
+        # exact class token: 'book-post-info' is a different, earlier div
+        return 'book-post' in (d.get('class') or '').split() or d.get('id') == 'page'
     def handle_starttag(self, t, a):
         if not self.on and not self.done and t in ('div', 'article') and self._is_post(a):
             self.on = True; self.depth = 1; return
@@ -80,11 +92,11 @@ def ref_page(path):
     return norm(''.join(b.out))
 
 def main():
-    pages = [('home', 'index.html'), ('about', 'Home/index.html')]
-    for L in LANGS:
-        for S, ps in SECS.items():
+    pages = []
+    for lslug, _, _, secs in manifest():
+        for sslug, _, ps in secs:
             for p in ps:
-                pages.append((idOf(L, S, p), f'{L}/{S}/{p}.html'))
+                pages.append((idOf(lslug, sslug, p), f'{lslug}/{sslug}/{p}.html'))
 
     with sync_playwright() as pw:
         br = pw.chromium.launch(executable_path='/opt/pw-browsers/chromium')

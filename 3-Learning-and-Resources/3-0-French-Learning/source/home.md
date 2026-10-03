@@ -23,17 +23,15 @@ learning, and never built a system of my own. So I started building one.
 
 | | | |
 |---|---|---|
-| 🇫🇷 **Français** | alphabet, tenses, TEF notes | [Start →](/French/Word-Phrase/Alphabet.html) |
-| 🇰🇷 **한국어** | Hangul, particles, politeness | [Start →](/Korean/Word-Phrase/Alphabet.html) |
-| 🇯🇵 **日本語** | hiragana, katakana, verb groups | [Start →](/Japanese/Word-Phrase/Alphabet.html) |
+| 🇫🇷 **Français** | alphabet, tenses, TEF notes | [Start →](/French/word-phraze/alphabet.html) |
+| 🇰🇷 **한국어** | TOPIK I & II, listening, daily notes | [Start →](/Korean/word-phraze/topik-i.html) |
+| 🇯🇵 **日本語** | 五十音, grammar, dialogue | [Start →](/Japanese/word-phraze/chapter1.html) |
 
-Every language carries the **same four sections**, so a chapter in one has a
-counterpart in the others:
-
-- **Word & Phrase** — the writing system first, then the vocabulary that pays
-- **Grammar** — the rule, examples, and where it goes wrong
-- **Dialogue & Passage** — real material, not textbook sentences
-- **Culture & Media** — books, film and television as listening practice
+The three sections every language shares are **Word & Phrase**, **Grammar** and
+**Dialogue & Passage**, plus **Culture & Media** for books, film and television.
+Korean carries two more that grew out of how I actually studied it —
+**Listening** and **Learn Everyday** — and each language keeps its own
+**About** page.
 
 ## Background
 

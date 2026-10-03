@@ -132,8 +132,7 @@ D.langs.forEach(L => L.sections.forEach(S => S.pages.forEach(P => {
     { lang:L, sec:S, page:P, file:'source/'+L.slug+'/'+S.slug+'/'+P.slug+'.md',
       dir:'source/'+L.slug+'/'+S.slug+'/' };
 })));
-ROUTES['home']  = { home:true,  file:D.home.file,  dir:'source/' };
-ROUTES['about'] = { about:true, file:D.about.file, dir:'source/Home/' };
+ROUTES['home'] = { home:true, file:D.home.file, dir:'source/' };
 
 let shown = 'home';                                  // the route actually on screen
 function current(){
@@ -148,9 +147,10 @@ function current(){
 /* ── markdown ───────────────────────────────────────────────────────────
    The .md files keep their Hexo front matter, so the same files render
    here and would still render under Hexo. Titles come from `title:`.      */
-// smartypants matches how the old Hexo build rendered quotes and dashes,
-// so the same markdown reads identically here
-marked.setOptions({ gfm:true, breaks:true, headerIds:true, mangle:false, smartypants:true });
+// smartypants stays OFF: the markdown imported from the three sites already
+// carries the exact punctuation they render, so transforming it again would
+// change quotes the source deliberately has straight
+marked.setOptions({ gfm:true, breaks:true, headerIds:true, mangle:false });
 
 function frontMatter(text){
   const m = /^\s*---\r?\n([\s\S]*?)\r?\n---\r?\n?/.exec(text);
@@ -168,7 +168,6 @@ const PATH2ID = {};
 D.langs.forEach(L => L.sections.forEach(S => S.pages.forEach(P => {
   PATH2ID['/'+L.slug+'/'+S.slug+'/'+P.slug+'.html'] = idOf(L.slug,S.slug,P.slug);
 })));
-PATH2ID['/Home/index.html'] = 'about';
 PATH2ID['/index.html'] = 'home';
 
 function rewrite(el, dir){
@@ -217,7 +216,6 @@ function load(file){
 function sidebar(id, R){
   let n = '<div class="brand"><b>&#128218;</b> ' + D.brand + '</div>';
   n += '<button class="railbtn" data-go="home">' + D.home.nav + '</button>';
-  n += '<button class="railbtn" data-go="about">' + D.about.nav + '</button>';
   D.langs.forEach(L => {
     const open = R.lang && R.lang.slug === L.slug;
     n += '<details class="grp"' + (open ? ' open' : '') + '><summary>' +
@@ -240,7 +238,7 @@ function render(){
   if(id === shown && doc.childElementCount) return;   // just an anchor jump
   const R = ROUTES[id], mine = ++token;
   sidebar(id, R);
-  const crumb = R.home ? 'Home' : R.about ? 'About'
+  const crumb = R.home ? 'Home'
               : (R.lang.flag + ' ' + R.lang.label + ' &middot; ' + R.sec.label);
   load(R.file).then(fm => {
     if(mine !== token) return;                       // a newer click won
