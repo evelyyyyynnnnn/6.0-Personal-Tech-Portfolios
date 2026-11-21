@@ -28,7 +28,6 @@ zh: 🌟我最喜欢的法国女演员是[苏菲·玛索](https://en.wikipedia.o
 ## {{Contact // 联系方式}}
 
 ```contact
-mail | vickydu1213@gmail.com | mailto:vickydu1213@gmail.com
 github | GitHub | https://github.com/Viiiikedy
 instagram | Instagram | https://www.instagram.com/viii.iiicky/
 ```

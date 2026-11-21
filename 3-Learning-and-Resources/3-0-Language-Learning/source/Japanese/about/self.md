@@ -28,7 +28,6 @@ zh: 🌟我最喜欢的日本偶像是[石原里美](https://baike.baidu.com/ite
 ## {{Contact // 联系方式}}接触
 
 ```contact
-mail | vickydu1213@gmail.com | mailto:vickydu1213@gmail.com
 github | GitHub | https://github.com/Viiiikedy
 instagram | Instagram | https://www.instagram.com/viii.iiicky/
 ```

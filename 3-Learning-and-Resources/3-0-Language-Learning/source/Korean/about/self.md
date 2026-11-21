@@ -28,7 +28,6 @@ zh: 🌟我最喜欢的韩国偶像是[太妍](https://www.youtube.com/@taeyeono
 ## {{Contact // 联系方式}}연락
 
 ```contact
-mail | vickydu1213@gmail.com | mailto:vickydu1213@gmail.com
 github | GitHub | https://github.com/Viiiikedy
 instagram | Instagram | https://www.instagram.com/viii.iiicky/
 ```
