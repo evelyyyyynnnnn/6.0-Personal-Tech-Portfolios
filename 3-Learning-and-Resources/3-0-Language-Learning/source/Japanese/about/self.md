@@ -24,10 +24,3 @@ zh: 📺我最喜欢的日本节目是[《有点心机又如何》](https://baik
 🌟And My Favorite Japanese Idol is [Satomi Ishihara](https://baike.baidu.com/item/%e7%9f%b3%e5%8e%9f%e9%87%8c%e7%be%8e/10629668)
 zh: 🌟我最喜欢的日本偶像是[石原里美](https://baike.baidu.com/item/%e7%9f%b3%e5%8e%9f%e9%87%8c%e7%be%8e/10629668)。
 ```
-
-## {{Contact // 联系方式}}接触
-
-```contact
-github | GitHub | https://github.com/Viiiikedy
-instagram | Instagram | https://www.instagram.com/viii.iiicky/
-```

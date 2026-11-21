@@ -24,10 +24,3 @@ zh: 📺我最喜欢的韩国综艺是[《认识的哥哥》](https://www.youtub
 🌟And My Favorite Korean Idol is [Taeyeon](https://www.youtube.com/@taeyeonofficial)
 zh: 🌟我最喜欢的韩国偶像是[太妍](https://www.youtube.com/@taeyeonofficial)。
 ```
-
-## {{Contact // 联系方式}}연락
-
-```contact
-github | GitHub | https://github.com/Viiiikedy
-instagram | Instagram | https://www.instagram.com/viii.iiicky/
-```

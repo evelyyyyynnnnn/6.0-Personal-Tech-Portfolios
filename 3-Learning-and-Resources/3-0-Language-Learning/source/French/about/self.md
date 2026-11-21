@@ -24,10 +24,3 @@ zh: 📺我最喜欢的法国节目是[《圈子》](https://en.wikipedia.org/wi
 🌟And my favorite French actress is [Sophie Marceau](https://en.wikipedia.org/wiki/Sophie_Marceau).
 zh: 🌟我最喜欢的法国女演员是[苏菲·玛索](https://en.wikipedia.org/wiki/Sophie_Marceau)。
 ```
-
-## {{Contact // 联系方式}}
-
-```contact
-github | GitHub | https://github.com/Viiiikedy
-instagram | Instagram | https://www.instagram.com/viii.iiicky/
-```
